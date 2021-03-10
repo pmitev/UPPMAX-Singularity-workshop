@@ -1,0 +1,39 @@
+site_name: 'UPPMAX: Singularity workshop'
+repo_url: https://github.com/pmitev/UPPMAX-Singularity-workshop
+nav:
+  - Home: index.md
+  - About: about.md
+theme: 
+  name: material
+  custom_dir: overrides
+markdown_extensions:
+  - admonition
+  - footnotes
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.snippets
+  - pymdownx.tabbed
+  - pymdownx.smartsymbols
+  - footnotes
+  - attr_list
+  - def_list
+  - meta
+  - pymdownx.caret
+  - pymdownx.mark
+  - pymdownx.tilde
+  - pymdownx.highlight:
+      use_pygments: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+extra_javascript:
+  - javascripts/config.js
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+site_url: https://pmitev.github.io/UPPMAX-Singularity-workshop/
