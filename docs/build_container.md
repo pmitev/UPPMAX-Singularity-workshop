@@ -1,6 +1,8 @@
 # Building your first container
 
-## Simple Singularity recipe
+In this simple example we will build Singularity container that will run the following programs `fortune | cowsay | lolcat` by installing all necessary libraries and packages withing Ubuntu 16.04 Linux distribution setup.
+
+## Simple Singularity definition file
 
 !!! note "Singularity.lolcow"
     ``` singularity
@@ -19,7 +21,7 @@
       fortune | cowsay | lolcat
     ```
 
-## Build the Singularity recipe
+## Build Singularity container
 
 ``` bash
 $ sudo singularity build lolcow.sif Singularity.lolcow
@@ -58,25 +60,84 @@ _________________________________________
                 ||     ||
 
 ```
+**-=>>> Done <<<=-**
 
-### Bootsrap agents - [online documentation](https://sylabs.io/guides/3.7/user-guide/definition_files.html#preferred-bootstrap-agents)
+
+## Syntax of the definition file
+
+### _header_: Bootsrap agents - [online documentation](https://sylabs.io/guides/3.7/user-guide/definition_files.html#preferred-bootstrap-agents)
 - `library` - images hosted on the [Container Library](https://cloud.sylabs.io/library)
 - `docker` - images hosted on [Docker Hub](https://hub.docker.com/)
 - `shub` - images hosted on [Singularity Hub](https://singularityhub.com/)
 - ...
 - Other: `localimage`, `yum`, `debootstrap`, `oci`, `oci-archive`, `docker-daemon`, `docker-archive`, `arch`, `busybox`, `zypper`
 
+### _header_: From
+Depending on the value assigned to `Bootstrap`, other keywords may also be valid in the header. For example, when using the `library` bootstrap agent, the `From` keyword becomes valid.
 
+### %post
+This section is where you can download files from the Internet, install new software and libraries, write configuration files, create new directories, etc.
 
+### %environment
+The `%environment` section allows you to define environment variables that will be set at runtime.
 
+### %runscript
+The contents of the `%runscript` section are written to a file within the container that is executed when the container image is run (either via the `singularity run` command or by executing the container directly as a command)
 
-### Bootstrap
-- **library://** to build from the [Container Library](https://cloud.sylabs.io/library)  
-` library://sylabs-jms/testing/lolcow`
-- **docker://** to build from [Docker Hub](https://hub.docker.com/)  
-` docker://godlovedc/lolcow`
-- **shub://** to build from [Singularity Hub](https://singularityhub.com/)
-- path to a existing container on your local machine
-- path to a directory to build from a sandbox
-- path to a Singularity definition file
+### All sections - [online documentation](https://sylabs.io/guides/3.7/user-guide/definition_files.html#sections)
 
+# Other simple examples
+
+## Texlive
+You need to use recent [TeX Live](https://www.tug.org/texlive/) but you do not want to (or you can't) upgrade your OS to the latest release... or you do not want to struggle unnecessary to make manual installation that has countless dependancies...
+
+!!! note "Singularity.texlive"
+    ``` singularity
+    Bootstrap: docker
+    From: ubuntu:latest
+
+    %post
+      export DEBIAN_FRONTEND=noninteractive
+      apt-get update && apt-get -y dist-upgrade && apt-get install -y texlive-full && apt-get clean
+
+    %runscript
+      /bin/bash $@
+    ```
+
+``` bash
+$ sudo singularity build texlive.sif Singularity.texlive
+
+$ ./texlive.sif
+```
+In this case, running the container will bring you to the bash prompt within latest Ubuntu release and the corresponding `texlive-full` package. Keep in mind that the shell is running within the container and this setup does not have any other tools like `git`, `wget`, `vim` etc.  
+If you want them available in the container, do you know where to add them?
+
+## Installing software from local package
+Some times, you cannot download a package directly or the software needs signing licenses. In this case you need to push in the locally downloaded file during the build process.
+
+!!! note "Singularity.vesta"
+    ``` singularity
+    Bootstrap:  docker
+    From: ubuntu:20.04
+    
+    %files
+      VESTA-gtk3.tar.bz2 / 
+
+    %post
+      export DEBIAN_FRONTEND=noninteractive
+    
+      apt-get update && apt-get -y dist-upgrade && \
+      apt-get install -y libxmu6 libxss1 libxft2 libquadmath0 libpng16-16 bzip2 libgl1-mesa-glx \
+      libglu1-mesa libglib2.0-0 libgtk-3-0 libgtk-3-dev libgomp1 && \
+      apt-get clean
+      
+      cd /
+      tar -C /usr/local -xvf /VESTA-gtk3.tar.bz2 && rm /VESTA-gtk3.tar.bz2    
+
+    %runscript
+      /usr/local/VESTA-gtk3/VESTA $@
+    ```
+
+Note the `%files` section. The line bellow will copy
+`VESTA-gtk3.tar.bz2` from the current directory to the root folder 
+`\ ` in the Singularity container.
