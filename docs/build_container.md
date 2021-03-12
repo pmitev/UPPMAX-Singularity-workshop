@@ -21,7 +21,7 @@ In this simple example we will build Singularity container that will run the fol
       fortune | cowsay | lolcat
     ```
 
-## Build Singularity container
+## Building the container
 
 ``` bash
 $ sudo singularity build lolcow.sif Singularity.lolcow
@@ -44,7 +44,7 @@ INFO:    Creating SIF file...
 INFO:    Build complete: lolcow.sif
 ```
 
-## Run the Singularity
+## Run the Singularity container
 
 ```
 $ ./lolcow.sif 
@@ -64,6 +64,23 @@ _________________________________________
 
 
 ## Syntax of the definition file
+
+!!! note "Singularity.lolcow"
+    ``` singularity
+    BootStrap: docker
+    From: ubuntu:16.04
+
+    %post
+      apt-get -y update
+      apt-get -y install fortune cowsay lolcat
+
+    %environment
+      export LC_ALL=C
+      export PATH=/usr/games:$PATH
+
+    %runscript
+      fortune | cowsay | lolcat
+    ```
 
 ### _header_: Bootsrap agents - [online documentation](https://sylabs.io/guides/3.7/user-guide/definition_files.html#preferred-bootstrap-agents)
 - `library` - images hosted on the [Container Library](https://cloud.sylabs.io/library)
@@ -112,7 +129,7 @@ $ ./texlive.sif
 In this case, running the container will bring you to the bash prompt within latest Ubuntu release and the corresponding `texlive-full` package. Keep in mind that the shell is running within the container and this setup does not have any other tools like `git`, `wget`, `vim` etc.  
 If you want them available in the container, do you know where to add them?
 
-## Installing software from local package
+## Installing software from a local package
 Some times, you cannot download a package directly or the software needs signing licenses. In this case you need to push in the locally downloaded file during the build process.
 
 !!! note "Singularity.vesta"
@@ -140,4 +157,4 @@ Some times, you cannot download a package directly or the software needs signing
 
 Note the `%files` section. The line bellow will copy
 `VESTA-gtk3.tar.bz2` from the current directory to the root folder 
-`\ ` in the Singularity container.
+`\ ` in the Singularity container. Also, you need to figure out yourself all required libraries and dependencies and install them.

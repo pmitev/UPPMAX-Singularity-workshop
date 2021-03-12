@@ -7,7 +7,7 @@ Detailed and well explained installation instructions at:
 Installation on Windows or Mac  
 <https://sylabs.io/guides/3.7/admin-guide/installation.html#installation-on-windows-or-mac>
 
-## [TD;DR](https://www.urbandictionary.com/define.php?term=tl%3Bdr) 
+## [TL;DR](https://www.urbandictionary.com/define.php?term=tl%3Bdr) 
 For Ubuntu (Debian based) Linux distributions.
 
 ``` bash
@@ -50,7 +50,7 @@ export VERSION=3.7.0 && # adjust this as necessary \
 
 <https://sylabs.io/guides/3.7/admin-guide/installation.html#testing-checking-the-build-configuration>
 
-TD;DR
+TL;DR
 
 ``` bash
  singularity 
