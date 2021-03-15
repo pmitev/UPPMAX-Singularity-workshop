@@ -101,7 +101,7 @@ VERSION_CODENAME=focal
 UBUNTU_CODENAME=focal
 ```
 
-To be consistant, run `export DEBIAN_FRONTEND=noninteractive` (_otherwise you will be asked to provide localization interactively during the package installation_) and add this line to the `%post` section of the recipe.
+To be consistent, run `export DEBIAN_FRONTEND=noninteractive` (_otherwise you will be asked to provide localization interactively during the package installation_) and add this line to the `%post` section of the recipe.
 
 ``` bash
 Singularity> export DEBIAN_FRONTEND=noninteractive
@@ -124,13 +124,13 @@ From: ubuntu:20.04
 We are ready for `pip`
 
 ``` bash
-Singularity> /usr/bin/env python3 -m  pip install --upgrade pip
+Singularity> /usr/bin/env python3 -m pip install --upgrade pip
 
-Singularity> /usr/bin/env python3 -m  pip install --upgrade jupyter_contrib_nbextensions
+Singularity> /usr/bin/env python3 -m pip install jupyter_contrib_nbextensions
 Singularity> jupyter contrib nbextension install --system
 Singularity> jupyter nbextension enable codefolding/main
 
-Singularity> /usr/bin/env python3 -m  pip install --upgrade jupyter_nbextensions_configurator
+Singularity> /usr/bin/env python3 -m pip install jupyter_nbextensions_configurator
 Singularity> jupyter nbextensions_configurator enable --system
 ```
 Add the commands in the relevant section.  
@@ -143,7 +143,7 @@ Singularity> jupyter notebook --ip 0.0.0.0 --no-browser
 [I 13:46:05.946 NotebookApp] [jupyter_nbextensions_configurator] enabled 0.4.1
 [C 13:46:05.946 NotebookApp] Running as root is not recommended. Use --allow-root to bypass.
 ```
-It complains but it seem sthat it will work.  
+It complains but it seems that it will work.  
 Exit form the container `exit`. Add `%runscrip`. Try to build the recipe you have assembled by now.
 
 ??? note "Singularity.jupyter"
@@ -155,15 +155,16 @@ Exit form the container `exit`. Add `%runscrip`. Try to build the recipe you hav
       export DEBIAN_FRONTEND=noninteractive
     
       apt-get update
-      apt-get install -y locales python3-dev  python3-pip  python3-tk     build-essential bash-completion
+      apt-get install -y locales python3-dev  python3-pip  python3-tk build-essential bash-completion
+      rm -rf /var/lib/apt/lists/*
     
-      /usr/bin/env python3 -m  pip install --upgrade pip
+      /usr/bin/env python3 -m pip install --no-cache-dir --upgrade pip
     
-      /usr/bin/env python3 -m  pip install --upgrade     jupyter_contrib_nbextensions
+      /usr/bin/env python3 -m pip install --no-cache-dir  jupyter_contrib_nbextensions
       jupyter contrib nbextension install --system
       jupyter nbextension enable codefolding/main
     
-      /usr/bin/env python3 -m  pip install --upgrade     jupyter_nbextensions_configurator
+      /usr/bin/env python3 -m pip install --no-cache-dir jupyter_nbextensions_configurator
       jupyter nbextensions_configurator enable --system
     
     %runscript
@@ -173,6 +174,14 @@ Exit form the container `exit`. Add `%runscrip`. Try to build the recipe you hav
     $ sudo singularity build jupyter.sif Singularity.jupyter
     ```
 
-When it is done, try to run it `./jupyter.sif`. Does it work? Can you open the address with the browser? Yes, you can install whatever packages you want and they will be available and preset in the container. 
+    Note, the added line `rm -rf /var/lib/apt/lists/*` and options `--no-cache-dir` to clean or skip remaining cached files.
+
+When it is done, try to run it with `./jupyter.sif`. Does it work? Can you open the address with the browser? Yes, you can install whatever packages you want and they will be available and preset in the container.
 
 Keep in mind that you have installed all packages with pip on a container's system level and they will be available to any user using it. **Important**! If you or somebody else who will use the container have packages installed in their home folder i.e. `pip install --user package` they will come on top of everything - for god or bad...
+
+When you are done experimenting, and your recipe builds and works, do not forget to delete the sandbox. Be careful, you will need run `rm -r` with `sudo`. Slow down. Check twice when you run
+
+``` bash
+$ sudo rm -r jupyter-sb
+```
