@@ -101,6 +101,8 @@ The `%environment` section allows you to define environment variables that will 
 ### %runscript
 The contents of the `%runscript` section are written to a file within the container that is executed when the container image is run (either via the `singularity run` command or by executing the container directly as a command)
 
+### Brief summary with examples - [online documentation](https://sylabs.io/guides/3.7/user-guide/cli/singularity_build.html?highlight=sandbox#examples)
+
 ### All sections - [online documentation](https://sylabs.io/guides/3.7/user-guide/definition_files.html#sections)
 
 # Other simple examples

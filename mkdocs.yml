@@ -5,8 +5,10 @@ nav:
   - How to install: installation.md
   - Building remotely: remote_builder.md
   - First steps: 
-    - Build a container: build_container.md
+    - Building a container: build_container.md
+    - Build own container: own_container.md
     - Running Singularity container: running_singularity.md
+    - Running containrs from online repositories: remote_repositories.md
   - About: about.md
 theme: 
   name: material
