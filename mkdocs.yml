@@ -11,6 +11,7 @@ nav:
     - Running containrs from online repositories: remote_repositories.md
   - Exercises:
     - Real life example: exercise_01.md
+    - Upload to Sylabs container library: exercise_02.md
   - About: about.md
 theme: 
   name: material
