@@ -78,3 +78,36 @@ Total space used: 187.04 MiB
     INFO:    No cached files to remove at /home/ubuntu/.singularity/    cache/oras
     INFO:    No cached files to remove at /home/ubuntu/.singularity/    cache/net
     ```
+
+## More examples
+
+```
+$ singularity run docker://dctrud/wttr
+```
+![output](images/wttr.png)
+
+If you have a GPU card here is how easy you can get running tensorflow running. Note the `--nv` option on the command line.
+
+---
+
+```
+$ singularity exec --nv tensorflow_latest-gpu.sif python3
+
+INFO:    Could not find any nv files on this host!
+Python 3.6.9 (default, Oct  8 2020, 12:12:24) 
+[GCC 8.4.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import tensorflow as tf
+2021-03-16 13:29:13.079079: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.11.0
+>>>
+```
+
+!!! info "Pulling Singularity container from online or local library/repository"
+    - **library://** to build from the [Container Library](https://    cloud.sylabs.io/library)  
+    ` library://sylabs-jms/testing/lolcow`
+    - **docker://** to build from [Docker Hub](https://hub.docker.com/    )  
+    ` docker://godlovedc/lolcow`
+    - **shub://** to build from [Singularity Hub](https://    singularityhub.com/)
+    - path to a existing container on your local machine
+    - path to a directory to build from a sandbox
+    - path to a Singularity definition file

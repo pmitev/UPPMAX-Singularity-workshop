@@ -9,6 +9,8 @@ nav:
     - Build own container: own_container.md
     - Running Singularity container: running_singularity.md
     - Running containrs from online repositories: remote_repositories.md
+  - Exercises:
+    - Real life example: exercise_01.md
   - About: about.md
 theme: 
   name: material
