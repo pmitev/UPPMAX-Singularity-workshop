@@ -4,6 +4,7 @@ nav:
   - Home: index.md
   - How to install: installation.md
   - Building remotely: remote_builder.md
+  - Building with --fakeroot: fakeroot.md
   - First steps: 
     - Building a container: build_container.md
     - Build own container: own_container.md

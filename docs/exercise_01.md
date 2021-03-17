@@ -113,4 +113,9 @@ Here is a real life example - you want to run this tool with Singularity.
     ```
     
 Here is a working recipe for the exercise:  
+Note that this particular tool downloads external data into the repository structure, which does not work if you include add the repository in the container itself (the common container format is read-only). Thus, the cloning of the repository should be done in your home or project folder where you can run the program with the long syntax i.e. 
+```
+$ singularity exec ../gapseq.sif ./gapseq doall toy/ecoli.fna.gz
+```
+
 <https://github.com/pmitev/UPPMAX-Singularity/tree/main/gapseq>
