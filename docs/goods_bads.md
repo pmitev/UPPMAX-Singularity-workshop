@@ -1,6 +1,6 @@
 # Common good or bad practices for building Singularity containers
 
-_Discalmer: these might not be the best solutions at all._
+_Disclaimer: these might not be the best solutions at all._
 
 ## Where to compile and install source codes.
 
@@ -51,7 +51,32 @@ Here is an example scenario
   ln -s /opt/miniconda3/bin/conda /usr/bin/conda
 
   conda env create -f /env.yaml
+
+cat <<EOF > /etc/profile.d/conda-env.sh
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/opt/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/opt/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/opt/miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/opt/miniconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+EOF
+
+%runscript
+  source /etc/profile.d/conda-env.sh
+  /bin/bash $@
 ```
+
+### pip
+
+Install only the minimum python (`python3-dev`) from the distribution package manager and the equivalent for `build-essential`. The rest should be perhaps better done by pip. Some libraries might still be needed.
 
 ## Downloading packages and files multiple times.
 
@@ -73,7 +98,7 @@ Now, if you find yourself repeatedly rebuilding your definition file... and you 
 
 
 
-``` singularity hl_lines="2-3 13" linenums="1"
+``` singularity hl_lines="2-3 12-13" linenums="1"
 %post
   mkdir -p /tmp/apt
   echo "Dir::Cache "/tmp/apt";" > /etc/apt/apt.conf.d/singularity-cache.conf
@@ -85,9 +110,44 @@ Now, if you find yourself repeatedly rebuilding your definition file... and you 
 
   ...
 
-  # remove the /tmp caching configuration
+  # remove the /tmp/apt caching configuration
   rm /etc/apt/apt.conf.d/singularity-cache.conf
 ```
 
 !!! note
     Remember to remove these lines in the final recipe.
+
+## Downloading large files
+
+The example bellow if from the installation instructions for https://github.com/freeseek/gtc2vcf.
+
+Here is the original code, which downloads the 871MB file and extracts it on the fly. Then some indexing is applied.
+```
+wget -O- ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/technical/reference/human_g1k_v37.fasta.gz | \
+  gzip -d > $HOME/GRCh37/human_g1k_v37.fasta
+samtools faidx $HOME/GRCh37/human_g1k_v37.fasta
+bwa index $HOME/GRCh37/human_g1k_v37.fasta
+```
+
+The file is rather large for multiple downloads... we could rewrite a bit the lines like this and keep the original file during builds.
+
+``` singularity
+%post
+
+  export TMPD=/tmp/downloads
+  mkdir -p $TMPD
+
+  # Install the GRCh37 human genome reference =======================================
+  mkdir -p /data/GRCh37 && cd /data/GRCh37
+
+  wget -P $TMPD -c  ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/technical/reference/human_g1k_v37.fasta.gz
+  gunzip -c $TMPD/human_g1k_v37.fasta.gz > human_g1k_v37.fasta || true
+
+  samtools faidx /data/GRCh37/human_g1k_v37.fasta
+  bwa index /data/GRCh37/human_g1k_v37.fasta || true
+```
+!!! note
+    `gunzip` is returning non zero exit code which signals an error and the Singularity build will stop. The not so nice solution is to apply the `|| true` "trick" to ignore the error. Similar for the `bwa` tool.
+
+!!! warning
+    The `samtools` and `bwa` are computationally intensive, memory demanding, and time demanding. This will conflict with some of the limitations of the free online building services. You might consider doing this outside the container and only copy the files (the uncompressed result is even larger) or better - as in the original instructions they will be installed in the user's `$HOME` directory. 
