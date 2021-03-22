@@ -150,4 +150,6 @@ The file is rather large for multiple downloads... we could rewrite a bit the li
     `gunzip` is returning non zero exit code which signals an error and the Singularity build will stop. The not so nice solution is to apply the `|| true` "trick" to ignore the error. Similar for the `bwa` tool.
 
 !!! warning
-    The `samtools` and `bwa` are computationally intensive, memory demanding, and time demanding. This will conflict with some of the limitations of the free online building services. You might consider doing this outside the container and only copy the files (the uncompressed result is even larger) or better - as in the original instructions they will be installed in the user's `$HOME` directory. 
+    The `samtools` and `bwa` are computationally intensive, memory demanding, and time demanding. This will conflict with some of the limitations of the free online building services. You might consider doing this outside the container and only copy the files (the uncompressed result is even larger) or better - as in the original instructions they will be installed in the user's `$HOME` directory.
+
+Have look for alternative advanced ideas - [Image Mounts](https://sylabs.io/guides/3.7/user-guide/bind_paths_and_mounts.html#image-mounts)
