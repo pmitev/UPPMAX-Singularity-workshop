@@ -6,7 +6,7 @@ Here is a real life example - you want to run this tool with Singularity.
 - Use the Ubuntu installation instructions.
 - Do not install the SBML tool.
 - Think where to clone the GitHUB repository.
-- Save the output to a file to track down potential errors `sudo singularity build ... | tee build.log`
+- Save the output to a file to track down potential errors `sudo singularity build ... |& tee build.log`
 - Test the container by running the tool `./gapseq.sif` that will start the `gapseq` tool from the github repository.
 
 ??? note "output"

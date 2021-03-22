@@ -12,7 +12,9 @@ nav:
     - Running containrs from online repositories: remote_repositories.md
   - Exercises:
     - Real life example: exercise_01.md
+    - Inspect containers: inspect.md
     - Upload to Sylabs container library: exercise_02.md
+  - Goods and bads: goods_bads.md  
   - About: about.md
 theme: 
   name: material
