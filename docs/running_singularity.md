@@ -34,6 +34,7 @@ $ singularity run ./lolcow.sif
                 ||     ||
 ```
 
+
 ## Getting a shell in the running container
 
 ``` bash
@@ -47,9 +48,35 @@ Singularity binds the user home folder, `/tmp` and some other by default. If you
 
 ## Binding/mounting folders
 
-Exit from the container with `exit`. Now start with 
+By default, Singularity binds these folders from the host computer (your computer) to the container defined in `/usr/local/etc/singularity/singularity.conf`.
 
-XXXXXXXXXXX
+``` linenums="1"
+mount home = yes
+
+mount tmp = yes
+
+#bind path = /etc/singularity/default-nsswitch.conf:/etc/nsswitch.conf
+#bind path = /opt
+#bind path = /scratch
+bind path = /etc/localtime
+bind path = /etc/hosts
+```
+
+On Rackham few more folders are automatically mounted for almot obvious reasons.
+```
+- /scratch
+- /sw
+- /proj
+```
+
+Binding folders from the host to the container, allows you to
+
+- "Inject" any host folder as read/write folder in the container  
+  frequently used for external databases or standalone tools
+- Replace container's folder or file form the host  
+  usually used to provide external configuration files to replace default common.
+
+More detailed online at [User-defined bind paths](https://sylabs.io/guides/3.7/user-guide/bind_paths_and_mounts.html#user-defined-bind-paths)
 
 ### Execute program in the container
 There is of course a way to start a different program than the default shell or the defined in the `%runscript` section.

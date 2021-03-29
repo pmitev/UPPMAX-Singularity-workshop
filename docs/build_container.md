@@ -66,7 +66,7 @@ _________________________________________
 ## Syntax of the definition file
 
 !!! note "Singularity.lolcow"
-    ``` singularity
+    ``` singularity linenums="1"
     BootStrap: docker
     From: ubuntu:16.04
 
@@ -107,7 +107,7 @@ The contents of the `%runscript` section are written to a file within the contai
 
 # Other simple examples
 
-## Texlive
+## TeX Live
 You need to use recent [TeX Live](https://www.tug.org/texlive/) but you do not want to (or you can't) upgrade your OS to the latest release... or you do not want to struggle unnecessary to make manual installation that has countless dependancies...
 
 !!! note "Singularity.texlive"

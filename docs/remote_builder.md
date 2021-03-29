@@ -1,6 +1,10 @@
 # Building containers remotely
 
-Building Singularity containers require `sudo` with `root` access which usually is not the case on community or public computer resources. Instances running on the cloud are an exception of this general rule.  
+Building Singularity containers require `sudo` with `root` access which usually is not the case on community or public computer resources. Instances running on the cloud are an exception of this general rule.
+
+In this course we will limit to exercises with local builds and try building remote when we gather some experience.
+
+For now, here are the two most common remote building services (GitHub is experimenting with it as well).
 
 ## Singularity Container Services
 Default installation of Singularity is configured to connect to the public [cloud.sylabs.io](https://cloud.sylabs.io/) services which allows you to send a definition file to be build on the Sylab cloud.

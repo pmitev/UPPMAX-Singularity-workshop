@@ -27,16 +27,16 @@ $ sudo singularity build paraview.sif Singularity.paraview
 
 This will download 301 MB and install 500 new packages... It might take some time to complete, but once you are done you will have a container that will run almost everywhere - there is always a catch.
 
-Instead of paraview, modify the definiton file to install and run your, not necessary graphical, program. Few tips: gnuplot, grace, blender, povray, rasmol...
+Instead of paraview, modify the definiton file to install and run your, not necessary graphical, program. Few tips: `gnuplot`, `grace`, `blender`, `povray`, `rasmol`, `gromacs-openmpi`  ...
 
 ## Building interactively in a sandbox.
 
 Unless you now exactly which programs and commands you need to install it might be rather tricky to assemble a recipe that will work. If every change requires rebuilding it becomes rather tedious work. Instead, we can try to build a container as we would do it interactively on the command line.
 
-For this purpose we will use '--sandbox' option which keeps the file structure intact.A regular build will create this folder structure in the `/tmp` then at the end will wrap everything in a single compressed **read-only** file by `mksquasfs` and delete the folder...
+For this purpose we will use `--sandbox` option which keeps the file structure intact. A regular build will create this folder structure in the `/tmp` then at the end will wrap everything in a single compressed **read-only** file by `mksquasfs` and delete the folder...
 The so called sandbox is writable (by root) and accessible as regular folder (by root).
 
-This is extremely convenient for testing purposes. The sandbox folder could be later converted to a regular container - but please do not do it unless you have a good reason why you are braking all the reproducible features of the container. Instead, during the interactive build, take notes by editing the definition file and build from scratch when you think you are ready.
+This is extremely convenient for testing purposes. The sandbox folder could be later converted to a regular container - but please do not do it unless you have a good reason why you are breaking all the reproducible features of the container. Instead, during the interactive build, take notes by editing the definition file and build from scratch when you think you are ready.
 
 Let's try this with something which might or might not  work - install jupyter with `jupyter_contrib_nbextensions` and `jupyter_nbextensions_configurator` via `pip`.
 
@@ -178,7 +178,7 @@ Exit form the container `exit`. Add `%runscrip`. Try to build the recipe you hav
 
 When it is done, try to run it with `./jupyter.sif`. Does it work? Can you open the address with the browser? Yes, you can install whatever packages you want and they will be available and preset in the container.
 
-Keep in mind that you have installed all packages with pip on a container's system level and they will be available to any user using it. **Important**! If you or somebody else who will use the container have packages installed in their home folder i.e. `pip install --user package` they will come on top of everything - for god or bad...
+Keep in mind that you have installed all packages with pip in the container at system level and they will be available to any user running the container. **Important**! If you or somebody else who will use the container have packages installed in their home folder i.e. `pip install --user package` they will come on top of everything - for god or bad...
 
 When you are done experimenting, and your recipe builds and works, do not forget to delete the sandbox. Be careful, you will need run `rm -r` with `sudo`. Slow down. Check twice when you run
 

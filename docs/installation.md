@@ -7,7 +7,7 @@ Detailed and well explained installation instructions at:
 Installation on Windows or Mac  
 <https://sylabs.io/guides/3.7/admin-guide/installation.html#installation-on-windows-or-mac>
 
-> I have successfully installed Singularity under [WSL2](https://docs.microsoft.com/en-us/windows/wsl/install-win10), but can't guarantee that it will work in all cases.
+> (PM) I have successfully installed Singularity under [WSL2](https://docs.microsoft.com/en-us/windows/wsl/install-win10), but can't guarantee that it will work in all cases.
 
 ## [TL;DR](https://www.urbandictionary.com/define.php?term=tl%3Bdr) 
 For Ubuntu (Debian based) Linux distributions.

@@ -104,7 +104,7 @@ Now, if you find yourself repeatedly rebuilding your definition file... and you 
   echo "Dir::Cache "/tmp/apt";" > /etc/apt/apt.conf.d/singularity-cache.conf
 
   apt-get update && \
-  apt-get -y install  wget unzip git bwa samtools
+  apt-get --no-install-recommends -y install  wget unzip git bwa samtools
   # the usual clean up
   rm -rf /var/lib/apt/lists/*
 
@@ -115,7 +115,10 @@ Now, if you find yourself repeatedly rebuilding your definition file... and you 
 ```
 
 !!! note
-    Remember to remove these lines in the final recipe.
+    - **Remember to remove these lines in the final recipe.**
+    - note the `--no-install-recommends` which can save on installing unnecessary packages. It is rather popular option.
+
+
 
 ## Downloading large files
 
