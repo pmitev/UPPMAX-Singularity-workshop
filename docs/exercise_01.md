@@ -1,7 +1,8 @@
 # Try to compile Singularity recipe
 
-Here is a real life example - you want to run this tool with Singularity.
-<https://gapseq.readthedocs.io/en/latest/install.html>
+Here is a real life example - you want to run `gapseq` tool with Singularity.
+<https://gapseq.readthedocs.io/en/latest/install.html>  
+> `gapseq` is a program for the prediction and analysis of metabolic pathways and genome-scale networks.
 
 - Create new folder for this project.
 - Use the Ubuntu installation instructions.
