@@ -14,6 +14,7 @@ nav:
     - Real life example: exercise_01.md
     - Inspect containers: inspect.md
     - Upload to Sylabs container library: exercise_02.md
+    - VSCode in Singularity: exercise_04.md
   - Goods and bads: goods_bads.md
   - UPPMAX in a can: uppmax_in_a_can.md 
   - About: about.md
