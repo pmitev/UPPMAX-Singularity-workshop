@@ -3,15 +3,40 @@
 Here is a real life example - you want to run this tool with Singularity.
 <https://gapseq.readthedocs.io/en/latest/install.html>
 
+- Create new folder for this project.
 - Use the Ubuntu installation instructions.
-- Do not install the SBML tool.
-- Think where to clone the GitHUB repository.
-- Save the output to a file to track down potential errors `sudo singularity build ... |& tee build.log`
-- Test the container by running the tool `./gapseq.sif` that will start the `gapseq` tool from the github repository.
+
+``` bash linenums="1"
+sudo apt install ncbi-blast+ git libglpk-dev r-base-core exonerate bedtools barrnap bc
+R -e 'install.packages(c("data.table", "stringr", "sybil", "getopt", "reshape2", "doParallel", "foreach", "R.utils", "stringi", "glpkAPI", "CHNOSZ", "jsonlite"))'
+R -e 'if (!requireNamespace("BiocManager", quietly = TRUE)) install.packages("BiocManager"); BiocManager::install("Biostrings")'
+git clone https://github.com/jotech/gapseq && cd gapseq
+```
+
+
+- Do not install the SBML tool (_not in the above instructions anyway_).
+- Think (discuss) where to clone the GitHUB repository from line 4.  
+  Note that this particular tool downloads external data into the repository structure, which does not work if you include add the repository in the container itself (the common container format is read-only). Thus, the cloning of the repository should be done in your home or project folder where you can run the program with the long syntax i.e.
+  ``` bash
+  $ singularity exec ../gapseq.sif ./gapseq doall toy/ecoli.fna.gz
+  ```
+- Start the build and save the output to a file to track down potential errors 
+  ``` bash
+  $ sudo singularity build ... |& tee build.log
+  ```
+- Clone the git repository - line 4
+  ``` bash
+  $ git clone https://github.com/jotech/gapseq && cd gapseq
+  ```
+- Test the container by running the tool that will start the `gapseq` tool from the github repository.
+  ```
+  $ singularity exec ../gapseq.sif ./gapseq
+  ``` 
+  
 
 ??? note "output"
     ``` 
-    ./gapseq.sif
+    $ singularity exec ../gapseq.sif ./gapseq
        __ _  __ _ _ __  ___  ___  __ _ 
       / _` |/ _` | '_ \/ __|/ _ \/ _` |
      | (_| | (_| | |_) \__ \  __/ (_| |
@@ -54,11 +79,11 @@ Here is a real life example - you want to run this tool with Singularity.
       -n              Enable noisy verbose mode.
     ```
 
-- Try to run `./gapseq.sif test`. Did you pass the tests? What is wrong? The output below shows an output with solved R packages tests. The second problem is related to the repository itself.
+- Try to run `singularity exec ../gapseq.sif ./gapseq test`. Did it pass the tests? What is wrong? The output below shows an output with solved R packages tests. The second problem is related to the repository itself.
 
 ??? note "output"
     ```
-    ./gapseq.sif test
+    $ singularity exec ../gapseq.sif ./gapseq test
     gapseq version: 1.1 7c25ca2
     linux-gnu
     #74-Ubuntu SMP Wed Jan 27 22:54:38 UTC 2021 
@@ -113,9 +138,4 @@ Here is a real life example - you want to run this tool with Singularity.
     ```
     
 Here is a working recipe for the exercise:  
-Note that this particular tool downloads external data into the repository structure, which does not work if you include add the repository in the container itself (the common container format is read-only). Thus, the cloning of the repository should be done in your home or project folder where you can run the program with the long syntax i.e. 
-```
-$ singularity exec ../gapseq.sif ./gapseq doall toy/ecoli.fna.gz
-```
-
 <https://github.com/pmitev/UPPMAX-Singularity/tree/main/gapseq>
