@@ -11,7 +11,7 @@ nav:
     - Running Singularity container: running_singularity.md
     - Running containrs from online repositories: remote_repositories.md
   - Exercises:
-    - Real life example: exercise_01.md
+    - Real-life example: exercise_01.md
     - Inspect containers: inspect.md
     - Upload to Sylabs container library: exercise_02.md
     - VSCode in Singularity: exercise_04.md
@@ -52,3 +52,6 @@ extra_javascript:
   - https://polyfill.io/v3/polyfill.min.js?features=es6
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
 site_url: https://pmitev.github.io/UPPMAX-Singularity-workshop/
+google_analytics:
+  - 268147891
+  - auto

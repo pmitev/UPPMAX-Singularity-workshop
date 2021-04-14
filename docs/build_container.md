@@ -1,6 +1,6 @@
 # Building your first container
 
-In this simple example we will build Singularity container that will run the following programs `fortune | cowsay | lolcat` by installing all necessary libraries and packages withing Ubuntu 16.04 Linux distribution setup.
+In this simple example we will build Singularity container that will run the following programs `fortune | cowsay | lolcat` by installing all necessary libraries and packages within Ubuntu 16.04 Linux distribution setup.
 
 ## Simple Singularity definition file
 
@@ -108,7 +108,7 @@ The contents of the `%runscript` section are written to a file within the contai
 # Other simple examples
 
 ## TeX Live
-You need to use recent [TeX Live](https://www.tug.org/texlive/) but you do not want to (or you can't) upgrade your OS to the latest release... or you do not want to struggle unnecessary to make manual installation that has countless dependancies...
+You need to use recent [TeX Live](https://www.tug.org/texlive/) but you do not want to (or you can't) upgrade your OS to the latest release... or you do not want to struggle unnecessary to make manual installation that has countless dependencies...
 
 !!! note "Singularity.texlive"
     ``` singularity
@@ -132,7 +132,7 @@ In this case, running the container will bring you to the bash prompt within lat
 If you want them available in the container, do you know where to add them?
 
 ## Installing software from a local package
-Some times, you cannot download a package directly or the software needs signing licenses. In this case you need to push in the locally downloaded file during the build process.
+Sometimes, you cannot download a package directly or the software needs signing licenses. In this case you need to push in the locally downloaded file during the build process.
 
 !!! note "Singularity.vesta"
     ``` singularity

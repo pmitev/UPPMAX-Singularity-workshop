@@ -44,7 +44,7 @@ Singularity>
 
 If you try to list the files in your home folder with `ls -l ~` you will see the content of your home folder. What about the root folder? List the content with `ls -l /` and compare the output from a different terminal. 
 
-Singularity binds the user home folder, `/tmp` and some other by default. If you are running on a computer with more users accounts than your own (like on a computer cluster) compare the content of `ls -l /home` from within the container and outside. You should not be able to see the other users folders that are on the computer otherwise.
+Singularity binds the user home folder, `/tmp` and some other by default. If you are running on a computer with more users accounts than your own (like on a computer cluster) compare the content of `ls -l /home` from within the container and outside. You should not be able to see the other users' folders that are on the computer otherwise.
 
 ## Binding/mounting folders
 
@@ -62,7 +62,7 @@ bind path = /etc/localtime
 bind path = /etc/hosts
 ```
 
-On Rackham few more folders are automatically mounted for almot obvious reasons.
+On Rackham few more folders are automatically mounted for almost obvious reasons.
 ```
 - /scratch
 - /sw
@@ -92,4 +92,4 @@ FATAL:   "host": executable file not found in $PATH
 Keep in mind that running in the container you should be able to find the program inside or in the folders you have binded to the container i.e. the system tools and programs remain isolated. 
 
 !!! warning
-    If you have setup `conda` or `pip` installations in you profile folder, they get available in the container. This  might conflict with the container setup which is unaware of programs installed in your home folder. To avoid such situations you might need to run singularity with `--cleanenv` option i.e. `singularity run -e ./lolcow.sif`
+    If you have setup `conda` or `pip` installations in you profile folder, they get available in the container. This  might conflict with the container setup which is unaware of programs installed in your home folder. To avoid such situations, you might need to run singularity with `--cleanenv` option i.e. `singularity run -e ./lolcow.sif`

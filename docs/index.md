@@ -23,11 +23,11 @@ Singularity is not the only [OS level virtualization](https://en.wikipedia.org/w
 
 Singularity runs in the user space i.e. which allows you to run Singularity containers in systems where you have only user rights - common situation on public and government computer resources.
 
-Since your home folder gets automatically mounted/exposed to you virtual environment you can look at it as an **alternative way to expose your data to different complete setups with pre-installed and configured software**.
+Since your home folder gets automatically mounted/exposed to your virtual environment you can look at it as an **alternative way to expose your data to different complete setups with pre-installed and configured software**.
 
 ## Purpose
 This workshop material aims to demonstrate and exercise some commonly used features by simple interactive tutorials. Thus, this is not complete manual or documentation for Singularity.
 
-The "[User documentation](https://sylabs.io/guides/3.7/user-guide/)" is an excellent reference source with basic examples in well ordered fashion and always up to date.
+The "[User documentation](https://sylabs.io/guides/3.7/user-guide/)" is an excellent reference source with basic examples in well-ordered fashion and always up to date.
 
 [^1]: Kurtzer, Gregory M; Sochat, Vanessa; Bauer, Michael W (2017). "Singularity: Scientific containers for mobility of compute". PLOS ONE. 12 (5): e0177459. Bibcode:2017PLoSO..1277459K. [doi:10.1371/journal.pone.0177459](https://doi.org/10.1371%2Fjournal.pone.0177459). PMC [5426675](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5426675). PMID [28494014](https://pubmed.ncbi.nlm.nih.gov/28494014)

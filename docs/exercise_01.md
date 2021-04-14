@@ -1,6 +1,6 @@
 # Try to compile Singularity recipe
 
-Here is a real life example - you want to run `gapseq` tool with Singularity.
+Here is a real-life example - you want to run `gapseq` tool with Singularity.
 <https://gapseq.readthedocs.io/en/latest/install.html>  
 > `gapseq` is a program for the prediction and analysis of metabolic pathways and genome-scale networks.
 

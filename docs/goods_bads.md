@@ -82,7 +82,7 @@ Install only the minimum python (`python3-dev`) from the distribution package ma
 
 ### Package installation - apt, yum, etc...
 
-Even if you use `--sandbox` you might find that some commands does not behave the same way as when executed by the common routines `sudo build...`. Some of this problems are related to the shell interpreter which might be `sh` or `bash`...
+Even if you use `--sandbox` you might find that some commands do not behave the same way as when executed by the common routines `sudo build...`. Some of these problems are related to the shell interpreter which might be `sh` or `bash`...
 
 !!! warning
     This nice file fetching trick will work interactively when you test but it will fail during the build
@@ -122,7 +122,7 @@ Now, if you find yourself repeatedly rebuilding your definition file... and you 
 
 ## Downloading large files
 
-The example bellow if from the installation instructions for https://github.com/freeseek/gtc2vcf.
+The example bellow is from the installation instructions for https://github.com/freeseek/gtc2vcf.
 
 Here is the original code, which downloads the 871MB file and extracts it on the fly. Then some indexing is applied.
 ```
@@ -150,7 +150,7 @@ The file is rather large for multiple downloads... we could rewrite a bit the li
   bwa index /data/GRCh37/human_g1k_v37.fasta || true
 ```
 !!! note
-    `gunzip` is returning non zero exit code which signals an error and the Singularity build will stop. The not so nice solution is to apply the `|| true` "trick" to ignore the error. Similar for the `bwa` tool.
+    `gunzip` is returning non-zero exit code which signals an error and the Singularity build will stop. The not so nice solution is to apply the `|| true` "trick" to ignore the error. Similar for the `bwa` tool.
 
 !!! warning
     The `samtools` and `bwa` are computationally intensive, memory demanding, and time demanding. This will conflict with some of the limitations of the free online building services. You might consider doing this outside the container and only copy the files (the uncompressed result is even larger) or better - as in the original instructions they will be installed in the user's `$HOME` directory.

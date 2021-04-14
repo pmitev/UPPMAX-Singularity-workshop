@@ -2,12 +2,12 @@
 
 <https://code.visualstudio.com/>
 
-This is another real life scenario. VSCode got rather popular these days, but it is still not available to run on Rackham...
+This is another real-life scenario. VSCode got rather popular these days, but it is still not available to run on Rackham...
 
-Let's try to assemble a recipe and see what difficulties could brings this.
+Let's try to assemble a recipe and see what difficulties could bring this.
 
 For Debian distributions the installation is done via downloading a package .deb file.  
-https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64
+`https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64`
 
 ## 1. The common...
 
@@ -37,7 +37,7 @@ From: ubuntu:20.04
 
 - **lines 1-6**: something trivial. We use docker and Ubuntu.20.04, set `export DEBIAN_FRONTEND=noninteractive` and update the `apt` repositories.
 - **line 7**: make sure we have some tools since VSCode might need them and they are not that big anyway.
-- **lines 9-11**: downloads the latest stable release and we save it as `code_stable_amd64.deb`. What happens if you do not specify the name of the output file. Try it i the terminal.
+- **lines 9-11**: downloads the latest stable release and we save it as `code_stable_amd64.deb`. What happens if you do not specify the name of the output file. Try it in the terminal.
 - **line 13**: just the usual cleaning.
 - **lines 15-16**: Some safe defaults
 - **lines 18-19**: At this point we do not know where the executable will be, so we will start just a bash shell instead.
@@ -65,7 +65,7 @@ You should be able to find that `libx11-xcb1` package contains this file... So, 
 - replace line 19 with the full path to the program to start `/usr/bin/code $@`
 
 ??? note "code"
-    ```
+    ``` singularity linenums="1"
     BootStrap: docker
     From: ubuntu:20.04
 

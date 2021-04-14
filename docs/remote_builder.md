@@ -7,7 +7,7 @@ In this course we will limit to exercises with local builds and try building rem
 For now, here are the two most common remote building services (GitHub is experimenting with it as well).
 
 ## Singularity Container Services
-Default installation of Singularity is configured to connect to the public [cloud.sylabs.io](https://cloud.sylabs.io/) services which allows you to send a definition file to be build on the Sylab cloud.
+Default installation of Singularity is configured to connect to the public [cloud.sylabs.io](https://cloud.sylabs.io/) services which allows you to send a definition file to be built on the Sylab cloud.
 
 Follow the manual about [Remote Endpoinst](https://sylabs.io/guides/3.7/user-guide/endpoint.html) to learn how to build containers remotely.
 
