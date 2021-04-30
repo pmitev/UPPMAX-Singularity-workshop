@@ -86,7 +86,19 @@ $ singularity run docker://dctrud/wttr
 ```
 ![output](images/wttr.png)
 
-If you have a GPU card here is how easy you can get running tensorflow running. Note the `--nv` option on the command line.
+### Tensorflow 
+Let's have some tensorflow running. First `pull` the image from docker hub.
+
+```
+$ singularity pull docker://tensorflow/tensorflow:latest-gpu
+
+INFO:    Converting OCI blobs to SIF format
+INFO:    Starting build...
+Getting image source signatures
+...
+```
+
+If you have a GPU card, here is how easy you can get tensorflow running. Note the `--nv` option on the command line.
 
 ---
 

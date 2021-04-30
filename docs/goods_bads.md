@@ -76,7 +76,7 @@ EOF
 
 ### pip
 
-Install only the minimum python (`python3-dev`) from the distribution package manager and the equivalent for `build-essential`. The rest should be perhaps better done by pip. Some libraries might still be needed.
+Install only the minimum python (`python3-dev`) from the distribution package manager and the equivalent for `build-essential`. The rest should be perhaps better done by `pip`. Some libraries might still be needed.
 
 ## Downloading packages and files multiple times.
 

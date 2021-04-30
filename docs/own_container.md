@@ -126,6 +126,8 @@ We are ready for `pip`
 ``` bash
 Singularity> /usr/bin/env python3 -m pip install --upgrade pip
 
+Singularity> /usr/bin/env python3 -m pip install jupyter
+
 Singularity> /usr/bin/env python3 -m pip install jupyter_contrib_nbextensions
 Singularity> jupyter contrib nbextension install --system
 Singularity> jupyter nbextension enable codefolding/main
@@ -160,6 +162,8 @@ Exit from the container `exit`. Add `%runscrip`. Try to build the recipe you hav
     
       /usr/bin/env python3 -m pip install --no-cache-dir --upgrade pip
     
+      /usr/bin/env python3 -m pip install --no-cache-dir jupyter
+
       /usr/bin/env python3 -m pip install --no-cache-dir  jupyter_contrib_nbextensions
       jupyter contrib nbextension install --system
       jupyter nbextension enable codefolding/main
