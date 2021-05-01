@@ -114,6 +114,44 @@ Type "help", "copyright", "credits" or "license" for more information.
 >>>
 ```
 
+### metaWRAP - a flexible pipeline for genome-resolved metagenomic data analysis
+
+Here is an example how to use the metaWRAP pipeline with via the docker container - [installation instructions](https://github.com/bxlab/metaWRAP#docker-installation).
+
+```
+$ docker pull quay.io/biocontainers/metawrap:1.2--1
+```
+In this particular case it is as easy as:
+
+```
+$ singularity pull docker://quay.io/biocontainers/metawrap:1.2--1
+
+INFO:    Converting OCI blobs to SIF format
+INFO:    Starting build...
+Getting image source signatures
+...
+```
+
+One can start the container and use it interactively.
+
+```
+$ ./metawrap_1.2--1.sif
+WARNING: Skipping mount /usr/local/var/singularity/mnt/session/etc/resolv.conf [files]: /etc/resolv.conf doesn't exist in container
+
+Singularity> metawrap --version
+metaWRAP v=1.2
+```
+
+but to run the tool from the command line (as you would use it in scripts) we need to add the call for the tool from Singularity.
+
+Original commad in the cript:  
+$ **metawrap** binning -o Lanna-straw_initial_binning_concoct -t 20 -a /proj/test/megahit_ass_Lanna-straw/final.contigs.fa --concoct --run-checkm /proj/test/Lanna-straw_reads_trimmed/*.fastq
+
+The command now calls the tool from the Singularity container:  
+$ ==singularity exec metawrap_1.2--1.sif== **metawrap** binning -o Lanna-straw_initial_binning_concoct -t 20 -a /proj/test/megahit_ass_Lanna-straw/final.contigs.fa --concoct --run-checkm /proj/test/Lanna-straw_reads_trimmed/*.fastq
+
+
+
 !!! info "Pulling Singularity container from online or local library/repository"
     - **library://** to build from the [Container Library](https://    cloud.sylabs.io/library)  
     ` library://sylabs-jms/testing/lolcow`
@@ -123,3 +161,4 @@ Type "help", "copyright", "credits" or "license" for more information.
     - path to a existing container on your local machine
     - path to a directory to build from a sandbox
     - path to a Singularity definition file
+
