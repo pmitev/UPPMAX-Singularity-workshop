@@ -116,7 +116,7 @@ Type "help", "copyright", "credits" or "license" for more information.
 
 ### metaWRAP - a flexible pipeline for genome-resolved metagenomic data analysis
 
-Here is an example how to use the metaWRAP pipeline with via the docker container - [installation instructions](https://github.com/bxlab/metaWRAP#docker-installation).
+Here is an example how to use the metaWRAP pipeline from the docker container - [installation instructions](https://github.com/bxlab/metaWRAP#docker-installation).
 
 ```
 $ docker pull quay.io/biocontainers/metawrap:1.2--1
@@ -131,8 +131,9 @@ INFO:    Starting build...
 Getting image source signatures
 ...
 ```
+This will bring the docker container locally and covert it to Singularity format.
 
-One can start the container and use it interactively.
+Then, one can start the container and use it interactively.
 
 ```
 $ ./metawrap_1.2--1.sif
@@ -142,7 +143,7 @@ Singularity> metawrap --version
 metaWRAP v=1.2
 ```
 
-but to run the tool from the command line (as you would use it in scripts) we need to add the call for the tool from Singularity.
+To run the tool from the command line (as you would use it in scripts) we need to add the call for the tool from Singularity.
 
 Original commad in the cript:  
 $ **metawrap** binning -o Lanna-straw_initial_binning_concoct -t 20 -a /proj/test/megahit_ass_Lanna-straw/final.contigs.fa --concoct --run-checkm /proj/test/Lanna-straw_reads_trimmed/*.fastq

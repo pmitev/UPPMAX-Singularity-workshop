@@ -24,7 +24,7 @@ Here is an example scenario
 
 ...
 
-  # Clen the installation folder (unless you want to keep it)
+  # Clean the installation folder (unless you want to keep it)
   rm -rf /installs
 ```
 
