@@ -35,44 +35,99 @@ Here is an example scenario
 
 ## Conda
 
-``` singularity
-%environment
-  export CONDA_ENVS_PATH=/opt/conda_envs
+Conda causes some unexpected problems. During the build and and the commands in `%runscrupt` sections are run with `/bin/sh` which fails upon `source /full_path_to/conda.sh` which in turn fails `conda activate my_environment`. Her are two examples how to deal with the situation.
 
-%post
-  export CONDA_ENVS_PATH=/opt/conda_envs &&  mkdir -p ${CONDA_ENVS_PATH}
+!!! note "docker://continuumio/miniconda3 container"
 
-  mkdir /installs && cd /installs
+    ``` singularity linenums="1"
+    Bootstrap: docker
+    From: continuumio/miniconda3
 
-  mconda="Miniconda3-py38_4.9.2-Linux-x86_64.sh"
-  wget https://repo.anaconda.com/miniconda/${mconda} && \
-  chmod +x ${mconda} && \
-  ./${mconda} -b -p /opt/miniconda3 && \
-  ln -s /opt/miniconda3/bin/conda /usr/bin/conda
+    %environment
+      export LC_ALL=C
+    
+    %post
+      export LC_ALL=C
+    
+      conda config --add channels defaults
+      conda config --add channels conda-forge
+      conda config --add channels bioconda
+      conda config --add channels ursky
+      conda create --name metawrap-env --channel ursky metawrap-mg=1.3.2
+    
+      conda clean --all --yes
+    
+    %runscript
+      params=$@
+    /bin/bash <<EOF
+      source /opt/conda/etc/profile.d/conda.sh
+      conda activate metawrap-env
+      metawrap $params
+    EOF
+    ```
 
-  conda env create -f /env.yaml
+??? note "Ubuntu + conda"
+    ``` singularity linenums="1"
+    Bootstrap: docker
+    From: ubuntu:20.04
+    
+    %labels
+      Author pmitev@gmail.com
+    
+    %environment
+      export LC_ALL=C
+      export CONDA_ENVS_PATH=/opt/conda_envs
+      export PATH=/opt/metaWRAP/bin:$PATH
+    
+    %post
+      export DEBIAN_FRONTEND=noninteractive
+      export LC_ALL=C
+      export CONDA_ENVS_PATH=/opt/conda_envs &&  mkdir -p ${CONDA_ENVS_PATH}
+    
+      apt-get update && apt-get -y install  wget git
+    
+      mkdir /installs && cd /installs
+    
+      # Conda installation     ==============================================
+      mconda="Miniconda3-py38_4.9.2-Linux-x86_64.sh"
+      wget https://repo.anaconda.com/miniconda/${mconda} && \
+      chmod +x ${mconda} && \
+      ./${mconda} -b -p /opt/miniconda3 && \
+      ln -s /opt/miniconda3/bin/conda /usr/bin/conda
+    
+      # metaWRAP dependencies installation     ==============================
+    /bin/bash <<EOF
+      source /opt/miniconda3/etc/profile.d/conda.sh
+    
+      conda create -y -n metawrap-env python=2.7
+      conda activate metawrap-env
+      
+      conda config --add channels defaults
+      conda config --add channels conda-forge
+      conda config --add channels bioconda
+      conda config --add channels ursky
+    
+      conda install --only-deps -c ursky metawrap-mg
+    
+      conda clean --all --yes
+    EOF
+    
+      # metaWRAP from github     ============================================
+      cd /opt
+      git clone https://github.com/bxlab/metaWRAP.git
+    
+      cd / && rm -r /installs
+    
+    %runscript
+      params=$@
+    /bin/bash <<EOF
+      export PATH=/opt/metaWRAP/bin:$PATH
+      source /opt/miniconda3/etc/profile.d/conda.sh
+      conda activate metawrap-env
+      metawrap $params
+    EOF
+    ```
 
-cat <<EOF > /etc/profile.d/conda-env.sh
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/opt/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/opt/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/opt/miniconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/opt/miniconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
-EOF
-
-%runscript
-  source /etc/profile.d/conda-env.sh
-  /bin/bash $@
-```
 
 ### pip
 
