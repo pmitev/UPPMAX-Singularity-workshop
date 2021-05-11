@@ -53,7 +53,7 @@ Conda causes some unexpected problems. During the build and and the commands in 
       conda config --add channels conda-forge
       conda config --add channels bioconda
       conda config --add channels ursky
-      conda create --name metawrap-env --channel ursky metawrap-mg=1.3.2
+      conda create --name metawrap-env --channel ursky metawrap-mg=1.3.2 tbb=2020.2
     
       conda clean --all --yes
     
