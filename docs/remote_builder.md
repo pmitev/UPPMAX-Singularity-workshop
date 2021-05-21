@@ -13,3 +13,6 @@ Follow the manual about [Remote Endpoinst](https://sylabs.io/guides/3.7/user-gui
 
 ## Singularity Container Registry (Singularity Hub)
 [Singularity Hub](https://singularity-hub.org/) is the predecessor to Singularity Registry, and while it also serves as an image registry, in addition it provides a cloud build service for users. Singularity Hub also takes advantage of Github for version control of build recipes. The user pushes to Github, a builder is deployed, and the image available to the user. Singularity Hub would allow a user to build and run an image from a resource where he or she doesn't have sudo simply by using Github as a middleman.
+
+!!! failure "Notice"
+    Singularity Hub is no longer online as a builder service, but exists as a read only archive. Containers built before April 19, 2021 are available at their same pull URLs. To see a last day gallery of Singularity Hub, please see [here](https://singularityhub.github.io/singularityhub-docs/lastday/)
