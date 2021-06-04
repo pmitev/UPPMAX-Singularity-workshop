@@ -86,3 +86,37 @@ Available Commands:
 
 Run 'singularity --help' for more detailed usage information.
 ```
+
+## Check the configuration
+
+``` bash
+singularity buildcfg
+PACKAGE_NAME=singularity
+PACKAGE_VERSION=3.7.0
+BUILDDIR=/root/singularity/builddir
+PREFIX=/usr/local
+EXECPREFIX=/usr/local
+BINDIR=/usr/local/bin
+SBINDIR=/usr/local/sbin
+LIBEXECDIR=/usr/local/libexec
+DATAROOTDIR=/usr/local/share
+DATADIR=/usr/local/share
+SYSCONFDIR=/usr/local/etc
+SHAREDSTATEDIR=/usr/local/com
+LOCALSTATEDIR=/usr/local/var
+RUNSTATEDIR=/usr/local/var/run
+INCLUDEDIR=/usr/local/include
+DOCDIR=/usr/local/share/doc/singularity
+INFODIR=/usr/local/share/info
+LIBDIR=/usr/local/lib
+LOCALEDIR=/usr/local/share/locale
+MANDIR=/usr/local/share/man
+SINGULARITY_CONFDIR=/usr/local/etc/singularity
+SESSIONDIR=/usr/local/var/singularity/mnt/session
+PLUGIN_ROOTDIR=/usr/local/libexec/singularity/plugin
+SINGULARITY_CONF_FILE=/usr/local/etc/singularity/singularity.conf
+SINGULARITY_SUID_INSTALL=1
+```
+
+!!! note
+    There is a possibility to [install Singularity as user](https://sylabs.io/guides/3.7/admin-guide/installation.html#unprivileged-non-setuid-installation), providing that the requirements are satisfied. Make sure you have `go` or install it as user as well.
