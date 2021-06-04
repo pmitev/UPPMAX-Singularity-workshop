@@ -1,0 +1,714 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="canonical" href="https://pmitev.github.io/UPPMAX-Singularity-workshop/exercise_01/">
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.1.6">
+    
+    
+      
+        <title>Real-life example - UPPMAX: Singularity workshop</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.875de78c.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.f1a3b89f.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+    
+      
+        
+<script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","268147891","auto"),ga("set","anonymizeIp",!0),ga("send","pageview"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){var e;this.value&&(e=document.location.pathname,ga("send","pageview",e+"?q="+this.value))}),"undefined"!=typeof location$&&location$.subscribe(function(e){ga("send","pageview",e.pathname)})})</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+      
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <script>function __prefix(e){return new URL("..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+      <script>var palette=__get("__palette");if(null!==palette&&"object"==typeof palette.color)for(var key in palette.color)document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#try-to-compile-singularity-recipe" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="UPPMAX: Singularity workshop" class="md-header__button md-logo" aria-label="UPPMAX: Singularity workshop" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            UPPMAX: Singularity workshop
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Real-life example
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo" type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 10a2 2 0 0 1 2 2 2 2 0 0 1-2 2 2 2 0 0 1-2-2 2 2 0 0 1 2-2m10-3a5 5 0 0 1 5 5 5 5 0 0 1-5 5H7a5 5 0 0 1-5-5 5 5 0 0 1 5-5h10M7 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3h10a3 3 0 0 0 3-3 3 3 0 0 0-3-3H7z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="blue" type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.com/pmitev/UPPMAX-Singularity-workshop/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="UPPMAX: Singularity workshop" class="md-nav__button md-logo" aria-label="UPPMAX: Singularity workshop" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    UPPMAX: Singularity workshop
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/pmitev/UPPMAX-Singularity-workshop/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../installation/" class="md-nav__link">
+        How to install
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../remote_builder/" class="md-nav__link">
+        Building remotely
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fakeroot/" class="md-nav__link">
+        Building with --fakeroot
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      <label class="md-nav__link" for="__nav_5">
+        First steps
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="First steps" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          First steps
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../build_container/" class="md-nav__link">
+        Building a container
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../own_container/" class="md-nav__link">
+        Build own container
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../running_singularity/" class="md-nav__link">
+        Running Singularity container
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../remote_repositories/" class="md-nav__link">
+        Running containrs from online repositories
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" checked>
+      
+      <label class="md-nav__link" for="__nav_6">
+        Exercises
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Exercises" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          Exercises
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Real-life example
+      </a>
+      
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../inspect/" class="md-nav__link">
+        Inspect containers
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../exercise_02/" class="md-nav__link">
+        Upload to Sylabs container library
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../exercise_04/" class="md-nav__link">
+        VSCode in Singularity
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../goods_bads/" class="md-nav__link">
+        Goods and bads
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../uppmax_in_a_can/" class="md-nav__link">
+        UPPMAX in a can
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../about/" class="md-nav__link">
+        About
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/pmitev/UPPMAX-Singularity-workshop/edit/master/docs/exercise_01.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                <h1 id="try-to-compile-singularity-recipe">Try to compile Singularity recipe</h1>
+<p>Here is a real-life example - you want to run <code>gapseq</code> tool with Singularity.
+<a href="https://gapseq.readthedocs.io/en/latest/install.html">https://gapseq.readthedocs.io/en/latest/install.html</a>  </p>
+<blockquote>
+<p><code>gapseq</code> is a program for the prediction and analysis of metabolic pathways and genome-scale networks.</p>
+</blockquote>
+<ul>
+<li>Create new folder for this project.</li>
+<li>Use the Ubuntu installation instructions.</li>
+</ul>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>sudo apt install ncbi-blast+ git libglpk-dev r-base-core exonerate bedtools barrnap bc
+R -e <span class="s1">&#39;install.packages(c(&quot;data.table&quot;, &quot;stringr&quot;, &quot;sybil&quot;, &quot;getopt&quot;, &quot;reshape2&quot;, &quot;doParallel&quot;, &quot;foreach&quot;, &quot;R.utils&quot;, &quot;stringi&quot;, &quot;glpkAPI&quot;, &quot;CHNOSZ&quot;, &quot;jsonlite&quot;))&#39;</span>
+R -e <span class="s1">&#39;if (!requireNamespace(&quot;BiocManager&quot;, quietly = TRUE)) install.packages(&quot;BiocManager&quot;); BiocManager::install(&quot;Biostrings&quot;)&#39;</span>
+git clone https://github.com/jotech/gapseq <span class="o">&amp;&amp;</span> <span class="nb">cd</span> gapseq
+</code></pre></div>
+</td></tr></table>
+<ul>
+<li>Do not install the SBML tool (<em>not in the above instructions anyway</em>).</li>
+<li>Think (discuss) where to clone the GitHUB repository from line 4.<br />
+  Note that this particular tool downloads external data into the repository structure, which does not work if you include add the repository in the container itself (the common container format is read-only). Thus, the cloning of the repository should be done in your home or project folder where you can run the program with the long syntax i.e.
+  <div class="highlight"><pre><span></span><code>$ singularity <span class="nb">exec</span> ../gapseq.sif ./gapseq doall toy/ecoli.fna.gz
+</code></pre></div></li>
+<li>Start the build and save the output to a file to track down potential errors 
+  <div class="highlight"><pre><span></span><code>$ sudo singularity build ... <span class="p">|&amp;</span> tee build.log
+</code></pre></div></li>
+<li>Clone the git repository - line 4
+  <div class="highlight"><pre><span></span><code>$ git clone https://github.com/jotech/gapseq <span class="o">&amp;&amp;</span> <span class="nb">cd</span> gapseq
+</code></pre></div></li>
+<li>Test the container by running the tool that will start the <code>gapseq</code> tool from the github repository.
+  <div class="highlight"><pre><span></span><code>$ singularity exec ../gapseq.sif ./gapseq
+</code></pre></div></li>
+</ul>
+<details class="note"><summary>output</summary><div class="highlight"><pre><span></span><code>$ singularity exec ../gapseq.sif ./gapseq
+   __ _  __ _ _ __  ___  ___  __ _ 
+  / _` |/ _` | &#39;_ \/ __|/ _ \/ _` |
+ | (_| | (_| | |_) \__ \  __/ (_| |
+  \__, |\__,_| .__/|___/\___|\__, |
+  |___/      |_|                |_|
+
+Informed prediction and analysis of bacterial metabolic pathways     and genome-scale networks
+
+Usage:
+  gapseq test
+  gapseq (find | find-transport | draft | fill | doall | adapt) (..    .)
+  gapseq doall (genome) [medium] [Bacteria|Archaea]
+  gapseq find (-p pathways | -e enzymes) [-b bitscore] (genome)
+  gapseq find-transport [-b bitscore] (genome)
+  gapseq draft (-r reactions | -t transporter -c genome -p     pathways) [-b pos|neg|archaea|auto]
+  gapseq fill (-m draft -n medium -c rxn_weights -g rxn_genes)
+  gapseq adapt (add | remove) (reactions,pathways) (model)
+
+Examples:
+  gapseq test
+  gapseq doall toy/ecoli.fna.gz
+  gapseq doall toy/myb71.fna.gz dat/media/TSBmed.csv
+  gapseq find -p chitin toy/myb71.fna.gz
+  gapseq find -p all toy/myb71.fna.gz
+  gapseq find-transport toy/myb71.fna.gz
+  gapseq draft -r toy/ecoli-all-Reactions.tbl -t toy/    ecoli-Transporter.tbl -c toy/ecoli.fna.gz -p toy/    ecoli-all-Pathways.tbl
+  gapseq fill -m toy/ecoli-draft.RDS -n dat/media/ALLmed.csv -c     toy/ecoli-rxnWeights.RDS -g toy/ecoli-rxnXgenes.RDS
+  gapseq adapt add 14DICHLORBENZDEG-PWY toy/myb71.RDS
+
+Options:
+  test            Testing dependencies and basic functionality of     gapseq.
+  find            Pathway analysis, try to find enzymes based on     homology.
+  find-transport  Search for transporters based on homology.
+  draft           Draft model construction based on results from     find and find-transport.
+  fill            Gap filling of a model.
+  doall           Combine find, find-transport, draft and fill.
+  adapt           Add or remove reactions or pathways.
+  -v              Show version.
+  -h              Show this screen.
+  -n              Enable noisy verbose mode.
+</code></pre></div>
+</details>
+<ul>
+<li>Try to run <code>singularity exec ../gapseq.sif ./gapseq test</code>. Did it pass the tests? What is wrong? The output below shows an output with solved R packages tests. The second problem is related to the repository itself.</li>
+</ul>
+<details class="note"><summary>output</summary><div class="highlight"><pre><span></span><code>$ singularity exec ../gapseq.sif ./gapseq test
+gapseq version: 1.1 7c25ca2
+linux-gnu
+#74-Ubuntu SMP Wed Jan 27 22:54:38 UTC 2021 
+
+#######################
+#Checking dependencies#
+#######################
+GNU Awk 5.0.1, API: 2.0 (GNU MPFR 4.0.2, GNU MP 6.2.0)
+sed (GNU sed) 4.7
+grep (GNU grep) 3.4
+This is perl 5, version 30, subversion 0 (v5.30.0) built for     x86_64-linux-gnu-thread-multi
+tblastn: 2.9.0+
+exonerate from exonerate version 2.4.0
+bedtools v2.27.1
+barrnap 0.9 - rapid ribosomal RNA prediction
+R version 3.6.3 (2020-02-29) -- &quot;Holding the Windsock&quot;
+R scripting front-end version 3.6.3 (2020-02-29)
+git version 2.25.1
+
+Missing dependencies: 0
+
+
+
+#####################
+#Checking R packages#
+#####################
+data.table 1.14.0 
+stringr 1.4.0 
+sybil 2.1.5 
+getopt 1.20.3 
+reshape2 1.4.4 
+doParallel 1.0.16 
+foreach 1.5.1 
+R.utils 2.10.1 
+stringi 1.5.3 
+glpkAPI 1.3.2 
+BiocManager 1.30.10 
+Biostrings 2.54.0 
+jsonlite 1.7.2 
+CHNOSZ 1.4.0 
+
+Missing R packages:  0 
+
+##############################
+#Checking basic functionality#
+##############################
+Optimization test: OK 
+Command line argument error: Argument &quot;query&quot;. File is not     accessible:  `/opt/gapseq/src/../dat/seq/Bacteria/rev/1.2.4.1.    fasta&#39;
+Blast test: FAILED
+
+Passed tests: 1/2
+</code></pre></div>
+</details>
+<p>Here is a working recipe for the exercise:<br />
+<a href="https://github.com/pmitev/UPPMAX-Singularity/tree/main/gapseq">https://github.com/pmitev/UPPMAX-Singularity/tree/main/gapseq</a></p>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      <a href="https://uppmax.uu.se/" target="_blank" rel="noopener"><img align="right" alt="Uppsala" src="https://pmitev.github.io/to-awk-or-not/images/Uppsala.png" /> </a>
+      <a href="https://snic.se/" target="_blank" rel="noopener"><img align="right" alt="SNIC" src="https://pmitev.github.io/to-awk-or-not/images/SNIC.png" /> </a>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "../assets/javascripts/workers/search.d351de03.min.js", "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.34eae1b6.min.js"></script>
+      
+        <script src="../javascripts/config.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

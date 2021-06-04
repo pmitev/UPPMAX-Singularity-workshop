@@ -1,0 +1,1009 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="canonical" href="https://pmitev.github.io/UPPMAX-Singularity-workshop/goods_bads/">
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.1.6">
+    
+    
+      
+        <title>Goods and bads - UPPMAX: Singularity workshop</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.875de78c.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.f1a3b89f.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+    
+      
+        
+<script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","268147891","auto"),ga("set","anonymizeIp",!0),ga("send","pageview"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){var e;this.value&&(e=document.location.pathname,ga("send","pageview",e+"?q="+this.value))}),"undefined"!=typeof location$&&location$.subscribe(function(e){ga("send","pageview",e.pathname)})})</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+      
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <script>function __prefix(e){return new URL("..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+      <script>var palette=__get("__palette");if(null!==palette&&"object"==typeof palette.color)for(var key in palette.color)document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#common-good-or-bad-practices-for-building-singularity-containers" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="UPPMAX: Singularity workshop" class="md-header__button md-logo" aria-label="UPPMAX: Singularity workshop" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            UPPMAX: Singularity workshop
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Goods and bads
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo" type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 10a2 2 0 0 1 2 2 2 2 0 0 1-2 2 2 2 0 0 1-2-2 2 2 0 0 1 2-2m10-3a5 5 0 0 1 5 5 5 5 0 0 1-5 5H7a5 5 0 0 1-5-5 5 5 0 0 1 5-5h10M7 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3h10a3 3 0 0 0 3-3 3 3 0 0 0-3-3H7z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="blue" type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.com/pmitev/UPPMAX-Singularity-workshop/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="UPPMAX: Singularity workshop" class="md-nav__button md-logo" aria-label="UPPMAX: Singularity workshop" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    UPPMAX: Singularity workshop
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/pmitev/UPPMAX-Singularity-workshop/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../installation/" class="md-nav__link">
+        How to install
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../remote_builder/" class="md-nav__link">
+        Building remotely
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fakeroot/" class="md-nav__link">
+        Building with --fakeroot
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      <label class="md-nav__link" for="__nav_5">
+        First steps
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="First steps" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          First steps
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../build_container/" class="md-nav__link">
+        Building a container
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../own_container/" class="md-nav__link">
+        Build own container
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../running_singularity/" class="md-nav__link">
+        Running Singularity container
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../remote_repositories/" class="md-nav__link">
+        Running containrs from online repositories
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
+      
+      <label class="md-nav__link" for="__nav_6">
+        Exercises
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Exercises" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          Exercises
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../exercise_01/" class="md-nav__link">
+        Real-life example
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../inspect/" class="md-nav__link">
+        Inspect containers
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../exercise_02/" class="md-nav__link">
+        Upload to Sylabs container library
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../exercise_04/" class="md-nav__link">
+        VSCode in Singularity
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Goods and bads
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Goods and bads
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#where-to-compile-and-install-source-codes" class="md-nav__link">
+    Where to compile and install source codes.
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conda" class="md-nav__link">
+    Conda
+  </a>
+  
+    <nav class="md-nav" aria-label="Conda">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pip" class="md-nav__link">
+    pip
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#downloading-packages-and-files-multiple-times" class="md-nav__link">
+    Downloading packages and files multiple times.
+  </a>
+  
+    <nav class="md-nav" aria-label="Downloading packages and files multiple times.">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#package-installation-apt-yum-etc" class="md-nav__link">
+    Package installation - apt, yum, etc...
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#downloading-large-files" class="md-nav__link">
+    Downloading large files
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../uppmax_in_a_can/" class="md-nav__link">
+        UPPMAX in a can
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../about/" class="md-nav__link">
+        About
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#where-to-compile-and-install-source-codes" class="md-nav__link">
+    Where to compile and install source codes.
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conda" class="md-nav__link">
+    Conda
+  </a>
+  
+    <nav class="md-nav" aria-label="Conda">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pip" class="md-nav__link">
+    pip
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#downloading-packages-and-files-multiple-times" class="md-nav__link">
+    Downloading packages and files multiple times.
+  </a>
+  
+    <nav class="md-nav" aria-label="Downloading packages and files multiple times.">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#package-installation-apt-yum-etc" class="md-nav__link">
+    Package installation - apt, yum, etc...
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#downloading-large-files" class="md-nav__link">
+    Downloading large files
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/pmitev/UPPMAX-Singularity-workshop/edit/master/docs/goods_bads.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                <h1 id="common-good-or-bad-practices-for-building-singularity-containers">Common good or bad practices for building Singularity containers</h1>
+<p><em>Disclaimer: these might not be the best solutions at all.</em></p>
+<h2 id="where-to-compile-and-install-source-codes">Where to compile and install source codes.</h2>
+<p>There are some, not so easy to see, complications. <code>/tmp</code> looks like good choice... The problem is that /tmp is mounted automatically even during the build process. This means that you will collide with leftovers from previous builds which might lead to rather unexpected results. We will use this problematic behavior in the next section for our advantage.</p>
+<p><code>$HOME</code> points to <code>/root</code> during build, and it is also mounted at build time. Really bad place to compile!</p>
+<blockquote>
+<p>So... Where is a good place to compile and install?</p>
+</blockquote>
+<p>Here is an example scenario</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="gh">%environment</span>
+<span class="hll">  <span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span>/opt/tool-name/bin:<span class="si">${</span><span class="nv">PATH</span><span class="si">}</span>
+</span>
+<span class="gh">%post</span>
+<span class="hll">  mkdir -p /installs <span class="o">&amp;&amp;</span> <span class="nb">cd</span> /installs
+</span>  git clone repository-link <span class="o">&amp;&amp;</span> <span class="nb">cd</span> tool-name
+<span class="hll">  ./configure --prefix<span class="o">=</span>/opt/tool-name
+</span>  make <span class="o">&amp;&amp;</span> make install
+
+...
+
+  <span class="c1"># Clean the installation folder (unless you want to keep it)</span>
+  rm -rf /installs
+</code></pre></div>
+</td></tr></table>
+<ul>
+<li>dedicate a folder in the container's file structure</li>
+<li>fetch your installation files there (look how this might be improved for large files downloaded with <code>wget</code>)</li>
+<li>install in /opt and adjust the <code>$PATH</code><br />
+  or just allow the tool to mix with the system files.</li>
+</ul>
+<h2 id="conda">Conda</h2>
+<p>Conda causes some unexpected problems. During the build and and the commands in <code>%runscrupt</code> sections are run with <code>/bin/sh</code> which fails upon <code>source /full_path_to/conda.sh</code> which in turn fails <code>conda activate my_environment</code>. Her are two examples how to deal with the situation.</p>
+<div class="admonition note">
+<p class="admonition-title">docker://continuumio/miniconda3 container</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">Bootstrap</span>: docker
+<span class="k">From</span>: continuumio/miniconda3
+
+<span class="gh">%environment</span>
+  <span class="nb">export</span> <span class="nv">LC_ALL</span><span class="o">=</span>C
+
+<span class="gh">%post</span>
+  <span class="nb">export</span> <span class="nv">LC_ALL</span><span class="o">=</span>C
+
+  conda config --add channels defaults
+  conda config --add channels conda-forge
+  conda config --add channels bioconda
+  conda config --add channels ursky
+  conda create --name metawrap-env --channel ursky metawrap-mg<span class="o">=</span><span class="m">1</span>.3.2 <span class="nv">tbb</span><span class="o">=</span><span class="m">2020</span>.2
+
+  conda clean --all --yes
+
+<span class="gh">%runscript</span>
+  <span class="nv">params</span><span class="o">=</span><span class="nv">$@</span>
+/bin/bash <span class="s">&lt;&lt;EOF</span>
+<span class="s">  source /opt/conda/etc/profile.d/conda.sh</span>
+<span class="s">  conda activate metawrap-env</span>
+<span class="s">  metawrap $params</span>
+<span class="s">EOF</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+<details class="note"><summary>Ubuntu + conda</summary><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">Bootstrap</span>: docker
+<span class="k">From</span>: ubuntu:<span class="m">20.04</span>
+
+<span class="gh">%labels</span>
+  Author pmitev@gmail.com
+
+<span class="gh">%environment</span>
+  <span class="nb">export</span> <span class="nv">LC_ALL</span><span class="o">=</span>C
+  <span class="nb">export</span> <span class="nv">CONDA_ENVS_PATH</span><span class="o">=</span>/opt/conda_envs
+  <span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span>/opt/metaWRAP/bin:<span class="nv">$PATH</span>
+
+<span class="gh">%post</span>
+  <span class="nb">export</span> <span class="nv">DEBIAN_FRONTEND</span><span class="o">=</span>noninteractive
+  <span class="nb">export</span> <span class="nv">LC_ALL</span><span class="o">=</span>C
+  <span class="nb">export</span> <span class="nv">CONDA_ENVS_PATH</span><span class="o">=</span>/opt/conda_envs <span class="o">&amp;&amp;</span>  mkdir -p <span class="si">${</span><span class="nv">CONDA_ENVS_PATH</span><span class="si">}</span>
+
+  apt-get update <span class="o">&amp;&amp;</span> apt-get -y install  wget git
+
+  mkdir /installs <span class="o">&amp;&amp;</span> <span class="nb">cd</span> /installs
+
+  <span class="c1"># Conda installation     ==============================================</span>
+  <span class="nv">mconda</span><span class="o">=</span><span class="s2">&quot;Miniconda3-py38_4.9.2-Linux-x86_64.sh&quot;</span>
+  wget https://repo.anaconda.com/miniconda/<span class="si">${</span><span class="nv">mconda</span><span class="si">}</span> <span class="o">&amp;&amp;</span> <span class="se">\</span>
+  chmod +x <span class="si">${</span><span class="nv">mconda</span><span class="si">}</span> <span class="o">&amp;&amp;</span> <span class="se">\</span>
+  ./<span class="si">${</span><span class="nv">mconda</span><span class="si">}</span> -b -p /opt/miniconda3 <span class="o">&amp;&amp;</span> <span class="se">\</span>
+  ln -s /opt/miniconda3/bin/conda /usr/bin/conda
+
+  <span class="c1"># metaWRAP dependencies installation     ==============================</span>
+/bin/bash <span class="s">&lt;&lt;EOF</span>
+<span class="s">  source /opt/miniconda3/etc/profile.d/conda.sh</span>
+
+<span class="s">  conda create -y -n metawrap-env python=2.7</span>
+<span class="s">  conda activate metawrap-env</span>
+
+<span class="s">  conda config --add channels defaults</span>
+<span class="s">  conda config --add channels conda-forge</span>
+<span class="s">  conda config --add channels bioconda</span>
+<span class="s">  conda config --add channels ursky</span>
+
+<span class="s">  conda install --only-deps -c ursky metawrap-mg</span>
+
+<span class="s">  conda clean --all --yes</span>
+<span class="s">EOF</span>
+
+  <span class="c1"># metaWRAP from github     ============================================</span>
+  <span class="nb">cd</span> /opt
+  git clone https://github.com/bxlab/metaWRAP.git
+
+  <span class="nb">cd</span> / <span class="o">&amp;&amp;</span> rm -r /installs
+
+<span class="gh">%runscript</span>
+  <span class="nv">params</span><span class="o">=</span><span class="nv">$@</span>
+/bin/bash <span class="s">&lt;&lt;EOF</span>
+<span class="s">  export PATH=/opt/metaWRAP/bin:$PATH</span>
+<span class="s">  source /opt/miniconda3/etc/profile.d/conda.sh</span>
+<span class="s">  conda activate metawrap-env</span>
+<span class="s">  metawrap $params</span>
+<span class="s">EOF</span>
+</code></pre></div>
+</td></tr></table>
+</details>
+<h3 id="pip">pip</h3>
+<p>Install only the minimum python (<code>python3-dev</code>) from the distribution package manager and the equivalent for <code>build-essential</code>. The rest should be perhaps better done by <code>pip</code>. Some libraries might still be needed.</p>
+<h2 id="downloading-packages-and-files-multiple-times">Downloading packages and files multiple times.</h2>
+<h3 id="package-installation-apt-yum-etc">Package installation - apt, yum, etc...</h3>
+<p>Even if you use <code>--sandbox</code> you might find that some commands do not behave the same way as when executed by the common routines <code>sudo build...</code>. Some of these problems are related to the shell interpreter which might be <code>sh</code> or <code>bash</code>...</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This nice file fetching trick will work interactively when you test but it will fail during the build
+<div class="highlight"><pre><span></span><code>wget -P bcftools/plugins https://raw.githubusercontent.com/freeseek/gtc2vcf/master/{gtc2vcf.{c,h},affy2vcf.c}
+</code></pre></div>
+It needs to be tricked a bit.
+<div class="highlight"><pre><span></span><code>/bin/bash -c &#39;wget -P bcftools/plugins https://raw.githubusercontent.com/freeseek/gtc2vcf/master/{gtc2vcf.{c,h},affy2vcf.c}&#39;
+</code></pre></div></p>
+</div>
+<p>Now, if you find yourself repeatedly rebuilding your definition file... and you find that every time you need to re-download packages from the repositories... Some hosting services might slow you down or even block you upon repetitive downloads...</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="gh">%post</span>
+<span class="hll">  mkdir -p /tmp/apt
+</span><span class="hll">  <span class="nb">echo</span> <span class="s2">&quot;Dir::Cache &quot;</span>/tmp/apt<span class="s2">&quot;;&quot;</span> &gt; /etc/apt/apt.conf.d/singularity-cache.conf
+</span>
+  apt-get update <span class="o">&amp;&amp;</span> <span class="se">\</span>
+  apt-get --no-install-recommends -y install  wget unzip git bwa samtools
+  <span class="c1"># the usual clean up</span>
+  rm -rf /var/lib/apt/lists/*
+
+  ...
+
+<span class="hll">  <span class="c1"># remove the /tmp/apt caching configuration</span>
+</span><span class="hll">  rm /etc/apt/apt.conf.d/singularity-cache.conf
+</span></code></pre></div>
+</td></tr></table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul>
+<li><strong>Remember to remove these lines in the final recipe.</strong></li>
+<li>note the <code>--no-install-recommends</code> which can save on installing unnecessary packages. It is rather popular option.</li>
+</ul>
+</div>
+<h2 id="downloading-large-files">Downloading large files</h2>
+<p>The example bellow is from the installation instructions for https://github.com/freeseek/gtc2vcf.</p>
+<p>Here is the original code, which downloads the 871MB file and extracts it on the fly. Then some indexing is applied.
+<div class="highlight"><pre><span></span><code>wget -O- ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/technical/reference/human_g1k_v37.fasta.gz | \
+  gzip -d &gt; $HOME/GRCh37/human_g1k_v37.fasta
+samtools faidx $HOME/GRCh37/human_g1k_v37.fasta
+bwa index $HOME/GRCh37/human_g1k_v37.fasta
+</code></pre></div></p>
+<p>The file is rather large for multiple downloads... we could rewrite a bit the lines like this and keep the original file during builds.</p>
+<div class="highlight"><pre><span></span><code><span class="gh">%post</span>
+
+  <span class="nb">export</span> <span class="nv">TMPD</span><span class="o">=</span>/tmp/downloads
+  mkdir -p <span class="nv">$TMPD</span>
+
+  <span class="c1"># Install the GRCh37 human genome reference =======================================</span>
+  mkdir -p /data/GRCh37 <span class="o">&amp;&amp;</span> <span class="nb">cd</span> /data/GRCh37
+
+  wget -P <span class="nv">$TMPD</span> -c  ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/technical/reference/human_g1k_v37.fasta.gz
+  gunzip -c <span class="nv">$TMPD</span>/human_g1k_v37.fasta.gz &gt; human_g1k_v37.fasta <span class="o">||</span> <span class="nb">true</span>
+
+  samtools faidx /data/GRCh37/human_g1k_v37.fasta
+  bwa index /data/GRCh37/human_g1k_v37.fasta <span class="o">||</span> <span class="nb">true</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code>gunzip</code> is returning non-zero exit code which signals an error and the Singularity build will stop. The not so nice solution is to apply the <code>|| true</code> "trick" to ignore the error. Similar for the <code>bwa</code> tool.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The <code>samtools</code> and <code>bwa</code> are computationally intensive, memory demanding, and time demanding. This will conflict with some of the limitations of the free online building services. You might consider doing this outside the container and only copy the files (the uncompressed result is even larger) or better - as in the original instructions they will be installed in the user's <code>$HOME</code> directory.</p>
+</div>
+<p>Have look for alternative advanced ideas - <a href="https://sylabs.io/guides/3.7/user-guide/bind_paths_and_mounts.html#image-mounts">Image Mounts</a></p>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      <a href="https://uppmax.uu.se/" target="_blank" rel="noopener"><img align="right" alt="Uppsala" src="https://pmitev.github.io/to-awk-or-not/images/Uppsala.png" /> </a>
+      <a href="https://snic.se/" target="_blank" rel="noopener"><img align="right" alt="SNIC" src="https://pmitev.github.io/to-awk-or-not/images/SNIC.png" /> </a>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "../assets/javascripts/workers/search.d351de03.min.js", "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.34eae1b6.min.js"></script>
+      
+        <script src="../javascripts/config.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
