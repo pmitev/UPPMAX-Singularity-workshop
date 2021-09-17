@@ -124,15 +124,15 @@ From: ubuntu:20.04
 We are ready for `pip`
 
 ``` bash
-Singularity> /usr/bin/env python3 -m pip install --upgrade pip
+Singularity> python3 -m pip install --upgrade pip
 
-Singularity> /usr/bin/env python3 -m pip install jupyter
+Singularity> python3 -m pip install jupyter
 
-Singularity> /usr/bin/env python3 -m pip install jupyter_contrib_nbextensions
+Singularity> python3 -m pip install jupyter_contrib_nbextensions
 Singularity> jupyter contrib nbextension install --system
 Singularity> jupyter nbextension enable codefolding/main
 
-Singularity> /usr/bin/env python3 -m pip install jupyter_nbextensions_configurator
+Singularity> python3 -m pip install jupyter_nbextensions_configurator
 Singularity> jupyter nbextensions_configurator enable --system
 ```
 Add the commands in the relevant section.  
