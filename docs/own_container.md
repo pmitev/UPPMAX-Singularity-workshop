@@ -18,7 +18,7 @@ From: ubuntu:20.04
   apt-get clean
 
 %runscript
-  paraview $@
+  paraview "$@"
 ```
 
 ``` bash

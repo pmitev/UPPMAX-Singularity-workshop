@@ -120,7 +120,7 @@ You need to use recent [TeX Live](https://www.tug.org/texlive/) but you do not w
       apt-get update && apt-get -y dist-upgrade && apt-get install -y texlive-full && apt-get clean
 
     %runscript
-      /bin/bash $@
+      /bin/bash "$@"
     ```
 
 ``` bash
@@ -154,7 +154,7 @@ Sometimes, you cannot download a package directly or the software needs signing 
       tar -C /usr/local -xvf /VESTA-gtk3.tar.bz2 && rm /VESTA-gtk3.tar.bz2    
 
     %runscript
-      /usr/local/VESTA-gtk3/VESTA $@
+      /usr/local/VESTA-gtk3/VESTA "$@"
     ```
 
 Note the `%files` section. The line bellow will copy
