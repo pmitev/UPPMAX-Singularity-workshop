@@ -72,7 +72,7 @@ You should be able to find that `libx11-xcb1` package contains this file... So, 
     %post
       export DEBIAN_FRONTEND=noninteractive
       apt-get -y update
-      apt-get -y install wget git curl vim  libx11-xcb1
+      apt-get -y install wget git curl vim  libx11-xcb1 libxshmfence1
 
       cd /
       wget "https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64" -O code_stable_amd64.deb
