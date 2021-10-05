@@ -27,7 +27,7 @@ sudo apt-get update && sudo apt-get install -y \
     cryptsetup
 
 # Install Go
-export VERSION=1.14.12 OS=linux ARCH=amd64 && # Replace the values as needed \
+export VERSION=1.16.4 OS=linux ARCH=amd64 && # Replace the values as needed \
   wget https://dl.google.com/go/go$VERSION.$OS-$ARCH.tar.gz && # Downloads the required Go package \
   sudo tar -C /usr/local -xzvf go$VERSION.$OS-$ARCH.tar.gz && # Extracts the archive \
   rm go$VERSION.$OS-$ARCH.tar.gz # Deletes the ``tar`` file
@@ -37,7 +37,7 @@ echo 'export GOPATH=${HOME}/go' >> ~/.bashrc && \
   source ~/.bashrc
 
 # Download Singularity from a release
-export VERSION=3.7.0 && # adjust this as necessary \
+export VERSION=3.8.3 && # adjust this as necessary \
     wget https://github.com/hpcng/singularity/releases/download/v${VERSION}/singularity-${VERSION}.tar.gz && \
     tar -xzf singularity-${VERSION}.tar.gz && \
     cd singularity
