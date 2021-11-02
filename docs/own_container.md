@@ -160,15 +160,15 @@ Exit from the container `exit`. Add `%runscrip`. Try to build the recipe you hav
       apt-get install -y locales python3-dev  python3-pip  python3-tk build-essential bash-completion
       rm -rf /var/lib/apt/lists/*
     
-      /usr/bin/env python3 -m pip install --no-cache-dir --upgrade pip
+      python3 -m pip install --no-cache-dir --upgrade pip
     
-      /usr/bin/env python3 -m pip install --no-cache-dir jupyter
+      python3 -m pip install --no-cache-dir jupyter
 
-      /usr/bin/env python3 -m pip install --no-cache-dir  jupyter_contrib_nbextensions
+      python3 -m pip install --no-cache-dir  jupyter_contrib_nbextensions
       jupyter contrib nbextension install --system
       jupyter nbextension enable codefolding/main
     
-      /usr/bin/env python3 -m pip install --no-cache-dir jupyter_nbextensions_configurator
+      python3 -m pip install --no-cache-dir jupyter_nbextensions_configurator
       jupyter nbextensions_configurator enable --system
     
     %runscript

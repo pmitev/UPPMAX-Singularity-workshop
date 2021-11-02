@@ -2,10 +2,10 @@
 
 ---
 Detailed and well explained installation instructions at:  
-<https://sylabs.io/guides/3.7/admin-guide/installation.html#installation-on-linux>
+<https://sylabs.io/guides/3.8/admin-guide/installation.html#installation-on-linux>
 
 Installation on Windows or Mac  
-<https://sylabs.io/guides/3.7/admin-guide/installation.html#installation-on-windows-or-mac>
+<https://sylabs.io/guides/3.8/admin-guide/installation.html#installation-on-windows-or-mac>
 
 > (PM) I have successfully installed Singularity under [WSL2](https://docs.microsoft.com/en-us/windows/wsl/install-win10), but can't guarantee that it will work in all cases.
 
@@ -15,42 +15,35 @@ For Ubuntu (Debian based) Linux distributions.
 ``` bash
 # Install system dependencies
 sudo apt-get update && sudo apt-get install -y \
-    build-essential \
-    libssl-dev \
-    uuid-dev \
-    libgpgme11-dev \
-    squashfs-tools \
-    libseccomp-dev \
-    wget \
-    pkg-config \
-    git \
-    cryptsetup
+  build-essential libssl-dev uuid-dev libgpgme11-dev \
+  squashfs-tools libseccomp-dev wget pkg-config git cryptsetup
 
 # Install Go
-export VERSION=1.16.4 OS=linux ARCH=amd64 && # Replace the values as needed \
+export VERSION=1.17.2 OS=linux ARCH=amd64 && # Replace the values as needed \
   wget https://dl.google.com/go/go$VERSION.$OS-$ARCH.tar.gz && # Downloads the required Go package \
-  sudo tar -C /usr/local -xzvf go$VERSION.$OS-$ARCH.tar.gz && # Extracts the archive \
+  sudo tar -C /usr/local -xzvf go$VERSION.$OS-$ARCH.tar.gz &&  # Extracts the archive \
   rm go$VERSION.$OS-$ARCH.tar.gz # Deletes the ``tar`` file
 
 echo 'export GOPATH=${HOME}/go' >> ~/.bashrc && \
   echo 'export PATH=/usr/local/go/bin:$PATH' >> ~/.bashrc && \
   source ~/.bashrc
 
-# Download Singularity from a release
-export VERSION=3.8.3 && # adjust this as necessary \
-    wget https://github.com/hpcng/singularity/releases/download/v${VERSION}/singularity-${VERSION}.tar.gz && \
-    tar -xzf singularity-${VERSION}.tar.gz && \
-    cd singularity
-
-# Compile the Singularity source code
-./mconfig && \
-    make -C builddir && \
-    sudo make -C builddir install
+# Clone Singularity, checkout from a release, compile end install
+export VERSION=3.8.4 && \
+  git clone https://github.com/sylabs/singularity.git && \
+  cd singularityi && git checkout $VERSION && \
+  ./mconfig && cd ./builddir &&  make -j 4  &&  sudo make install
 ```
+
+!!! note
+    The code development is very dynamic, please always check with the original instructions if in doubt.
+
+ 
+
 
 ## Test the installation
 
-<https://sylabs.io/guides/3.7/admin-guide/installation.html#testing-checking-the-build-configuration>
+<https://sylabs.io/guides/3.8/admin-guide/installation.html#testing-checking-the-build-configuration>
 
 TL;DR
 

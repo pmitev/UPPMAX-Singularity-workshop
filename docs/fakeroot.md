@@ -1,6 +1,6 @@
 # Building without elevated privileges with `--fakeroot`
 
-[Online manual](https://sylabs.io/guides/3.7/user-guide/fakeroot.html)
+[Online manual](https://sylabs.io/guides/3.8/user-guide/fakeroot.html)
 
 The fakeroot feature (commonly referred as rootless mode) allows an unprivileged user to run a container as a "**fake root**" user by leveraging [user namespace UID/GID mapping](http://man7.org/linux/man-pages/man7/user_namespaces.7.html).
 

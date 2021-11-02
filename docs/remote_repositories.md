@@ -52,7 +52,7 @@ INFO:    Using cached SIF image
 ```
 Note, that singularity, after contacting the repositories, realizes that the container is in the local cache and proceeds to run it. But where is it?
 
-[More details...](https://sylabs.io/guides/3.7/user-guide/singularity_and_docker.html)
+[More details...](https://sylabs.io/guides/3.8/user-guide/singularity_and_docker.html)
 
 ``` bash
 $ singularity cache list
@@ -118,7 +118,8 @@ Type "help", "copyright", "credits" or "license" for more information.
 
 Here is an example how to use the metaWRAP pipeline from the docker container - [installation instructions](https://github.com/bxlab/metaWRAP#docker-installation).
 
-```
+``` bash
+# Original instructions (do NOT run)
 $ docker pull quay.io/biocontainers/metawrap:1.2--1
 ```
 In this particular case it is as easy as:

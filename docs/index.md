@@ -11,7 +11,7 @@ Use standard file and object copy tools to transport, share, or distribute a Sin
 - **Compatibility**  
 Designed to support complex architectures and workflows, Singularity is easily adaptable to almost any environment.
 - **[More ...](https://sylabs.io/singularity)**
-- **[More from the "User documentation" ...](https://sylabs.io/guides/3.7/user-guide/introduction.html#why-use-singularity)**
+- **[More from the "User documentation" ...](https://sylabs.io/guides/3.8/user-guide/introduction.html#why-use-singularityce)**
 
 ## What is Singularity.
 
@@ -28,6 +28,6 @@ Since your home folder gets automatically mounted/exposed to your virtual enviro
 ## Purpose
 This workshop material aims to demonstrate and exercise some commonly used features by simple interactive tutorials. Thus, this is not complete manual or documentation for Singularity.
 
-The "[User documentation](https://sylabs.io/guides/3.7/user-guide/)" is an excellent reference source with basic examples in well-ordered fashion and always up to date.
+The "[User documentation](https://sylabs.io/guides/3.8/user-guide/)" is an excellent reference source with basic examples in well-ordered fashion and always up to date.
 
 [^1]: Kurtzer, Gregory M; Sochat, Vanessa; Bauer, Michael W (2017). "Singularity: Scientific containers for mobility of compute". PLOS ONE. 12 (5): e0177459. Bibcode:2017PLoSO..1277459K. [doi:10.1371/journal.pone.0177459](https://doi.org/10.1371%2Fjournal.pone.0177459). PMC [5426675](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5426675). PMID [28494014](https://pubmed.ncbi.nlm.nih.gov/28494014)
