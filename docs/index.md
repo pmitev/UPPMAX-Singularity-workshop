@@ -1,4 +1,4 @@
-# Why [Singularity](https://sylabs.io)?
+# **Why [Singularity](https://sylabs.io)?**
 
 ---
 
@@ -13,19 +13,19 @@ Designed to support complex architectures and workflows, Singularity is easily a
 - **[More ...](https://sylabs.io/singularity)**
 - **[More from the "User documentation" ...](https://sylabs.io/guides/3.8/user-guide/introduction.html#why-use-singularityce)**
 
-## What is Singularity.
+## **What is Singularity.**
 
 Singularity is not the only [OS level virtualization](https://en.wikipedia.org/wiki/OS-level_virtualization) implementation arround. One of the main uses of Singularity is to bring containers and reproducibility to scientific computing and the high-performance computing (HPC) world[^1].
 
 [More on Wikipedia](https://en.wikipedia.org/wiki/Singularity_(software))
 
-## What is Singularity - an alternative view.
+## **What is Singularity - an alternative view.**
 
 Singularity runs in the user space i.e. which allows you to run Singularity containers in systems where you have only user rights - common situation on public and government computer resources.
 
 Since your home folder gets automatically mounted/exposed to your virtual environment you can look at it as an **alternative way to expose your data to different complete setups with pre-installed and configured software**.
 
-## Purpose
+## **Purpose**
 This workshop material aims to demonstrate and exercise some commonly used features by simple interactive tutorials. Thus, this is not complete manual or documentation for Singularity.
 
 The "[User documentation](https://sylabs.io/guides/3.8/user-guide/)" is an excellent reference source with basic examples in well-ordered fashion and always up to date.

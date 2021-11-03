@@ -5,17 +5,20 @@ nav:
   - How to install: installation.md
   - Building remotely: remote_builder.md
   - Building with --fakeroot: fakeroot.md
-  - First steps: 
+  - First steps:
     - Building a container: build_container.md
     - Build own container: own_container.md
     - Running Singularity container: running_singularity.md
     - Running containrs from online repositories: remote_repositories.md
   - Exercises:
+    - Something easy: exercise_00.md 
     - Real-life example: exercise_01.md
     - Inspect containers: inspect.md
     - Upload to Sylabs container library: exercise_02.md
     - VSCode in Singularity: exercise_04.md
   - Goods and bads: goods_bads.md
+  - Advanced:
+    - Singularity and MPI: mpi_applications.md
   - UPPMAX in a can: uppmax_in_a_can.md 
   - About: about.md
 theme:

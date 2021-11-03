@@ -33,7 +33,7 @@ Here is an example scenario
 - install in /opt and adjust the `$PATH`  
   or just allow the tool to mix with the system files.
 
-## Conda
+## **Conda**
 
 Conda causes some unexpected problems. During the build and and the commands in `%runscrupt` sections are run with `/bin/sh` which fails upon `source /full_path_to/conda.sh` which in turn fails `conda activate my_environment`. Her are two examples how to deal with the situation.
 
@@ -129,7 +129,7 @@ Conda causes some unexpected problems. During the build and and the commands in 
     ```
 
 
-### pip
+### **pip**
 
 Install only the minimum python (`python3-dev`) from the distribution package manager and the equivalent for `build-essential`. The rest should be perhaps better done by `pip`. Some libraries might still be needed.
 
@@ -175,7 +175,7 @@ Now, if you find yourself repeatedly rebuilding your definition file... and you 
 
 
 
-## Downloading large files
+## **Downloading large files**
 
 The example bellow is from the installation instructions for https://github.com/freeseek/gtc2vcf.
 

@@ -1,6 +1,6 @@
 # Simple build to exercise
 
-Let's start with something easy and fast to build - Install the [figlet](http://www.figlet.org/examples.html) app in container.
+Let's start with something easy and fast to build - Install the [figlet](http://www.figlet.org/examples.html) app in a container.
 
 ```
 $ figlet UPPMAX
@@ -59,7 +59,7 @@ Let's use Ubuntu from Docker to install the package.
       apt-get clean
     
     %runscript
-      figlet $@
+      figlet "$@"
     ```
 
 - Build the recipe
