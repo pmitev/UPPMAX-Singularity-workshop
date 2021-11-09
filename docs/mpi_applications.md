@@ -80,7 +80,7 @@ We can use [A free GROMACS benchmark set](https://www.mpibpc.mpg.de/grubmueller/
 
 ``` bash
 # Run shell in the container
-$ singularity shell Gromacs-openmpi.sif
+$ singularity shell Gromacs-openmpi20.sif
 
 # 2 MPI processes, 4 OpenMP threads per MPI process
 Singularity> mpirun -n 2 mdrun_mpi -ntomp 4 -s benchMEM.tpr -nsteps 10000 -resethway
@@ -90,10 +90,10 @@ Singularity> mpirun -n 2 mdrun_mpi -ntomp 4 -s benchMEM.tpr -nsteps 10000 -reset
 
 On my host which runs Ubuntu 20.04 the OpenMPI version is identical. On other machines you need to make sure to run compatible version. On HPC clusters this should be module which provides OpenMPI compiled with gcc.
 ``` bash
-$ mpirun -n 2 singularity exec Gromacs-openmpi.sif /usr/bin/mdrun_mpi -ntomp 4 -s benchMEM.tpr -nsteps 10000 -resethway
+$ mpirun -n 2 singularity exec Gromacs-openmpi20.sif /usr/bin/mdrun_mpi -ntomp 4 -s benchMEM.tpr -nsteps 10000 -resethway
 
 # or relying on the runscript
-$ mpirun -n 2 Gromacs-openmpi.sif -ntomp 4 -s benchMEM.tpr -nsteps 10000 -resethway
+$ mpirun -n 2 Gromacs-openmpi20.sif -ntomp 4 -s benchMEM.tpr -nsteps 10000 -resethway
 ```
 
 > Note: At present, there is a incompatibility in the OpenMPI version that causes "Segmentation fault" when trying to run it on Rackham@UPPMAX. 
@@ -135,9 +135,8 @@ Note: file tpx version 83, software tpx version 119
 ...
 ```
 Attempting to start the jobs manually requires `-mca plm rsh` to skip SLURM and use rsh/ssh to start the processes on all allocated nodes and `-B /etc/ssh` to pick up the "Host authentication" setup. Here are the problems:
-
-- Rackham@UPPMAX uses "[Host based authentication](https://en.wikibooks.org/wiki/OpenSSH/Cookbook/Host-based_Authentication)" which does not work in the Singularity container, because the container runs in the user space and can not get/read the private host key...
-- You can use passwordless user key for the authentication (_Note: passwordless ssh keys are not allowed on Rackham_) after adding all nodes public host keys/signatures (_the signatures that you are asked to accept when connecting for the first time to a machine_).
+    - Rackham@UPPMAX uses "[Host based authentication](https://en.wikibooks.org/wiki/OpenSSH/Cookbook/Host-based_Authentication)" which does not work in the Singularity container, because the container runs in the user space and can not get/read the private host key...
+    - One can use passwordless user key for the authentication (_Note: passwordless ssh keys are not allowed on Rackham_) after adding all nodes public host keys/signatures (_the signatures that you are asked to accept when connecting for the first time to a machine_).
 
 - **Host-based MPI runtime: Run 2 MPI processes, 20 OpenMP threads per MPI process (explicitly specified on the mpirun command line)**
 ```
