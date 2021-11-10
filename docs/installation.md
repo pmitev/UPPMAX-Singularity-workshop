@@ -29,9 +29,9 @@ echo 'export GOPATH=${HOME}/go' >> ~/.bashrc && \
   source ~/.bashrc
 
 # Clone Singularity, checkout from a release, compile end install
-export VERSION=3.8.4 && \
+export VERSION=v3.8.4 && \
   git clone https://github.com/sylabs/singularity.git && \
-  cd singularityi && git checkout $VERSION && \
+  cd singularity && git checkout $VERSION && \
   ./mconfig && cd ./builddir &&  make -j 4  &&  sudo make install
 ```
 
