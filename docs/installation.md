@@ -85,7 +85,7 @@ Run 'singularity --help' for more detailed usage information.
 ``` bash
 singularity buildcfg
 PACKAGE_NAME=singularity
-PACKAGE_VERSION=3.7.0
+PACKAGE_VERSION=3.8.4
 BUILDDIR=/root/singularity/builddir
 PREFIX=/usr/local
 EXECPREFIX=/usr/local
