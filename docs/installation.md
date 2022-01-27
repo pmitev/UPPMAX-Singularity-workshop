@@ -1,3 +1,11 @@
+!!! info "Information"
+    Singularity project is officially [moving into the Linux Foundation](https://www.linuxfoundation.org/press-release/new-linux-foundation-project-accelerates-collaboration-on-container-systems-between-enterprise-and-high-performance-computing-environments/). As part of this move, and to differentiate from the other like-named projects and commercial products, we will be renaming the project to "[**Apptainer**](https://apptainer.org/)". [_source_](https://apptainer.org/news/community-announcement-20211130/)
+
+!!! note "Disclaimer"
+    During the last 2021 year, the installation instructions changed more frequent than the workshop was given... Always check with the original instructions on how to install Singularity/Apptainer. For the purpose of this workshop, we will try to adapt to the the new free derivative as soon it becomes stable [https://github.com/apptainer/apptainer](https://github.com/apptainer/apptainer).
+
+    Until then the content bellow will remain unchanged, to avoid unnecessary modifications.
+
 # Installation
 
 ---
