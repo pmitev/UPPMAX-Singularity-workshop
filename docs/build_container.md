@@ -62,6 +62,8 @@ _________________________________________
 ```
 **-=>>> Done <<<=-**
 
+![lolcow](./images/lolcow.gif) [asciinema](https://asciinema.org/a/469408)
+
 
 ## Syntax of the definition file
 
