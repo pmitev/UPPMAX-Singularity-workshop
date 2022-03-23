@@ -19,6 +19,7 @@ nav:
   - Goods and bads: goods_bads.md
   - Advanced:
     - Singularity and MPI: mpi_applications.md
+    - Indirect calls: indirect-call.md
   - UPPMAX in a can: uppmax_in_a_can.md 
   - About: about.md
 theme:
