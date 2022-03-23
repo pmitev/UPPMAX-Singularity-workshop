@@ -43,7 +43,7 @@ Wed 23 Mar 2022 09:23:40 AM CET
 Wed Mar 23 08:23:42 Europe 2022
 ```
 
-Note, that the time zone in the container is different from the one on your/my computer. I have my computer in CET (Central European Time) and the container defaults to "Europe" and one hour later than CET. 
+Note, that the time zone in the container is different from the one on your/my computer. I have my computer in CET (Central European Time) and the container defaults to "Europe" - one hour behind CET. 
 
 Here is one more example, by runing the container on a CentOS computer.
 
