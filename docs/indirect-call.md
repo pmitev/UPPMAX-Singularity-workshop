@@ -17,10 +17,11 @@ From: ubuntu:20.04
   if [ -x /usr/local/bin/$SINGULARITY_NAME ]; then
     exec $SINGULARITY_NAME "$@"
   else
-    /bin/echo -e "This Singularity image does not provide a single entrypoint.\nPlease use make soft links to the container to one of the available executables in /usr/local/bin i.e.\n  ln -s $SINGULARITY_NAME date"
+    /bin/echo -e "This Singularity image does not provide a single entrypoint."
+    /bin/echo -e "Please make soft links in the container to one of the available executables in /usr/local/bin i.e."
+    /bin/echo -e "  ln -s $SINGULARITY_NAME date"
     exec ls -1 /usr/local/bin
   fi
-EOF
 ```
 
 Build the recipe and make two soft links to the image:
