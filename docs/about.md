@@ -16,4 +16,5 @@ This web page is a supplementary material to the [UPPMAX](https://www.uppmax.uu.
 - [C3SE](https://www.c3se.chalmers.se/documentation/applications/containers-advanced/)
 
 ## Contacts:
-[Pavlin Mitev](https://katalog.uu.se/empinfo/?id=N3-1425)
+- [Pavlin Mitev](https://katalog.uu.se/empinfo/?id=N3-1425) - [UPPMAX](http://www.hpc2n.umu.se/)
+- [Pedro Ojeda May](Pedro Ojeda May) - [HPC2N](http://www.hpc2n.umu.se/)
