@@ -102,16 +102,15 @@ If you have a GPU card, here is how easy you can get tensorflow running. Note th
 
 ---
 
-```
+``` python
 $ singularity exec --nv tensorflow_latest-gpu.sif python3
 
-INFO:    Could not find any nv files on this host!
-Python 3.6.9 (default, Oct  8 2020, 12:12:24) 
-[GCC 8.4.0] on linux
+Python 3.8.10 (default, Nov 26 2021, 20:14:08) 
+[GCC 9.3.0] on linux
 Type "help", "copyright", "credits" or "license" for more information.
 >>> import tensorflow as tf
-2021-03-16 13:29:13.079079: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.11.0
->>>
+>>> tf.config.list_physical_devices('GPU')
+[PhysicalDevice(name='/physical_device:GPU:0', device_type='GPU')]
 ```
 
 ### metaWRAP - a flexible pipeline for genome-resolved metagenomic data analysis

@@ -10,6 +10,7 @@ nav:
     - Build own container: own_container.md
     - Running Singularity container: running_singularity.md
     - Running containrs from online repositories: remote_repositories.md
+    - NVIDIA Deep Learning Frameworks: PyTorch_NVIDIA.md  
   - Exercises:
     - Something easy: exercise_00.md 
     - Real-life example: exercise_01.md
