@@ -22,7 +22,8 @@ nav:
     - Singularity and MPI: mpi_applications.md
     - Singularity MPI@Kebnekaise: openmpi-benchmark.md 
     - Indirect calls: indirect-call.md
-  - UPPMAX in a can: uppmax_in_a_can.md 
+  - UPPMAX in a can: uppmax_in_a_can.md
+  - Practical information: practical_information.md
   - About: about.md
 theme:
   palette:

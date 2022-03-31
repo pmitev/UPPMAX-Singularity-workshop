@@ -87,7 +87,7 @@ $ singularity run docker://dctrud/wttr
 ![output](images/wttr.png)
 
 ### Tensorflow 
-Let's have some tensorflow running. First `pull` the image from docker hub.
+Let's have some tensorflow running. First `pull` the image from docker hub (~2.6GB).
 
 ```
 $ singularity pull docker://tensorflow/tensorflow:latest-gpu
