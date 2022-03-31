@@ -4,7 +4,7 @@ Here is how easy one can use an NVIDIA [environment](https://docs.nvidia.com/dee
 
 ![pytorch](./images/pytorch-nvidia.png)
 
-First, Let's pull the container.
+First, Let's pull the container (6.5GB).
 
 ``` bash
 singularity pull docker://nvcr.io/nvidia/pytorch:22.03-py3

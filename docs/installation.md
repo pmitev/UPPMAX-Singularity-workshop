@@ -6,16 +6,26 @@
 
     Until then the content bellow will remain unchanged, to avoid unnecessary modifications.
 
+    If you have already installed Singularity version, newer than 3.7, it should be sufficient for the workshop.
+
+!!! note "Perhaps the easiest way to install it under Linux"
+    Currently, for supported Ubuntu and CentOS distributions, it is also possible to install it with the system package manager [link](https://github.com/sylabs/singularity/releases/tag/v3.9.7)
+    ``` bash
+    # Ubuntu 20.04
+    wget https://github.com/sylabs/singularity/releases/download/v3.9.7/singularity-ce_3.9.7-focal_amd64.deb
+    sudo apt install ./singularity-ce_3.9.7-focal_amd64.deb
+    ```
+
 # Installation
 
 ---
 Detailed and well explained installation instructions at:  
-<https://sylabs.io/guides/3.8/admin-guide/installation.html#installation-on-linux>
+[https://sylabs.io/guides/latest/admin-guide/installation.html#installation-on-linux](https://sylabs.io/guides/latest/admin-guide/installation.html#installation-on-linux){target=_blank}
 
 Installation on Windows or Mac  
-<https://sylabs.io/guides/3.8/admin-guide/installation.html#installation-on-windows-or-mac>
+[https://sylabs.io/guides/latest/admin-guide/installation.html#installation-on-windows-or-mac](https://sylabs.io/guides/latest/admin-guide/installation.html#installation-on-windows-or-mac){target=_blank}
 
-> (PM) I have successfully installed Singularity under [WSL2](https://docs.microsoft.com/en-us/windows/wsl/install-win10), but can't guarantee that it will work in all cases.
+> (PM) I have successfully installed Singularity under [WSL2](https://docs.microsoft.com/en-us/windows/wsl/install-win10){target=_blank}, but can't guarantee that it will work in all cases.
 
 ## [TL;DR](https://www.urbandictionary.com/define.php?term=tl%3Bdr) 
 For Ubuntu (Debian based) Linux distributions.
@@ -27,7 +37,7 @@ sudo apt-get update && sudo apt-get install -y \
   squashfs-tools libseccomp-dev wget pkg-config git cryptsetup
 
 # Install Go
-export VERSION=1.17.2 OS=linux ARCH=amd64 && # Replace the values as needed \
+export VERSION=1.17.6 OS=linux ARCH=amd64 && # Replace the values as needed \
   wget https://dl.google.com/go/go$VERSION.$OS-$ARCH.tar.gz && # Downloads the required Go package \
   sudo tar -C /usr/local -xzvf go$VERSION.$OS-$ARCH.tar.gz &&  # Extracts the archive \
   rm go$VERSION.$OS-$ARCH.tar.gz # Deletes the ``tar`` file
@@ -37,7 +47,7 @@ echo 'export GOPATH=${HOME}/go' >> ~/.bashrc && \
   source ~/.bashrc
 
 # Clone Singularity, checkout from a release, compile end install
-export VERSION=v3.8.4 && \
+export VERSION=v3.9.2 && \
   git clone https://github.com/sylabs/singularity.git && \
   cd singularity && git checkout $VERSION && \
   ./mconfig && cd ./builddir &&  make -j 4  &&  sudo make install
@@ -51,7 +61,7 @@ export VERSION=v3.8.4 && \
 
 ## Test the installation
 
-<https://sylabs.io/guides/3.8/admin-guide/installation.html#testing-checking-the-build-configuration>
+[https://sylabs.io/guides/latest/admin-guide/installation.html#testing-checking-the-build-configuration](https://sylabs.io/guides/latest/admin-guide/installation.html#testing-checking-the-build-configuration){target=_blank}
 
 TL;DR
 
