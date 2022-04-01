@@ -8,7 +8,7 @@
 
     If you have already installed Singularity version, newer than 3.7, it should be sufficient for the workshop.
 
-!!! note "Perhaps the easiest way to install it under Linux"
+!!! note "Perhaps the easiest way to install Singularity under Linux"
     Currently, for supported Ubuntu and CentOS distributions, it is also possible to install Singuarity via the system package manager [link](https://github.com/sylabs/singularity/releases/tag/v3.9.7)
     ``` bash
     # Ubuntu 20.04
