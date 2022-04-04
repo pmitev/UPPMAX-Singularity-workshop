@@ -3,82 +3,131 @@
 The common approach for Singularity is to have single entry point defined by `%runscript` or by `%app`. This is not so convenient for daily use... So, here is a minimal example on how to implement a well known trick to use single executable for multiple commands (see for example the [BusBox](https://busybox.net/screenshot.html) project).
 
 
-
 ``` singularity
 Bootstrap: docker
 From: ubuntu:20.04
 
-%post
-  # let's add some executable in /usr/local/bin
-  ln -s /usr/bin/cat  /usr/local/bin/cat
-  ln -s /usr/bin/date /usr/local/bin/date
+%environment
+  export LC_ALL=C
 
+%post
+  export LC_ALL=C
+  export DEBIAN_FRONTEND=noninteractive
+
+  mkdir -p /tmp/apt
+  echo "Dir::Cache /tmp/apt;" > /etc/apt/apt.conf.d/singularity-cache.conf
+
+  apt-get update && \
+  apt-get --no-install-recommends -y install  wget unzip git bwa samtools bcftools bowtie
+  
 %runscript
-  if [ -x /usr/local/bin/$SINGULARITY_NAME ]; then
+  if command -v $SINGULARITY_NAME &> /dev/null; then
     exec $SINGULARITY_NAME "$@"
   else
-    /bin/echo -e "This Singularity image does not provide a single entrypoint."
-    /bin/echo -e "Please make soft links in the container to one of the available executables in /usr/local/bin i.e."
-    /bin/echo -e "  ln -s $SINGULARITY_NAME date"
-    exec ls -1 /usr/local/bin
+    echo "# ERROR !!! Command $SINGULARITY_NAME not found in the container"
   fi
 ```
 
-Build the recipe and make two soft links to the image:
-``` bash
-sudo singularity build cmd.sif Singularity.cmd
 
-ln -s cmd.sif cat
-ln -s cmd.sif date
+Let's build the recipe and make soft links to the executables in the image:
+``` bash
+sudo singularity build samtools.sif Singularity.samtools
+
+# make bin folder
+mkdir -p bin
+
+# Extraxt the executable names from the packages of interest
+SIMG=samtools.sif
+bins=$(singularity exec ${SIMG} dpkg -L bwa samtools bcftools bowtie | grep /bin/)
+
+# Make softlinks pointing to the Singularity image
+for i in $bins; do echo $i; ln -s ../${SIMG} bin/${i##*/} ; done
+
+# Check what is the content of bin
+[09:11:36]> ls -l bin
+total 0
+lrwxrwxrwx 1 user user 15 Apr  4 09:09 ace2sam -> ../samtools.sif
+lrwxrwxrwx 1 user user 15 Apr  4 09:09 bcftools -> ../samtools.sif
+lrwxrwxrwx 1 user user 15 Apr  4 09:09 blast2sam.pl -> ../samtools.sif
+lrwxrwxrwx 1 user user 15 Apr  4 09:09 bowtie -> ../samtools.sif
+lrwxrwxrwx 1 user user 15 Apr  4 09:09 bowtie2sam.pl -> ../samtools.sif
+lrwxrwxrwx 1 user user 15 Apr  4 09:09 bowtie-align-l -> ../samtools.sif
+lrwxrwxrwx 1 user user 15 Apr  4 09:09 bowtie-align-l-debug -> ../samtools.sif
+lrwxrwxrwx 1 user user 15 Apr  4 09:09 bowtie-align-s -> ../samtools.sif
+lrwxrwxrwx 1 user user 15 Apr  4 09:09 bowtie-align-s-debug -> ../samtools.sif
+lrwxrwxrwx 1 user user 15 Apr  4 09:09 bowtie-build -> ../samtools.sif
+...
 ``` 
 
-Here is what happens. Compare the output by running `date` on your computer and by running the soft link by `./date`.
+Let's test the tools (you can add the `bin` folder in `$PATH` if you want...)
+``` bash
+./bin/bwa 
+/usr/bin/bwa
+
+Program: bwa (alignment via Burrows-Wheeler transformation)
+Version: 0.7.17-r1188
+Contact: Heng Li <lh3@sanger.ac.uk>
+
+Usage:   bwa <command> [options]
+
+Command: index         index sequences in the FASTA format
+         mem           BWA-MEM algorithm
+         fastmap       identify super-maximal exact matches
+         pemerge       merge overlapping paired ends (EXPERIMENTAL)
+         aln           gapped/ungapped alignment
+         samse         generate alignment (single ended)
+         sampe         generate alignment (paired ended)
+         bwasw         BWA-SW for long queries
+...
+```
 
 ``` bash
-# local system call
+./bin/samtools --help
+/usr/bin/samtools
+
+Program: samtools (Tools for alignments in the SAM format)
+Version: 1.10 (using htslib 1.10.2-3)
+
+Usage:   samtools <command> [options]
+
+Commands:
+  -- Indexing
+     dict           create a sequence dictionary file
+     faidx          index/extract FASTA
+     fqidx          index/extract FASTQ
+     index          index alignment
+...
+```
+
+``` bash
+./bin/bcftools --help
+/usr/bin/bcftools
+
+Program: bcftools (Tools for variant calling and manipulating VCFs and BCFs)
+Version: 1.10.2 (using htslib 1.10.2-3)
+
+Usage:   bcftools [--version|--version-only] [--help] <command> <argument>
+
+Commands:
+
+ -- Indexing
+    index        index VCF/BCF files
+...
+```
+
+We can add other tools that we want from the image...
+``` bash
+# Make soft link for date
+ln -s ../samtools.sif bin/date
+
+# Running date from the image
+./bin/date
+/usr/bin/date
+Mon Apr  4 07:23:16 Europe 2022
+
+# Running date from the container
 date
-Wed 23 Mar 2022 09:23:40 AM CET
-
-# here we run the container that picks the name from the soft link
-./date
-Wed Mar 23 08:23:42 Europe 2022
+Mon 04 Apr 2022 09:24:12 AM CEST
 ```
 
-Note, that the time zone in the container is different from the one on your/my computer. I have my computer in CET (Central European Time) and the container defaults to "Europe" - one hour behind CET. 
-
-Here is one more example, by runing the container on a CentOS computer.
-
-``` bash
-$rackham3: cat /etc/os-release 
-NAME="CentOS Linux"
-VERSION="7 (Core)"
-ID="centos"
-ID_LIKE="rhel fedora"
-VERSION_ID="7"
-PRETTY_NAME="CentOS Linux 7 (Core)"
-ANSI_COLOR="0;31"
-CPE_NAME="cpe:/o:centos:centos:7"
-HOME_URL="https://www.centos.org/"
-BUG_REPORT_URL="https://bugs.centos.org/"
-
-CENTOS_MANTISBT_PROJECT="CentOS-7"
-CENTOS_MANTISBT_PROJECT_VERSION="7"
-REDHAT_SUPPORT_PRODUCT="centos"
-REDHAT_SUPPORT_PRODUCT_VERSION="7"
-
-$rackham3: ./cat /etc/os-release 
-NAME="Ubuntu"
-VERSION="20.04.4 LTS (Focal Fossa)"
-ID=ubuntu
-ID_LIKE=debian
-PRETTY_NAME="Ubuntu 20.04.4 LTS"
-VERSION_ID="20.04"
-HOME_URL="https://www.ubuntu.com/"
-SUPPORT_URL="https://help.ubuntu.com/"
-BUG_REPORT_URL="https://bugs.launchpad.net/ubuntu/"
-PRIVACY_POLICY_URL="https://www.ubuntu.com/legal/terms-and-policies/privacy-policy"
-VERSION_CODENAME=focal
-UBUNTU_CODENAME=focal
-```
-
-The first call is regular `cat` on the computer and the second is calling `cat` inside the container.
+Note the different time zones ;-)
