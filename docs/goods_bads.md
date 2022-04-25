@@ -211,3 +211,70 @@ The file is rather large for multiple downloads... we could rewrite a bit the li
     The `samtools` and `bwa` are computationally intensive, memory demanding, and time demanding. This will conflict with some of the limitations of the free online building services. You might consider doing this outside the container and only copy the files (the uncompressed result is even larger) or better - as in the original instructions they will be installed in the user's `$HOME` directory.
 
 Have look for alternative advanced ideas - [Image Mounts](https://sylabs.io/guides/3.7/user-guide/bind_paths_and_mounts.html#image-mounts)
+
+
+## **Installing R and libraries**
+
+!!! warning
+    If you are using `vagrand` to run Singularity, keep in mind that installing R libraries often might need more than 4GB memory, which needs increasing the memory of the instance. Inspect the build log for failures... singularity does not catch them and continues building...
+
+Here are some tips (_try them but they might be autdated_).
+
+``` singularity
+Bootstrap: docker
+From: ubuntu:20.04
+
+%post
+
+  # R-CRAN
+  apt-get -y  install dirmngr gnupg apt-transport-https ca-certificates software-properties-common
+  apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
+  add-apt-repository 'deb https://cloud.r-project.org/bin/linux/ubuntu focal-cran40/'
+  apt-get update && apt-get -y  install r-base
+
+  # Add a default CRAN mirror
+  echo "options(repos = c(CRAN = 'https://cran.rstudio.com/'), download.file.method = 'libcurl')" >> /usr/lib/R/etc/Rprofile.site
+
+  # Rstudio
+  wget -P /tmp/ -c https://download1.rstudio.org/desktop/bionic/amd64/rstudio-2021.09.1-372-amd64.deb
+  apt-get -y install /tmp/rstudio-2021.09.1-372-amd64.deb
+
+  # Fix R package libpaths (helps RStudio Server find the right directories)
+  mkdir -p /usr/lib64/R/etc
+  echo "R_LIBS_USER='/usr/lib64/R/library'" >> /usr/lib64/R/etc/Renviron
+
+  # Install reticulate 
+  Rscript -e 'install.packages("reticulate")'
+
+  # Perhaps miniconda via 
+  Rscript -e 'reticulate::install_miniconda()'
+
+```
+
+Here you can find more detailed instructions related to different ideas related to R: [link](https://github.com/CSCfi/singularity-recipes/blob/fc36f908d0e8216f234a6721f6a086a1c53d4e72/r-env-singularity/4.1.1/4.1.1.def).
+
+
+## **Compiling code...**
+
+... and cleaning the development tools and libraries to slim-down the container.
+
+!!! warning
+    Removing the build dependencies, might remove some necessary libraries - you need to install them back if necessary.
+
+``` singularity hl_lines="4 13"
+...
+
+# install packages needed for compiling 
+deps="wget git make cmake gcc g++ gfortran"
+apt-get install -y --no-install-recommends $deps
+
+# install packages needed for OpenGL
+apt-get install -y --no-install-recommends mesa-utils ...
+
+# compile some code here
+
+# remove build dependencies
+apt-get purge -y --auto-remove $deps
+
+...
+```
