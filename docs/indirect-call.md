@@ -21,7 +21,7 @@ From: ubuntu:20.04
   apt-get --no-install-recommends -y install  wget unzip git bwa samtools bcftools bowtie
   
 %runscript
-  if command -v $SINGULARITY_NAME &> /dev/null; then
+  if command -v $SINGULARITY_NAME > /dev/null 2> /dev/null; then
     exec $SINGULARITY_NAME "$@"
   else
     echo "# ERROR !!! Command $SINGULARITY_NAME not found in the container"
