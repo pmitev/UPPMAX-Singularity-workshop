@@ -36,10 +36,12 @@ From: ubuntu:20.04
     exec ${OSU_DIR}/$*
 ```
 
+This is an adaptation of the example from *The Carpentries*
+(https://carpentries-incubator.github.io/singularity-introduction/08-singularity-mpi/index.html).
 Generation of the container was done through:
 
 ``` bash
-sudo singularity build ... ...
+sudo singularity build osu_benchmarks.sif osu_benchmarks.def 
 ```
 
 The container is then transferred to Kebnekaise. Notice that the MPI
@@ -55,6 +57,7 @@ case is as follows:
 #SBATCH -t 00:10:00
 #SBATCH --exclusive
 
+ml purge  > /dev/null 2>&1
 ml singularity/3.8.2
 ml GCC/9.3.0
 ml OpenMPI/4.0.3
