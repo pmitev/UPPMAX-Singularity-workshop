@@ -278,3 +278,8 @@ apt-get purge -y --auto-remove $deps
 
 ...
 ```
+
+## **Kernel dependencies**
+
+Nowadays, `glibc`, and probably other libraries, occasionally take advantage of new kernel syscalls. Singulariy images run with the host machine's kernel.  
+Debian 9 has an old enough `glibc` to not have many features that would only work on newer machines, and the other packages are new enough to compile all of these dependencies. Consider `FROM debian:9` or `FROM ubuntu:18.04` to address such problems.

@@ -31,13 +31,14 @@ Installation on Windows or Mac
 For Ubuntu (Debian based) Linux distributions.
 
 ``` bash
+# Instructions last updated on 2022.09.02
 # Install system dependencies
 sudo apt-get update && sudo apt-get install -y \
   build-essential libssl-dev uuid-dev libgpgme11-dev \
   squashfs-tools libseccomp-dev wget pkg-config git cryptsetup
 
 # Install Go
-export VERSION=1.17.6 OS=linux ARCH=amd64 && # Replace the values as needed \
+export VERSION=1.18.1 OS=linux ARCH=amd64 && # Replace the values as needed \
   wget https://dl.google.com/go/go$VERSION.$OS-$ARCH.tar.gz && # Downloads the required Go package \
   sudo tar -C /usr/local -xzvf go$VERSION.$OS-$ARCH.tar.gz &&  # Extracts the archive \
   rm go$VERSION.$OS-$ARCH.tar.gz # Deletes the ``tar`` file
@@ -47,8 +48,8 @@ echo 'export GOPATH=${HOME}/go' >> ~/.bashrc && \
   source ~/.bashrc
 
 # Clone Singularity, checkout from a release, compile end install
-export VERSION=v3.9.2 && \
-  git clone https://github.com/sylabs/singularity.git && \
+export VERSION=v3.10.2 && \
+  git clone --recursive https://github.com/sylabs/singularity.git && \
   cd singularity && git checkout $VERSION && \
   ./mconfig && cd ./builddir &&  make -j 4  &&  sudo make install
 ```
