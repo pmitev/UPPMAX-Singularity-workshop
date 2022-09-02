@@ -12,8 +12,16 @@
     Currently, for supported Ubuntu and CentOS distributions, it is also possible to install Singuarity via the system package manager [link](https://github.com/sylabs/singularity/releases/tag/v3.9.7)
     ``` bash
     # Ubuntu 20.04
-    wget https://github.com/sylabs/singularity/releases/download/v3.9.7/singularity-ce_3.9.7-focal_amd64.deb
-    sudo apt install ./singularity-ce_3.9.7-focal_amd64.deb
+    wget https://github.com/sylabs/singularity/releases/download/v3.10.2/singularity-ce_3.10.2-focal_amd64.deb
+    sudo apt install ./singularity-ce_3.10.2-focal_amd64.deb
+
+    # Ubuntu 22.04
+    wget https://github.com/sylabs/singularity/releases/download/v3.10.2/singularity-ce_3.10.2-jammy_amd64.deb
+    sudo apt install ./singularity-ce_3.10.2-jammy_amd64.deb
+
+    # RHEL/CentOS/AlmaLinux/Rocky 9
+    wget https://github.com/sylabs/singularity/releases/download/v3.10.2/singularity-ce-3.10.2-1.el9.x86_64.rpm
+    sudo yum install ./singularity-ce-3.10.2-1.el9.x86_64.rpm 
     ```
 
 # Installation
