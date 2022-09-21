@@ -21,7 +21,8 @@ nav:
   - Goods and bads: goods_bads.md
   - Advanced:
     - Singularity and MPI: mpi_applications.md
-    - Singularity MPI@Kebnekaise: openmpi-benchmark.md 
+    - Singularity MPI@Kebnekaise: openmpi-benchmark.md
+    - Convert Docker image to Singularity container: docker2singularity.md   
     - Indirect calls: indirect-call.md
   - UPPMAX in a can: uppmax_in_a_can.md
   - Practical information: practical_information.md
