@@ -84,7 +84,7 @@ _________________________________________
       fortune | cowsay | lolcat
     ```
 
-### _header_: Bootsrap agents - [online documentation](https://sylabs.io/guides/3.8/user-guide/definition_files.html#preferred-bootstrap-agents)
+### _header_: Bootsrap agents - [online documentation](https://sylabs.io/guides/latest/user-guide/definition_files.html#preferred-bootstrap-agents)
 - `library` - images hosted on the [Container Library](https://cloud.sylabs.io/library)
 - `docker` - images hosted on [Docker Hub](https://hub.docker.com/)
 - `shub` - images hosted on [Singularity Hub](https://singularityhub.com/)
@@ -103,9 +103,9 @@ The `%environment` section allows you to define environment variables that will 
 ### %runscript
 The contents of the `%runscript` section are written to a file within the container that is executed when the container image is run (either via the `singularity run` command or by executing the container directly as a command)
 
-### Brief summary with examples - [online documentation](https://sylabs.io/guides/3.8/user-guide/cli/singularity_build.html?highlight=sandbox#examples)
+### Brief summary with examples - [online documentation](https://sylabs.io/guides/latest/user-guide/cli/singularity_build.html?highlight=sandbox#examples)
 
-### All sections - [online documentation](https://sylabs.io/guides/3.8/user-guide/definition_files.html#sections)
+### All sections - [online documentation](https://sylabs.io/guides/latest/user-guide/definition_files.html#sections)
 
 # Other simple examples
 

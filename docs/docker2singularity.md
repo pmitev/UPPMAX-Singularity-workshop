@@ -56,3 +56,5 @@ $ docker save image_id -o local.tar
 #$ singularity build local_tar.sif docker-archive://local.tar
 $ singularity build local_tar.sif local.tar
 ```
+
+[Related documentation online...](https://docs.sylabs.io/guides/latest/user-guide/appendix.html#docker-daemon-archive)

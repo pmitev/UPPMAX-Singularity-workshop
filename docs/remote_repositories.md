@@ -52,7 +52,7 @@ INFO:    Using cached SIF image
 ```
 Note, that singularity, after contacting the repositories, realizes that the container is in the local cache and proceeds to run it. But where is it?
 
-[More details...](https://sylabs.io/guides/3.8/user-guide/singularity_and_docker.html)
+[More details...](https://sylabs.io/guides/latest/user-guide/singularity_and_docker.html)
 
 ``` bash
 $ singularity cache list
