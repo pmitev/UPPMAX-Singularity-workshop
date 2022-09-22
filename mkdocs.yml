@@ -21,7 +21,8 @@ nav:
   - Goods and bads: goods_bads.md
   - Case Studies:
     - ORFfinder on Rackham: CaseStudies/ORFfinder.md
-    - arcasHLA in Singularity: CaseStudies/arcasHLA.md  
+    - arcasHLA in Singularity: CaseStudies/arcasHLA.md
+    - VESPA (conda, python2): CaseStudies/VESPA.md
   - Advanced:
     - Singularity and MPI: mpi_applications.md
     - Singularity MPI@Kebnekaise: openmpi-benchmark.md
