@@ -19,6 +19,9 @@ nav:
     - Upload to Sylabs container library: exercise_02.md
     - VSCode in Singularity: exercise_04.md
   - Goods and bads: goods_bads.md
+  - Case Studies:
+    - ORFfinder on Rackham: CaseStudies/ORFfinder.md
+    - arcasHLA in Singularity: CaseStudies/arcasHLA.md  
   - Advanced:
     - Singularity and MPI: mpi_applications.md
     - Singularity MPI@Kebnekaise: openmpi-benchmark.md
