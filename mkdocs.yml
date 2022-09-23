@@ -23,6 +23,8 @@ nav:
     - ORFfinder on Rackham: CaseStudies/ORFfinder.md
     - arcasHLA in Singularity: CaseStudies/arcasHLA.md
     - VESPA (conda, python2): CaseStudies/VESPA.md
+    - MariaDB Server: CaseStudies/mariadb.md
+    - FUSE overlayfs: CaseStudies/fuse-overlayfs.md
   - Advanced:
     - Singularity and MPI: mpi_applications.md
     - Singularity MPI@Kebnekaise: openmpi-benchmark.md

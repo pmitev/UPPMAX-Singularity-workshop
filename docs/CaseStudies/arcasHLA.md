@@ -119,4 +119,4 @@ From: ubuntu:18.04
 
 Now, you can easily avoid some unnecessary repetitive installations of multiple tools...
  
-With a small trick in the `%runscript` section, you can make soft links, and you will be able to run other tools from the container - look here for [more](../../indirect-call.md) information.
+With a small trick in the `%runscript` section, you can make soft links, and you will be able to run other tools from the container - look here for [more](../indirect-call.md) information.
