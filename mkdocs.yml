@@ -25,6 +25,7 @@ nav:
     - VESPA (conda, python2): CaseStudies/VESPA.md
     - MariaDB Server: CaseStudies/mariadb.md
     - FUSE overlayfs: CaseStudies/fuse-overlayfs.md
+    - QEMU-utils: CaseStudies/qemu-utils.md
   - Advanced:
     - Singularity and MPI: mpi_applications.md
     - Singularity MPI@Kebnekaise: openmpi-benchmark.md
