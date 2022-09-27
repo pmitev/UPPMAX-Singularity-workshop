@@ -10,6 +10,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - 13:15-16:00  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(_If you need help with the workshop setup, the meeting will be open from 9:00_)  
 :book: - [**Workshop material online**](https://pmitev.github.io/UPPMAX-Singularity-workshop/)  
+:question: - [**Questions during the workshop**](https://hackmd.io/@pmitev/Singularity_FAQ_20220928)
 
 ---
 
