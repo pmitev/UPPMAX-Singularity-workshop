@@ -12,7 +12,41 @@ A "**fake root**" user has almost the same administrative rights as root but onl
 
 !!! note
     Many computer centers, including UPPMAX, does not allow the use of "fake root" and attempt to build on Rackham will trigger the following error:
-    ``` bash
+    ``` text
+    ssh rackham
+     _   _ ____  ____  __  __    _    __  __
+    | | | |  _ \|  _ \|  \/  |  / \   \ \/ /   | System:    rackham3
+    | | | | |_) | |_) | |\/| | / _ \   \  /    | User:      user
+    | |_| |  __/|  __/| |  | |/ ___ \  /  \    | 
+     \___/|_|   |_|   |_|  |_/_/   \_\/_/\_\   | 
+
+    ###############################################################################
+
+        User Guides: http://www.uppmax.uu.se/support/user-guides
+        FAQ: http://www.uppmax.uu.se/support/faq
+
+        Write to support@uppmax.uu.se, if you have questions or comments.
+
+    $ singularity build --fakeroot lolcow.sif Singularity.lolcow 
+    FATAL:   could not use fakeroot: no mapping entry found in /etc/subuid for user
+    ```
+    ``` text
+    ssh alvis
+               ,             
+        ,   |\ ,__        
+          |\   \/   `.         
+          \ `-.:.     `\       █  █▙   █ ▟  █  █                 _.-.
+           `-.__ `\=====|      █  █▜▙  █▟▛  █  █  ▟          .-.  `) |  .-. 
+              /=`'/   ^_\      █  █ ▜  █▛▟  █  █ ▟█      _.'`. .~./  \.~. .`'._
+            .'   /\   .=)     ▟█  █    █▟▛  █  █▟▛█   .-' .'.'.'.-|  |-.'.'.'. '-.
+         .-'  .'|  '-(/_|    ▟▛█  █    █▛   █  █▛ █    `'`'`'`'`  \  /  `'`'`'`'`
+       .'  __(  \  .'`       ▛ █  █    █    █  ▛  █               /||\
+      /_.'`  `.  |`            █  █    █    █     █              //||\\
+               \ |            
+                |/               
+
+    For support, see https://www.c3se.chalmers.se/support
+
     $ singularity build --fakeroot lolcow.sif Singularity.lolcow 
     FATAL:   could not use fakeroot: no mapping entry found in /etc/subuid for user
     ```
