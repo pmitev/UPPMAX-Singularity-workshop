@@ -32,8 +32,8 @@ A "**fake root**" user has almost the same administrative rights as root but onl
     ```
     ``` text
     ssh alvis
-               ,             
-        ,   |\ ,__        
+              ,
+          ,   |\ ,__        
           |\   \/   `.         
           \ `-.:.     `\       █  █▙   █ ▟  █  █                 _.-.
            `-.__ `\=====|      █  █▜▙  █▟▛  █  █  ▟          .-.  `) |  .-. 
