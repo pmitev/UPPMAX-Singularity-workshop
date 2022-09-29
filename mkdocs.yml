@@ -14,7 +14,6 @@ nav:
     - NVIDIA Deep Learning Frameworks: PyTorch_NVIDIA.md  
   - Exercises:
     - Something easy: exercise_00.md 
-    - Real-life example: exercise_01.md
     - Inspect containers: inspect.md
     - Upload to Sylabs container library: exercise_02.md
     - VSCode in Singularity: exercise_04.md
@@ -23,6 +22,7 @@ nav:
     - ORFfinder on Rackham: CaseStudies/ORFfinder.md
     - arcasHLA in Singularity: CaseStudies/arcasHLA.md
     - VESPA (conda, python2): CaseStudies/VESPA.md
+    - gapseq enviroment: CaseStudies/gapseq.md
     - MariaDB Server: CaseStudies/mariadb.md
     - FUSE overlayfs: CaseStudies/fuse-overlayfs.md
     - QEMU-utils: CaseStudies/qemu-utils.md

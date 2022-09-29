@@ -5,24 +5,24 @@ For the  more complicated we will try to use a bit more interactive approach usi
 
 Here we simply install the [Paraview](https://www.paraview.org/) program in virtual environment conveniently provided by the Ubuntu distribution via the docker hub repository.
 
-`Singularity.paraview`
-``` singularity
-Bootstrap: docker
-From: ubuntu:20.04
+!!! note "paraview.def"
+    ``` singularity
+    Bootstrap: docker
+    From: ubuntu:20.04
 
-%post
-  export DEBIAN_FRONTEND=noninteractive
-  
-  apt-get update && apt-get -y dist-upgrade && \
-  apt-get install -y paraview && \
-  apt-get clean
+    %post
+      export DEBIAN_FRONTEND=noninteractive
+      
+      apt-get update && apt-get -y dist-upgrade && \
+      apt-get install -y paraview && \
+      apt-get clean
 
-%runscript
-  paraview "$@"
-```
+    %runscript
+      paraview "$@"
+    ```
 
 ``` bash
-$ sudo singularity build paraview.sif Singularity.paraview
+$ sudo singularity build paraview.sif paraview.def
 ```
 
 This will download 301 MB and install 500 new packages... It might take some time to complete, but once you are done you will have a container that will run almost everywhere - there is always a catch.
@@ -30,6 +30,10 @@ This will download 301 MB and install 500 new packages... It might take some tim
 Instead of paraview, modify the definition file to install and run your, not necessarily graphical, program. Few tips: `gnuplot`, `grace`, `blender`, `povray`, `rasmol`, `gromacs-openmpi`  ...
 
 ## Building interactively in a sandbox.
+
+!!! info
+    This section is especially relevant if you want to build Singularity containers to run on [Dardel](https://www.pdc.kth.se/hpc-services/computing-systems/about-dardel-1.1053338) at [PDC](https://www.pdc.kth.se/), where you need to run in a `sandbox` format. More detailed [documenation](https://www.pdc.kth.se/hpc-services/computing-systems/about-dardel-1.1053338) at PDC.  
+    Hint: Use `ml PDC singularity` to load Singularity from the software module system.
 
 Unless you know exactly which programs and commands you need to install it might be rather tricky to assemble a recipe that will work. If every change requires rebuilding it becomes rather tedious work. Instead, we can try to build a container as we would do it interactively on the command line.
 
@@ -146,9 +150,9 @@ Singularity> jupyter notebook --ip 0.0.0.0 --no-browser
 [C 13:46:05.946 NotebookApp] Running as root is not recommended. Use --allow-root to bypass.
 ```
 It complains but it seems that it will work.  
-Exit from the container `exit`. Add `%runscrip`. Try to build the recipe you have assembled by now.
+Exit from the container `exit`. Add `%runscript`. Try to build the recipe you have assembled by now.
 
-??? note "Singularity.jupyter"
+??? note "jupyter.def"
     ``` singularity
     Bootstrap: docker
     From: ubuntu:20.04
@@ -179,6 +183,12 @@ Exit from the container `exit`. Add `%runscrip`. Try to build the recipe you hav
     ```
 
     Note, the added line `rm -rf /var/lib/apt/lists/*` and options `--no-cache-dir` to clean or skip remaining cached files.
+
+!!! hint
+    You can convert the sandbox container to a regular single file container with
+    ``` bash
+    $ singularity build jupyter.sif jupyter-sb
+    ```
 
 When it is done, try to run it with `./jupyter.sif`. Does it work? Can you open the address with the browser? Yes, you can install whatever packages you want and they will be available and preset in the container.
 

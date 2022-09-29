@@ -19,7 +19,7 @@ $ figlet UPPMAX
 ```
 
 Let's use Ubuntu from Docker to install the package.
-??? note "Singularity.figlet"
+??? note "figlet.def"
     ```
     Bootstrap: docker
     From: ubuntu:20.04
@@ -31,7 +31,7 @@ Let's use Ubuntu from Docker to install the package.
 - In what section we add these commands?
 - Let's clean a bit with `apt-get clean`
 
-??? note "Singularity.figlet"
+??? note "figlet.def"
     ```
     Bootstrap: docker
     From: ubuntu:20.04
@@ -46,7 +46,7 @@ Let's use Ubuntu from Docker to install the package.
 
 - Let's define what to run when we run the container itself.
 
-??? note "Singularity.figlet"
+??? note "figlet.def"
     ```
     Bootstrap: docker
     From: ubuntu:20.04
@@ -66,5 +66,5 @@ Let's use Ubuntu from Docker to install the package.
 
 ??? note "build"
     ```
-    $ sudo singularity build figlet.sif Singularity.figlet
+    $ sudo singularity build figlet.sif figlet.def
     ```

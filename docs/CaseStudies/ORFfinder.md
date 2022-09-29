@@ -1,6 +1,6 @@
 # ORFfinder on Rackham (CentOS7.x)
 
-The tool is distributed prec-ompiled [here](https://ftp.ncbi.nlm.nih.gov/genomes/TOOLS/ORFfinder/linux-i64/), but from the [release log](https://ftp.ncbi.nlm.nih.gov/genomes/TOOLS/ORFfinder/CHANGELOG.txt) one can read:
+The tool is distributed precompiled [here](https://ftp.ncbi.nlm.nih.gov/genomes/TOOLS/ORFfinder/linux-i64/), but from the [release log](https://ftp.ncbi.nlm.nih.gov/genomes/TOOLS/ORFfinder/CHANGELOG.txt) one can read:
 
 > 02/26/2017 - v 0.4.3  
 Built with statically linked libstdc++  

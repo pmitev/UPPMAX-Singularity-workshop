@@ -4,7 +4,7 @@ In this simple example we will build Singularity container that will run the fol
 
 ## Simple Singularity definition file
 
-!!! note "Singularity.lolcow"
+!!! note "lolcow.def"
     ``` singularity
     BootStrap: docker
     From: ubuntu:16.04
@@ -24,7 +24,7 @@ In this simple example we will build Singularity container that will run the fol
 ## Building the container
 
 ``` bash
-$ sudo singularity build lolcow.sif Singularity.lolcow
+$ sudo singularity build lolcow.sif lolcow.def
 
 Starting build...
 Getting image source signatures
@@ -67,7 +67,7 @@ _________________________________________
 
 ## Syntax of the definition file
 
-!!! note "Singularity.lolcow"
+!!! note "lolcow.def"
     ``` singularity linenums="1"
     BootStrap: docker
     From: ubuntu:16.04
@@ -112,7 +112,7 @@ The contents of the `%runscript` section are written to a file within the contai
 ## TeX Live
 You need to use recent [TeX Live](https://www.tug.org/texlive/) but you do not want to (or you can't) upgrade your OS to the latest release... or you do not want to struggle unnecessary to make manual installation that has countless dependencies...
 
-!!! note "Singularity.texlive"
+!!! note "texlive.def"
     ``` singularity
     Bootstrap: docker
     From: ubuntu:latest
@@ -126,7 +126,7 @@ You need to use recent [TeX Live](https://www.tug.org/texlive/) but you do not w
     ```
 
 ``` bash
-$ sudo singularity build texlive.sif Singularity.texlive
+$ sudo singularity build texlive.sif texlive.def
 
 $ ./texlive.sif
 ```
@@ -136,7 +136,7 @@ If you want them available in the container, do you know where to add them?
 ## Installing software from a local package
 Sometimes, you cannot download a package directly or the software needs signing licenses. In this case you need to push in the locally downloaded file during the build process. You can get the latest version of the file bellow from here: https://jp-minerals.org/vesta/en/download.html (_download the the linux `VESTA-gtk3.tar.bz2` version_).
 
-!!! note "Singularity.vesta"
+!!! note "vesta.def"
     ``` singularity
     Bootstrap:  docker
     From: ubuntu:20.04
@@ -152,8 +152,8 @@ Sometimes, you cannot download a package directly or the software needs signing 
       libglu1-mesa libglib2.0-0 libgtk-3-0 libgtk-3-dev libgomp1 && \
       apt-get clean
       
-      cd /
-      tar -C /usr/local -xvf /VESTA-gtk3.tar.bz2 && rm /VESTA-gtk3.tar.bz2    
+      # Install/unpack the precompiled software
+      tar -C /usr/local -xvf /VESTA-gtk3.tar.bz2 && rm /VESTA-gtk3.tar.bz2   
 
     %runscript
       /usr/local/VESTA-gtk3/VESTA "$@"

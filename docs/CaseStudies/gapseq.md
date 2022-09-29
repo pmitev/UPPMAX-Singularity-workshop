@@ -1,8 +1,10 @@
-# Try to compile Singularity recipe
+# Enviroment to run gapseq
 
 Here is a real-life example - you want to run `gapseq` tool with Singularity.
 <https://gapseq.readthedocs.io/en/latest/install.html>  
 > `gapseq` is a program for the prediction and analysis of metabolic pathways and genome-scale networks.
+
+The tool executable are distributed on GitHub. One can not include it in the container, since the tool downloads data and writes into the code folders...
 
 - Create new folder for this project.
 - Use the Ubuntu installation instructions.
