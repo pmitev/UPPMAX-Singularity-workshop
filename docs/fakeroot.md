@@ -27,7 +27,7 @@ A "**fake root**" user has almost the same administrative rights as root but onl
 
         Write to support@uppmax.uu.se, if you have questions or comments.
 
-    $ singularity build --fakeroot lolcow.sif Singularity.lolcow 
+    $ singularity build --fakeroot lolcow.sif lolcow.def 
     FATAL:   could not use fakeroot: no mapping entry found in /etc/subuid for user
     ```
     ``` text
@@ -47,6 +47,19 @@ A "**fake root**" user has almost the same administrative rights as root but onl
 
     For support, see https://www.c3se.chalmers.se/support
 
-    $ singularity build --fakeroot lolcow.sif Singularity.lolcow 
+    $ singularity build --fakeroot lolcow.sif lolcow.def 
     FATAL:   could not use fakeroot: no mapping entry found in /etc/subuid for user
+    ```
+    **UPDATE 2022.10.19:** Alvis supports building Singularity containers with `apptainer`
+    ```
+    $ apptainer build lolcow.sif lolcow.def 
+    INFO:    Detected Singularity user configuration directory
+    INFO:    User not listed in /etc/subuid, trying root-mapped namespace
+    INFO:    The %post section will be run under fakeroot
+    INFO:    Starting build...
+    ...
+    INFO:    Adding environment to container
+    INFO:    Adding runscript
+    INFO:    Creating SIF file...
+    INFO:    Build complete: lolcow.sif
     ```
