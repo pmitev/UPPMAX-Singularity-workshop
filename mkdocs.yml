@@ -19,6 +19,7 @@ nav:
     - VSCode in Singularity: exercise_04.md
   - Goods and bads: goods_bads.md
   - Case Studies:
+    - Offline conda installer: CaseStudies/conda-offline.md
     - ORFfinder on Rackham: CaseStudies/ORFfinder.md
     - arcasHLA in Singularity: CaseStudies/arcasHLA.md
     - VESPA (conda, python2): CaseStudies/VESPA.md
