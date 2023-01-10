@@ -1,11 +1,11 @@
 # Practical information
 
-> Information updated: 2022.12.09
+> Information updated: 2023.01.10
 
 :loudspeaker: - [**Announcement and registration**](https://www.uppmax.uu.se/support/courses-and-workshops/singularity-workshop-announcement/)  
 :classical_building: -  **Place:** The workshop will be online via Zoom.  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_Link will be sent a week before the workshop_.  
-:watch: - **Time:** - 9 March 2023  
+:watch: - **Time:** - 10 March 2023  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - 09:15-12:00  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - 13:15-16:00  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(_If you need help with the workshop setup, the meeting will be open from 9:00_)  
