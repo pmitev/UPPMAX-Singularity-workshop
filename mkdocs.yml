@@ -54,9 +54,13 @@ theme:
       accent: blue
       toggle:
         icon: material/toggle-switch
-        name: Switch to light mode  
+        name: Switch to light mode
   name: material
   custom_dir: overrides
+  features:
+    - search.highlight
+    - content.code.annotate
+    - content.code.copy
 markdown_extensions:
   - admonition
   - footnotes
