@@ -24,6 +24,8 @@ nav:
     - arcasHLA in Singularity: CaseStudies/arcasHLA.md
     - VESPA (conda, python2): CaseStudies/VESPA.md
     - gapseq enviroment: CaseStudies/gapseq.md
+    - Jamovi Server: CaseStudies/jamovi.md
+    - GitHub2Docker2Singularity: CaseStudies/github2docker2singularity.md
     - MariaDB Server: CaseStudies/mariadb.md
     - FUSE overlayfs: CaseStudies/fuse-overlayfs.md
     - QEMU-utils: CaseStudies/qemu-utils.md
