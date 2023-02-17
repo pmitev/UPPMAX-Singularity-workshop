@@ -32,7 +32,22 @@ A "**fake root**" user has almost the same administrative rights as root but onl
     INFO:    Build complete: lolcow.sif
     ```
 
-Documentation about  Singularity / Apptainer on different HPC centers:  
+### Handy environmental variables for use on HPC clusters
+> Environmental variables that will help you to redirect potentially large folders to alternative location - keep in mins your `$HOME` folder is relatively small in size.
+
+```bash
+export PROJECT=project_folder
+
+export SINGULARITY_CACHEDIR=/proj/${PROJECT}/nobackup/SINGULARITY_CACHEDIR
+export SINGULARITY_TMPDIR=/proj/${PROJECT}/nobackup/SINGULARITY_TMPDIR
+
+export APPTAINER_CACHEDIR=/proj/${PROJECT}/nobackup/SINGULARITY_CACHEDIR
+export APPTAINER_TMPDIR=/proj/${PROJECT}/nobackup/SINGULARITY_TMPDIR
+
+mkdir -p $APPTAINER_CACHEDIR $APPTAINER_TMPDIR
+```
+
+### Documentation about  Singularity / Apptainer on different HPC centers:  
 
 - [C3SE](https://www.c3se.chalmers.se/)
     - [Alvis](https://www.c3se.chalmers.se/about/Alvis/) - [https://www.c3se.chalmers.se/documentation/applications/containers/](https://www.c3se.chalmers.se/documentation/applications/containers/)
