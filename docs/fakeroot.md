@@ -18,7 +18,7 @@ A "**fake root**" user has almost the same administrative rights as root but onl
     FATAL:   could not use fakeroot: no mapping entry found in /etc/subuid for user
     ```
 
-    **UPDATE 2022.10.19:** Alvis and UPPMAX support building Singularity containers with `apptainer / singularity`
+    **UPDATE 2022.10.19:** **Alvis** and **Rackham** support building Singularity containers with `apptainer / singularity`
     ```
     $ apptainer build lolcow.sif lolcow.def 
     INFO:    Detected Singularity user configuration directory
@@ -55,3 +55,7 @@ mkdir -p $APPTAINER_CACHEDIR $APPTAINER_TMPDIR
     - [Dardel](https://www.pdc.kth.se/hpc-services/computing-systems) - [https://www.pdc.kth.se/software/software/singularity/index_general.html](https://www.pdc.kth.se/software/software/singularity/index_general.html)
 - [HPC2N](https://www.hpc2n.umu.se/)
     - [https://www.hpc2n.umu.se/resources/software/singularity](https://www.hpc2n.umu.se/resources/software/singularity)
+- [NSC](https://www.nsc.liu.se/)
+    - [https://www.nsc.liu.se/support/singularity/](https://www.nsc.liu.se/support/singularity/)
+- [Lunarc]()
+    - [https://lunarc-documentation.readthedocs.io/en/latest/guides/containers/apptainer/](https://lunarc-documentation.readthedocs.io/en/latest/guides/containers/apptainer/)
