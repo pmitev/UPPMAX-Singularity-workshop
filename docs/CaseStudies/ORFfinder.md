@@ -6,7 +6,7 @@ The tool is distributed precompiled [here](https://ftp.ncbi.nlm.nih.gov/genomes/
 Built with statically linked libstdc++  
 (on issue of GCC-4.9 libraries not yet supported on CentOS7)
 
-It means that the tool will not run on Rackhama and Bianca, which currently are running CentOS7.
+It means that the tool will not run on Rackham and Bianca, which currently are running CentOS7.
 
 Here is a simple Singularity recipe that will provide newer environment with the necessary libraries...
 
