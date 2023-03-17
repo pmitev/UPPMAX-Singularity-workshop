@@ -79,6 +79,6 @@ Fig.1 - Latency benchmark on Kebnekaise using the on-site MPI-compiled version (
 ---
 
 ![](./images/osu2.png)
-Fig.2 - All-to-all benchmark on Kebnekaise using the on-site MPI-compiled version (black), the singularity container (red) and singularity container compiled with infiniband libraries (orange). There is a 24.2% "overhead" in going from MPI-compiled (black) to singularity (red) for 1MB message.
+Fig.2 - All-to-all benchmark on Kebnekaise using the on-site MPI-compiled version (black), the singularity container (red), singularity container compiled with infiniband libraries (orange), and Apptainer (blue). There is a 24.2% "overhead" in going from MPI-compiled (black) to singularity (red) for 1MB message.
 
 

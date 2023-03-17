@@ -19,6 +19,7 @@ A "**fake root**" user has almost the same administrative rights as root but onl
     ```
 
     **UPDATE 2022.10.19:** **Alvis** and **Rackham** support building Singularity containers with `apptainer / singularity`
+    **UPDATE 2023.03.08:** **Kebnekaise** supports building containers with `apptainer` fakeroot option (Apptainer available on the command-line)
     ```
     $ apptainer build lolcow.sif lolcow.def 
     INFO:    Detected Singularity user configuration directory
