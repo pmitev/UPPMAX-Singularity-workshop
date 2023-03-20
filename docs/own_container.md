@@ -179,7 +179,7 @@ Exit from the container `exit`. Add `%runscript`. Try to build the recipe you ha
       jupyter notebook --ip 0.0.0.0 --no-browser
     ```
     ``` bash
-    $ sudo singularity build jupyter.sif Singularity.jupyter
+    $ sudo singularity build jupyter.sif jupyter.def
     ```
 
     Note, the added line `rm -rf /var/lib/apt/lists/*` and options `--no-cache-dir` to clean or skip remaining cached files.
