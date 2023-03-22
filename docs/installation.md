@@ -33,7 +33,10 @@ Detailed and well explained installation instructions at:
 Installation on Windows or Mac  
 [https://sylabs.io/guides/latest/admin-guide/installation.html#installation-on-windows-or-mac](https://sylabs.io/guides/latest/admin-guide/installation.html#installation-on-windows-or-mac){target=_blank}
 
-> (PM) I have successfully installed Singularity under [WSL2](https://docs.microsoft.com/en-us/windows/wsl/install-win10){target=_blank}, but can't guarantee that it will work in all cases.
+> (PM) I have successfully installed Singularity under [WSL2](https://docs.microsoft.com/en-us/windows/wsl/install-win10){target=_blank}, but can't guarantee that it will work in all cases.  
+> Look at this [page](../vagrant_windows) for tips on the typical Windows installation (MacOS is rather similar).
+
+---
 
 ## [TL;DR](https://www.urbandictionary.com/define.php?term=tl%3Bdr) 
 For Ubuntu (Debian based) Linux distributions.
