@@ -1,209 +1,174 @@
 # Singularity and MPI applications
 
-The Singularity documentation is excellent starting point - [link](https://sylabs.io/guides/3.8/user-guide/mpi.html)
+> The Singularity documentation is excellent starting point - [link](https://sylabs.io/guides/3.8/user-guide/mpi.html)     
+The C3SE Singularity has really nice summary as well - [link](https://www.c3se.chalmers.se/documentation/applications/containers-advanced/#running-singularity-with-mpi-across-multiple-nodes)
 
-The C3SE Singularity has really nice summary that is included bellow - [source](https://www.c3se.chalmers.se/documentation/applications/containers-advanced/#running-singularity-with-mpi-across-multiple-nodes)
+Here is an example of simple MPI program compiled with OpenMPI 4.1.2 in Ubuntu 22.04 container.
 
-## **Running singularity with MPI across multiple nodes**
-- There are four main components involved in a containerised MPI-based application:  
-:   1.The executable MPI program (e.g. a.out)  
-    2.The MPI library  
-    3.MPI runtime, e.g. mpirun  
-    4.Communication channel, e.g. SSH server
 
-- Depending on how to containerise those elements, there are two general approaches to running a containerised application across a multi-node cluster:  
-:   1.Packaging the MPI program and the MPI library inside the container, but keeping the MPI runtime outside on the host  
-    2.Packaging the MPI runtime also inside the container leaving only the communication channel on the host
-
-## **Host-based MPI runtime**
-In this approach, the mpirun command runs on the host: `$ mpirun singularity run myImage.sif myMPI_program`
-
-mpirun does, among other things, the following: * Spawns the ORTE daemon on the compute nodes * Launches the MPI program on the nodes * Manages the communication among the MPI ranks
-
-This fits perfectly with the regular workflow of submitting jobs on the HPC clusters, and is, therefore, **the recommended approach**. There is one thing to keep in mind however:  
-The MPI runtime on the host needs to be able to communicate with the MPI library inside the container; therefore,  
-:   i) there must be the same implementation of the MPI standard (e.g. OpenMPI) inside the container, and,  
-    ii) the version of the two MPI libraries should be as close to one another as possible to prevent unpredictable behaviour (ideally the exact same version).
-
-## **Image-based MPI runtime**
-- In this approach, the MPI launcher is called from within the container; therefore, it can even run on a host system without an MPI installation (your challenge would be to find one!):  
- `$ singularity run myImage.sif mpirun myMPI_program`
-- Everything works well on a single node. There's a problem though: as soon as the launcher tries to spawn into the second node, the ORTED process crashes. The reason is it tries to launch the MPI runtime on the host and not inside the container.
-- The solution is to have a launch agent do it inside the container. With OpenMPI, that would be:  
-`$ singularity run myImage.sif mpirun --launch-agent 'singularity run myImage.sif orted' myMPI_program`
-
-## **Example - running conteinerized gromacs in parallel**
-
-Here is a simple setup to build and test simple Singularity container with Gromacs with binaries for OpenMPI parallelization provided with the Ubuntu 20.04 distribution.
-
-``` singularity
-Bootstrap: docker
-From: ubuntu:20.04
+```singularity linenums="1" hl_lines="14"
+Bootstrap:  docker
+From: ubuntu:22.04
 
 %setup
+  mkdir -p ${SINGULARITY_ROOTFS}/opt/mpi-test
 
 %files
-
-%environment
-  export LC_ALL=C
+  mpi-test.c /opt/mpi-test/
 
 %post
-  export LC_ALL=C
-  export DEBIAN_FRONTEND=noninteractive
-
-  apt-get update && apt-get -y dist-upgrade && apt-get install -y git wget gawk cmake build-essential libopenmpi-dev openssh-client slurm-client gromacs-openmpi
+  apt-get update && apt-get install -y build-essential mpi-default-dev lsof slurm-client \
+  && rm -rf /var/lib/apt/lists/*
+  
+  cd /opt/mpi-test && mpicc -o mpi-test mpi-test.c
 
 %runscript
-  /usr/bin/mdrun_mpi "$@"
+  /bin/bash
 ```
 
-At the time of writing this page, the recipe will install
+??? note "mpi-test.c"
+    ```c++
+    #include <mpi.h>
+    #include <stdio.h>
 
-- GROMACS - mdrun_mpi, 2020.1-Ubuntu-2020.1-1
-- mpirun (Open MPI) 4.0.3
+    int main(int argc, char** argv) {
+        // Initialize the MPI environment
+        MPI_Init(NULL, NULL);
 
-!!! note
-    Keep in mind that the binaries provided by the package manager are not optimized for the CPU and you could read such message in the output:
-    > Compiled SIMD: SSE2, but for this host/run AVX2_256 might be better (see log).
-    The current CPU can measure timings more accurately than the code in
-    mdrun_mpi was configured to use. This might affect your simulation
-    speed as accurate timings are needed for load-balancing.
-    Please consider rebuilding mdrun_mpi with the GMX_USE_RDTSCP=ON CMake option.
-    Reading file benchMEM.tpr, VERSION 4.6.3-dev-20130701-6e3ae9e (single precision)
-    Note: file tpx version 83, software tpx version 119
+        // Get the number of processes
+        int world_size;
+        MPI_Comm_size(MPI_COMM_WORLD, &world_size);
 
-We can use [A free GROMACS benchmark set](https://www.mpibpc.mpg.de/grubmueller/bench) to perform tests with this [set](https://www.mpibpc.mpg.de/15101317/benchMEM.zip).
+        // Get the rank of the process
+        int world_rank;
+        MPI_Comm_rank(MPI_COMM_WORLD, &world_rank);
 
-### Running on single node
+        // Get the name of the processor
+        char processor_name[MPI_MAX_PROCESSOR_NAME];
+        int name_len;
+        MPI_Get_processor_name(processor_name, &name_len);
 
-#### Image-based MPI runtime
+        // Print off a hello world message
+        printf("Hello world from processor %s, rank %d out of %d processors\n",
+              processor_name, world_rank, world_size);
 
-``` bash
-# Run shell in the container
-$ singularity shell Gromacs-openmpi20.sif
-
-# 2 MPI processes, 4 OpenMP threads per MPI process
-Singularity> mpirun -n 2 mdrun_mpi -ntomp 4 -s benchMEM.tpr -nsteps 10000 -resethway
-```
-
-#### Host-based MPI runtime
-
-On my host which runs Ubuntu 20.04 the OpenMPI version is identical. On other machines you need to make sure to run compatible version. On HPC clusters this should be module which provides OpenMPI compiled with gcc.
-``` bash
-$ mpirun -n 2 singularity exec Gromacs-openmpi20.sif /usr/bin/mdrun_mpi -ntomp 4 -s benchMEM.tpr -nsteps 10000 -resethway
-
-# or relying on the runscript
-$ mpirun -n 2 Gromacs-openmpi20.sif -ntomp 4 -s benchMEM.tpr -nsteps 10000 -resethway
-```
-
-> Note: At present, there is a incompatibility in the OpenMPI version that causes "Segmentation fault" when trying to run it on Rackham@UPPMAX. 
-
-Bootsraping from Ubntu 18.04 will install `GROMACS - mdrun_mpi, 2018.1` and `mpirun (Open MPI) 2.1.1` which "resolves" the problem and reveals other...
-
-- **Image-based MPI runtime: Run 2 MPI processes, 20 OpenMP threads per MPI process**
-``` bash
-scontrol show hostname $SLURM_NODELIST > host
-singularity exec -B /etc/slurm:/etc/slurm-llnl -B /run/munge Gromacs-openmpi18.sif mpirun -n 2 -d -mca plm_base_verbose 10 --launch-agent 'singularity exec Gromacs-openmpi18.sif orted' /usr/bin/mdrun_mpi -ntomp 20 -s benchMEM.tpr -nsteps 10000 -resethway
-```
-Use `-d -mca plm_base_verbose 10` to get debugging information from `mpirun`. The slurm client that provides `srun` in Ubuntu 18.04 is too old to read the current slurm configuration on Rackham@UPPMAX.
-``` c++
-# Ubuntu 18.04 SLURM error
-# ============================
-...
-srun: error: _parse_next_key: Parsing error at unrecognized key: SlurmctldHost
-srun: error: Parse error in file /etc/slurm-llnl/slurm.conf line 5: "SlurmctldHost=rackham-q"
-srun: error: _parse_next_key: Parsing error at unrecognized key: CredType
-srun: error: Parse error in file /etc/slurm-llnl/slurm.conf line 7: "CredType=cred/munge"
-srun: fatal: Unable to process configuration file
-...
-
-# Ubuntu 20.04 SLURM passes but gromacs+mpi binaries fail on Rackham
-# =====================================================================
-...
-[r483.uppmax.uu.se:25362] [[34501,0],0] plm:slurm: final top-level argv:
-        srun --ntasks-per-node=1 --kill-on-bad-exit --nodes=1 --nodelist=r484 --ntasks=1 /usr/bin/singularity exec Gromacs-apt.sif /usr/bin/orted -mca ess "slurm" -mca ess
-_base_jobid "2261057536" -mca ess_base_vpid "1" -mca ess_base_num_procs "2" -mca orte_node_regex "r[3:483-484]@0(2)" -mca orte_hnp_uri "2261057536.0;tcp://172.18.10.240,10.1.10.234,10.0.10.234:44203" -mca plm_base_verbose "10" -mca -d "-
-display-allocation"
-[r483.uppmax.uu.se:25362] [[34501,0],0] complete_setup on job [34501,1]
- Data for JOB [34501,1] offset 0 Total slots allocated 2
-2261057536.0;tcp://172.18.10.240,10.1.10.234,10.0.10.234:44203
-...
-Reading file benchMEM.tpr, VERSION 4.6.3-dev-20130701-6e3ae9e (single precision)
-Note: file tpx version 83, software tpx version 119
-[r484:19455] *** Process received signal ***
-[r484:19455] Signal: Segmentation fault (11)
-...
-```
-Attempting to start the jobs manually requires `-mca plm rsh` to skip SLURM and use rsh/ssh to start the processes on all allocated nodes and `-B /etc/ssh` to pick up the "Host authentication" setup. Here are the problems:
-    - Rackham@UPPMAX uses "[Host based authentication](https://en.wikibooks.org/wiki/OpenSSH/Cookbook/Host-based_Authentication)" which does not work in the Singularity container, because the container runs in the user space and can not get/read the private host key...
-    - One can use passwordless user key for the authentication (_Note: passwordless ssh keys are not allowed on Rackham_) after adding all nodes public host keys/signatures (_the signatures that you are asked to accept when connecting for the first time to a machine_).
-
-- **Host-based MPI runtime: Run 2 MPI processes, 20 OpenMP threads per MPI process (explicitly specified on the mpirun command line)**
-```
-#!/bin/bash -l
-#SBATCH -J test
-#SBATCH -t 00:15:00
-#SBATCH -p devel -N 2 -n 2
-#SBATCH --cpus-per-task 20
-#SBATCH -A project
-
-module load gcc/7.2.0 openmpi/2.1.1
-
-mpirun -n 2 Gromacs-openmpi18.sif -ntomp 20 -s benchMEM.tpr -nsteps 10000 -resethway
-# or
-# mpirun -n 2 singularity exec Gromacs-openmpi18.sif /usr/bin/mdrun_mpi -ntomp 20 -s benchMEM.tpr -nsteps 10000 -resethway
-```
-
-
-#### Compiling Gromacs
-
-> Note: the recipe bellow uses the OpenMPI from the distribution that triggers "Segmentation fault" problems when running the container on Rackham@UPPMAX.
-
-??? note "recipe"
-    ``` singularity
-    Bootstrap: docker
-    From: ubuntu:20.04
-    
-    %setup
-    
-    %files
-    
-    %environment
-      export LC_ALL=C
-    
-    %post
-      export LC_ALL=C
-      export DEBIAN_FRONTEND=noninteractive
-      export NCPU=$(grep -c ^processor /proc/cpuinfo)
-    
-      apt-get update && apt-get -y dist-upgrade && apt-get install -y git wget gawk cmake build-essential libopenmpi-dev openssh-client
-    
-      mkdir -p installs
-    
-      # Gromacs
-      mkdir -p /tmp/downloads && cd /tmp/downloads
-      test -f gromacs-2021.2.tar.gz || wget https://ftp.gromacs.org/gromacs/gromacs-2021.2.tar.gz
-      tar xf gromacs-2021.2.tar.gz -C /installs
-    
-      cd /installs/gromacs-2021.2
-      mkdir build-normal && cd build-normal
-      cmake .. -DCMAKE_INSTALL_PREFIX=/opt/gromacs-2021.2 -DGMX_GPU=OFF -DGMX_MPI=ON -DGMX_THREAD_MPI=ON -DGMX_BUILD_OWN_FFTW=ON -DGMX_DOUBLE=OFF -DGM
-    X_PREFER_STATIC_LIBS=ON -DBUILD_SHARED_LIBS=ON -DCMAKE_BUILD_TYPE=RELEASE
-      make -j $NCPU && make install
-    
-      cd /installs/gromacs-2021.2
-      mkdir build-mdrun-only && cd build-mdrun-only
-      cmake .. -DCMAKE_INSTALL_PREFIX=/opt/gromacs-2021.2 -DGMX_GPU=OFF -DGMX_MPI=ON -DGMX_THREAD_MPI=ON -DGMX_BUILD_OWN_FFTW=ON -DGMX_DOUBLE=OFF -DGM
-    X_PREFER_STATIC_LIBS=ON -DBUILD_SHARED_LIBS=ON -DCMAKE_BUILD_TYPE=RELEASE -DGMX_BUILD_MDRUN_ONLY=ON
-      make -j $NCPU && make install
-    
-      cd /
-      rm -r /installs
-      rm /etc/apt/apt.conf.d/singularity-cache.conf
-    
-    %runscript
-    #!/bin/bash
-      source /opt/gromacs-2021.2/bin/GMXRC
-      exec gmx_mpi "$@"
+        // Finalize the MPI environment.
+        MPI_Finalize();
+    }
     ```
-> GROMACS reminds you: "Statistics: The only science that enables different experts using the same figures to draw different conclusions." (Evan Esar)
+
+## **Running on single node** 
+
+Running MPI on a single machine is almost trivial, since the communication between the processes is done locally and after allocating a node. Below are two different scenarious.
+
+> **Host based MPI runtime** (_note that the host is running the same OpenMPI version_)
+```bash hl_lines="1"
+HP-Z2:> mpirun -n 4 singularity exec mpi-test.sif /opt/mpi-test/mpi-test
+
+Authorization required, but no authorization protocol specified
+Authorization required, but no authorization protocol specified
+Hello world from processor HP-Z2, rank 1 out of 4 processors
+Hello world from processor HP-Z2, rank 3 out of 4 processors
+Hello world from processor HP-Z2, rank 0 out of 4 processors
+Hello world from processor HP-Z2, rank 2 out of 4 processors
+```
+
+> **Container based MPI runtime**
+```bash hl_lines="1"
+HP-Z2:> singularity exec mpi-test.sif mpirun -n 4 /opt/mpi-test/mpi-test
+
+Authorization required, but no authorization protocol specified
+Authorization required, but no authorization protocol specified
+Hello world from processor HP-Z2, rank 3 out of 4 processors
+Hello world from processor HP-Z2, rank 1 out of 4 processors
+Hello world from processor HP-Z2, rank 2 out of 4 processors
+Hello world from processor HP-Z2, rank 0 out of 4 processors
+```  
+---
+
+
+## **Running singularity with MPI across multiple nodes**
+
+Running on multiple nodes is a bit of challenge. `mpirun` needs to know about the allocated resources and your program should be compiled to support the network hardware
+
+> **Host based MPI runtime** (_example for running on Rackham@UPPMAX_)
+```slurm hl_lines="8"
+#!/bin/bash -l
+#SBATCH -A project
+#SBATCH -n 40 -p devel
+#SBATCH -t 5:00
+
+module load gcc/11.3.0 openmpi/4.1.2
+
+mpirun singularity exec mpi-test.sif /opt/mpi-test/mpi-test
+```
+Note: `openmpi` package from the Ubuntu distribution is compiled without `SLURM` support and the executable has problems to run `srun` - [link](https://www.open-mpi.org/faq/?category=slurm)
+
+??? note "output"
+    ```
+    Hello world from processor r484.uppmax.uu.se, rank 8 out of 40 processors
+    Hello world from processor r484.uppmax.uu.se, rank 2 out of 40 processors
+    Hello world from processor r484.uppmax.uu.se, rank 3 out of 40 processors
+    Hello world from processor r484.uppmax.uu.se, rank 4 out of 40 processors
+    Hello world from processor r484.uppmax.uu.se, rank 9 out of 40 processors
+    Hello world from processor r484.uppmax.uu.se, rank 0 out of 40 processors
+    Hello world from processor r484.uppmax.uu.se, rank 1 out of 40 processors
+    Hello world from processor r484.uppmax.uu.se, rank 5 out of 40 processors
+    Hello world from processor r484.uppmax.uu.se, rank 6 out of 40 processors
+    Hello world from processor r484.uppmax.uu.se, rank 7 out of 40 processors
+    Hello world from processor r484.uppmax.uu.se, rank 10 out of 40 processors
+    Hello world from processor r484.uppmax.uu.se, rank 11 out of 40 processors
+    Hello world from processor r484.uppmax.uu.se, rank 12 out of 40 processors
+    Hello world from processor r484.uppmax.uu.se, rank 13 out of 40 processors
+    Hello world from processor r484.uppmax.uu.se, rank 14 out of 40 processors
+    Hello world from processor r484.uppmax.uu.se, rank 15 out of 40 processors
+    Hello world from processor r484.uppmax.uu.se, rank 16 out of 40 processors
+    Hello world from processor r484.uppmax.uu.se, rank 17 out of 40 processors
+    Hello world from processor r484.uppmax.uu.se, rank 18 out of 40 processors
+    Hello world from processor r484.uppmax.uu.se, rank 19 out of 40 processors
+    Hello world from processor r485.uppmax.uu.se, rank 20 out of 40 processors
+    Hello world from processor r485.uppmax.uu.se, rank 23 out of 40 processors
+    Hello world from processor r485.uppmax.uu.se, rank 25 out of 40 processors
+    Hello world from processor r485.uppmax.uu.se, rank 26 out of 40 processors
+    Hello world from processor r485.uppmax.uu.se, rank 29 out of 40 processors
+    Hello world from processor r485.uppmax.uu.se, rank 33 out of 40 processors
+    Hello world from processor r485.uppmax.uu.se, rank 24 out of 40 processors
+    Hello world from processor r485.uppmax.uu.se, rank 27 out of 40 processors
+    Hello world from processor r485.uppmax.uu.se, rank 28 out of 40 processors
+    Hello world from processor r485.uppmax.uu.se, rank 31 out of 40 processors
+    Hello world from processor r485.uppmax.uu.se, rank 32 out of 40 processors
+    Hello world from processor r485.uppmax.uu.se, rank 37 out of 40 processors
+    Hello world from processor r485.uppmax.uu.se, rank 39 out of 40 processors
+    Hello world from processor r485.uppmax.uu.se, rank 21 out of 40 processors
+    Hello world from processor r485.uppmax.uu.se, rank 22 out of 40 processors
+    Hello world from processor r485.uppmax.uu.se, rank 30 out of 40 processors
+    Hello world from processor r485.uppmax.uu.se, rank 35 out of 40 processors
+    Hello world from processor r485.uppmax.uu.se, rank 36 out of 40 processors
+    Hello world from processor r485.uppmax.uu.se, rank 38 out of 40 processors
+    Hello world from processor r485.uppmax.uu.se, rank 34 out of 40 processors
+    ```
+
+
+> **Container based MPI runtime**
+```slurm hl_lines="8"
+#!/bin/bash -l
+#SBATCH -A project
+#SBATCH -n 40 -p devel
+#SBATCH -t 5:00
+
+module load gcc/11.3.0 openmpi/4.1.2
+
+singularity exec mpi-test.sif  mpirun --launch-agent 'singularity exec /FULL_PATH/mpi-test.sif orted' /opt/mpi-test/mpi-test
+```
+
+??? note "still failing"
+    ```
+    --------------------------------------------------------------------------
+    An ORTE daemon has unexpectedly failed after launch and before
+    communicating back to mpirun. This could be caused by a number
+    of factors, including an inability to create a connection back
+    to mpirun due to a lack of common network interfaces and/or no
+    route found between them. Please check network connectivity
+    (including firewalls and network routing requirements).
+    --------------------------------------------------------------------------
+    ```

@@ -32,6 +32,7 @@ nav:
     - QEMU-utils: CaseStudies/qemu-utils.md
   - Advanced:
     - Singularity and MPI: mpi_applications.md
+    - Gromacs in a container: mpi_gromacs.md
     - Singularity MPI@Kebnekaise: openmpi-benchmark.md
     - Convert Docker image to Singularity container: docker2singularity.md
     - Building from Singularity image: localimage.md  
