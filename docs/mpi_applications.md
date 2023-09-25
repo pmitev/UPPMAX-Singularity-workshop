@@ -59,7 +59,7 @@ From: ubuntu:22.04
 
 ## **Running on single node** 
 
-Running MPI on a single machine is almost trivial, since the communication between the processes is done locally and after allocating a node. Below are two different scenarious.
+Running MPI on a single machine is almost trivial, since the communication between the processes is done locally. Below are two different scenarios.
 
 > **Host based MPI runtime** (_note that the host is running the same OpenMPI version_)
 ```bash hl_lines="1"
@@ -89,7 +89,7 @@ Hello world from processor HP-Z2, rank 0 out of 4 processors
 
 ## **Running singularity with MPI across multiple nodes**
 
-Running on multiple nodes is a bit of challenge. `mpirun` needs to know about the allocated resources and your program should be compiled to support the network hardware
+Running on multiple nodes is a bit of challenge. `mpirun` needs to know about the allocated resources and your program should be compiled to support the network hardware...
 
 > **Host based MPI runtime** (_example for running on Rackham@UPPMAX_)
 ```slurm hl_lines="8"
