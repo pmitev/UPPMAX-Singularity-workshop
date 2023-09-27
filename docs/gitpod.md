@@ -29,3 +29,10 @@ sudo apptainer build lolcow.sif lolcow.def
 ```
 5. Run as usually.
 ![Run](./images/gitpod-vm3.png)
+
+The Gitpod workspace runs Ubuntu 22.04 and you can:
+
+- install packages with `sudo apt-get ...`
+- install python modules with `python3 -m pip install ...` via `pyenv`. To get the newly installed modules and tools in the path you need to refresh with `pyenv rehash` after installation.
+
+Files created in repository folder will be kept when the workspace is restarted - any other files will be lost.
