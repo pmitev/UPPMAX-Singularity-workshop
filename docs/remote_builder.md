@@ -11,6 +11,10 @@ Default installation of Singularity is configured to connect to the public [clou
 
 Follow the manual about [Remote Endpoinst](https://sylabs.io/guides/3.8/user-guide/endpoint.html) to learn how to build containers remotely.
 
+## Building interactivelly in Gitpod
+We are trying to provide an [**experimental build**](./gitpod.md) with graphical interface and Apptainer running in [Gitpod](https://www.gitpod.io/). The free tier allows users to run about 50 hours on the standard configuration (4 cores, 8GB RAM, ~30GB storage).
+
+
 ## Singularity Container Registry (Singularity Hub)
 [Singularity Hub](https://singularity-hub.org/) is the predecessor to Singularity Registry, and while it also serves as an image registry, in addition it provides a cloud build service for users. Singularity Hub also takes advantage of Github for version control of build recipes. The user pushes to Github, a builder is deployed, and the image available to the user. Singularity Hub would allow a user to build and run an image from a resource where he or she doesn't have sudo simply by using Github as a middleman.
 
