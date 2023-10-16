@@ -66,6 +66,8 @@ Conda causes some unexpected problems. During the build and and the commands in 
     EOF
     ```
 
+> Tip: for `mamba` one can start from `From: condaforge/mambaforge`
+
 ??? note "Ubuntu + conda"
     ``` singularity linenums="1"
     Bootstrap: docker
