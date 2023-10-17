@@ -8,23 +8,24 @@
 
     If you have already installed Singularity version, newer than 3.7, it should be sufficient for the workshop.
 
-!!! note "Perhaps the easiest way to install Singularity under Linux"
-    Currently, for supported Ubuntu and CentOS distributions, it is also possible to install Singuarity via the system package manager [link](https://github.com/sylabs/singularity/releases)
-    ``` bash
-    # Ubuntu 20.04
-    wget https://github.com/sylabs/singularity/releases/download/v4.0.0/singularity-ce_4.0.0-focal_amd64.deb
-    sudo apt install ./singularity-ce_4.0.0-focal_amd64.deb
+## Installation via package manager (_if available_)
 
-    # Ubuntu 22.04
-    wget https://github.com/sylabs/singularity/releases/download/v4.0.0/singularity-ce_4.0.0-jammy_amd64.deb
-    sudo apt install ./singularity-ce_4.0.0-jammy_amd64.deb
+Currently, for supported Ubuntu and CentOS distributions, it is also possible to install Singuarity via the system package manager [link](https://github.com/sylabs/singularity/releases)
+``` bash
+# Ubuntu 20.04
+wget https://github.com/sylabs/singularity/releases/download/v4.0.0/singularity-ce_4.0.0-focal_amd64.deb
+sudo apt install ./singularity-ce_4.0.0-focal_amd64.deb
 
-    # RHEL/CentOS/AlmaLinux/Rocky 9
-    wget https://github.com/sylabs/singularity/releases/download/v4.0.0/singularity-ce-4.0.0-1.el9.x86_64.rpm
-    sudo yum install ./singularity-ce-4.0.0-1.el9.x86_64.rpm 
-    ```
+# Ubuntu 22.04
+wget https://github.com/sylabs/singularity/releases/download/v4.0.0/singularity-ce_4.0.0-jammy_amd64.deb
+sudo apt install ./singularity-ce_4.0.0-jammy_amd64.deb
 
-# Installation
+# RHEL/CentOS/AlmaLinux/Rocky 9
+wget https://github.com/sylabs/singularity/releases/download/v4.0.0/singularity-ce-4.0.0-1.el9.x86_64.rpm
+sudo yum install ./singularity-ce-4.0.0-1.el9.x86_64.rpm 
+```
+
+## Installation from source
 
 ---
 Detailed and well explained installation instructions at:  
