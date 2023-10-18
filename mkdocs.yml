@@ -9,6 +9,7 @@ nav:
   - First steps:
     - Building a container: build_container.md
     - Build own container: own_container.md
+    - Building interactively (sandbox): sandbox.md
     - Running Singularity container: running_singularity.md
     - Running containrs from online repositories: remote_repositories.md
     - NVIDIA Deep Learning Frameworks: PyTorch_NVIDIA.md  

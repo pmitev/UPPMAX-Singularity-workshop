@@ -72,7 +72,7 @@ export VERSION=v3.10.2 && \
  
 
 
-## Test the installation
+## Testing the installation
 
 [https://sylabs.io/guides/latest/admin-guide/installation.html#testing-checking-the-build-configuration](https://sylabs.io/guides/latest/admin-guide/installation.html#testing-checking-the-build-configuration){target=_blank}
 
@@ -111,7 +111,7 @@ Available Commands:
 Run 'singularity --help' for more detailed usage information.
 ```
 
-## Check the configuration
+## Checking the configuration
 
 ``` bash
 singularity buildcfg
