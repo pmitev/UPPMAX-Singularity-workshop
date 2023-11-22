@@ -25,7 +25,7 @@ Here is the tool's [GitHub](https://github.com/RabadanLab/arcasHLA) with rather 
 
 This requires some reasonable efforts to setup. It is doable but if you need to setup this on multiple locations or for multiple users... it becomes unbearable.  
 
-The developers of the tool has provided [Dockerfile](https://github.com/RabadanLab/arcasHLA/blob/master/Docker/Dockerfile) which is perfect guide for installation, by the way. The container is not available to pull from DockerHub so you need to build it yourself and convert it to Sinfularity ([relevant info here](../../docker2singularity)) or rewrite the recipe for Singularity following the original -  there are tools but it is not that difficult. here it is:
+The developers of the tool has provided [Dockerfile](https://github.com/RabadanLab/arcasHLA/blob/master/Docker/Dockerfile) which is perfect guide for installation, by the way. The container is not available to pull from DockerHub so you need to build it yourself and convert it to Sinfularity ([relevant info here](../docker2singularity.md)) or rewrite the recipe for Singularity following the original -  there are tools but it is not that difficult. here it is:
 
 ```singularity
 Bootstrap: docker

@@ -1,9 +1,9 @@
 # Multi-Stage Builds
 > [Reference to the documentation](https://docs.sylabs.io/guides/latest/user-guide/definition_files.html#multi-stage-builds)
 
-Some times one might want to install software that requires external libraries (not available in the distribution package manager)  or to recompile existing with different options. Usually, this wil require installing common building tools and compilers that are not needed for running the compiled executables... 
+One might want to install software that requires external libraries that are not available with the distribution or to recompile existing with different options. Usually, this will require installing common building tools and compilers that are not needed for running the executables...
 
-Similar to Docker, Singularity also offers a multistage builds which allows you to copy files between stages (Singularity can copy only from previous to current stage). Below is an  example definition file to compile the [ARPIP](https://acg-team.github.io/bpp-arpip/) (Ancestral sequence Reconstruction under the Poisson Indel Process) tool. Note, the recipe is following the local installation for the static binary build. 
+Similar to [Docker multi-stage builds](https://docs.docker.com/build/building/multi-stage/), Singularity also offers a [multi-stage builds](https://docs.sylabs.io/guides/latest/user-guide/definition_files.html#multi-stage-builds) that allows for copying files between stages (Singularity can copy only from previous to current stage). Below is an  example definition file that compiles the [ARPIP](https://acg-team.github.io/bpp-arpip/) (Ancestral sequence Reconstruction under the Poisson Indel Process) tool. The recipe is following the local installation for the [static binary build](https://acg-team.github.io/bpp-arpip/arpip_ancestral_sequence_reconstruction_under_poisson_indel_proccess_compiling_localenv.html). 
 
 ```singularity linenums="1"
 Bootstrap: docker
