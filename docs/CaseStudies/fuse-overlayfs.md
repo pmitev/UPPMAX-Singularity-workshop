@@ -2,7 +2,7 @@
 
 [https://github.com/containers/fuse-overlayfs](https://github.com/containers/fuse-overlayfs)
 
-Here we will skip the explanation on what is and for what purpose ypu would need `fuse-overlayfs`, but will rather assume you badly need it to run on a computer or system which does not support it - like Rackham.
+Here we will skip the explanation on what is and for what purpose you would need `fuse-overlayfs`, but will rather assume you badly need it to run on a computer or system which does not support it - like Rackham.
 
 The recipy is extremely simple - just installing it from the package manager - in this case Ubuntu distribution.
 ```singularity
