@@ -172,4 +172,9 @@ mpirun -n 2 Gromacs-openmpi18.sif -ntomp 20 -s benchMEM.tpr -nsteps 10000 -reset
       source /opt/gromacs-2021.2/bin/GMXRC
       exec gmx_mpi "$@"
     ```
+#### MPI multi-node example: HPC2N
+
+This is an example on how to compile GROMACS (but it can be other software too) at HPC2N and how to run it on several nodes 
+[Apptainer multi-node Kebnekaise](https://github.com/hpc2n/intro-course/tree/master/hands-ons/4.application-usage/APPTAINER).
+
 > GROMACS reminds you: "Statistics: The only science that enables different experts using the same figures to draw different conclusions." (Evan Esar)
