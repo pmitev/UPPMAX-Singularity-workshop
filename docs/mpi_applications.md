@@ -1,7 +1,7 @@
 # Singularity and MPI applications
 
 > The Singularity documentation is excellent starting point - [link](https://sylabs.io/guides/3.8/user-guide/mpi.html)     
-The C3SE Singularity has really nice summary as well - [link](https://www.c3se.chalmers.se/documentation/applications/containers-advanced/#running-singularity-with-mpi-across-multiple-nodes)
+The C3SE Singularity has really nice summary as well - [link](https://www.c3se.chalmers.se/documentation/applications/containers/)
 
 Here is an example of simple MPI program compiled with OpenMPI 4.1.2 in Ubuntu 22.04 container.
 
