@@ -35,7 +35,7 @@ A "**fake root**" user has almost the same administrative rights as root but onl
     :movie_camera: [asciinema](https://asciinema.org/a/ioZ8GTdyMoCfr4oPuyN5qSd5w)
 
 ### Handy environmental variables for use on HPC clusters
-> Environmental variables that will help you to redirect potentially large folders to alternative location - keep in mins your `$HOME` folder is relatively small in size.
+> Environmental variables that will help you to redirect potentially large folders to alternative location - keep in mind that your `$HOME` folder is relatively small in size.
 
 ```bash
 export PROJECT=project_folder

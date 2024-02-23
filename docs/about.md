@@ -13,7 +13,13 @@ This web page is a supplementary material to the [UPPMAX](https://www.uppmax.uu.
 - [C3SE](https://www.c3se.chalmers.se/documentation/applications/containers-advanced/){target=_blank}
 
 ### Course feedback
-[2021.05 workshop feedback](https://docs.google.com/forms/d/1HlQNa0lpGQwA7LRvUYt_kN7DjYbYDnWQJCa6Gj0V4Ak/viewanalytics){target=_blank} - *including suggestions for improvements*.
+- 2024.??.?? | [2024.02.23](https://docs.google.com/forms/d/1IPyua4tJOABWQVQqPt3xT5h8WXRSvOPJCYq4fnqIGD8/viewanalytics){target=_blank}
+- [2023.10.06](https://docs.google.com/forms/d/1i8MD_mB5HAyy3DGCZjfzGA3IE7Z828ugnaxK4VYv2qI/viewanalytics){target=_blank} | 
+[2023.03.10](https://docs.google.com/forms/d/1OGJAbK0dBHoXsu8gzBRb5cW3Xd-pIGQWk36usuJlbkU/viewanalytics){target=_blank}
+- [2022.09.28](https://docs.google.com/forms/d/1FBb6RCB9ZGN-LNbGP4UCub7n6gfwwCzdTwNtcBrmwkY/viewanalytics){target=_blank} | 
+[2022.04.20](https://docs.google.com/forms/d/1AgtwJzj2z990-Vz_RqWIuNv8nlsK8RcwgqDOrsno1bY/viewanalytics){target=_blank}
+- [2021.11.17](https://docs.google.com/forms/d/1qxiICDwo-bhVBeR3J8EY_z4Qlma02mn-MnLP75cBFWQ/viewanalytics){target=_blank} | 
+[2021.05.03](https://docs.google.com/forms/d/1HlQNa0lpGQwA7LRvUYt_kN7DjYbYDnWQJCa6Gj0V4Ak/viewanalytics){target=_blank}
 
 ---
 ## Contacts:
