@@ -56,7 +56,7 @@ Most probably you will get an error about a missing dynamic library `libX11-xcb.
 
 ## Finding the missing pieces
 This is an easy case - it could be more problematic. Visit https://packages.ubuntu.com/ and use the "Search the contents of packages" for `focal` (Ubuntu 20.04) to find which package could possibly provide the missing library.
-![packages](./images/deb-search.png)
+![packages](../images/deb-search.png)
 
 You should be able to find that `libx11-xcb1` package contains this file... So, we need to add it to the `apt-get install ...` line and rebuild. In the general case there might be more missing libraries and using tools like `ldd` might come more handy to track down multiple missing libraries.
 
@@ -92,7 +92,7 @@ You should be able to find that `libx11-xcb1` package contains this file... So, 
 
 Unfortunatelly we are not ready. There will be this pop up window with warnings...
 
-![vscode-error](./images/vscode-error.png)
+![vscode-error](../images/vscode-error.png)
 
 There might be better ways to do this but at this point we will just give write access to `/var` to our container.
 

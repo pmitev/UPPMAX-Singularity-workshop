@@ -1,6 +1,6 @@
-# Running Singlarity containers from online repositories
+# Running Singularity containers from online repositories
 
-Here we will briefly show one example and later try to build our own container and share it online.
+Let us try to run a small and simple container from Docker Hub repository. Singularity, will pull the docker image in the cache, convert it and run it. The output should look something like this:
 
 ``` bash
 $ singularity run docker://godlovedc/lolcow
@@ -35,6 +35,12 @@ INFO:    Creating SIF file...
                 ||----w |
                 ||     ||
 ```
+
+The container executes predefined command `fortune | cowsay | lolcat`.
+
+- `fortune` - print a random, hopefully interesting, adage.
+- `cowsay` - configurable speaking/thinking cow (and a bit more)
+- `lolcat` - rainbow coloring effect for text console display
 
 Let's run it again.
 ``` bash
@@ -86,8 +92,57 @@ $ singularity run docker://dctrud/wttr
 ```
 ![output](images/wttr.png)
 
+### metaWRAP - a flexible pipeline for genome-resolved metagenomic data analysis
+
+Here is an example how to use the metaWRAP pipeline from the docker container - [installation instructions](https://github.com/bxlab/metaWRAP#docker-installation).
+
+``` bash
+# Original instructions (do NOT run)
+$ docker pull quay.io/biocontainers/metawrap:1.2--1
+```
+In this particular case it is as easy as:
+
+```
+$ singularity pull docker://quay.io/biocontainers/metawrap:1.2--1
+
+INFO:    Converting OCI blobs to SIF format
+INFO:    Starting build...
+Getting image source signatures
+...
+```
+This will bring the docker image locally and covert it to Singularity format.
+
+Then, one can start the container and use it interactively.  
+In this particular case, executing the Singularity container gives us a shell running in the container.
+
+```
+$ ./metawrap_1.2--1.sif
+WARNING: Skipping mount /usr/local/var/singularity/mnt/session/etc/resolv.conf [files]: /etc/resolv.conf doesn't exist in container
+
+Singularity> metawrap --version
+metaWRAP v=1.2
+```
+
+To run the tool from the command line (outside of the container, as you would use it in scripts) we need to add the call for the tool.
+
+Original commad in the cript:  
+```$ metawrap binning -o Lanna-straw_initial_binning_concoct -t 20 -a /proj/test/megahit_ass_Lanna-straw/final.contigs.fa --concoct --run-checkm /proj/test/Lanna-straw_reads_trimmed/*.fastq```
+
+The command now calls the tool from the Singularity container:  
+```$ singularity exec metawrap_1.2--1.sif metawrap binning -o Lanna-straw_initial_binning_concoct -t 20 -a /proj/test/megahit_ass_Lanna-straw/final.contigs.fa --concoct --run-checkm /proj/test/Lanna-straw_reads_trimmed/*.fastq```
+
+!!! info "Pulling Singularity container from online or local library/repository"
+    - **library://** to build from the [Container Library](https://    cloud.sylabs.io/library)  
+    ` library://sylabs-jms/testing/lolcow`
+    - **docker://** to build from [Docker Hub](https://hub.docker.com/    )  
+    ` docker://godlovedc/lolcow`
+    - **shub://** to build from [Singularity Hub](https://    singularityhub.com/)
+    - path to a existing container on your local machine
+    - path to a directory to build from a sandbox
+    - path to a Singularity definition file
+
 ### Tensorflow 
-Let's have some tensorflow running. First `pull` the image from docker hub (~2.6GB).
+Let's have some tensorflow running. First `pull` the image from docker hub (~2.6GB).  
 
 ```
 $ singularity pull docker://tensorflow/tensorflow:latest-gpu
@@ -113,53 +168,4 @@ Type "help", "copyright", "credits" or "license" for more information.
 [PhysicalDevice(name='/physical_device:GPU:0', device_type='GPU')]
 ```
 
-### metaWRAP - a flexible pipeline for genome-resolved metagenomic data analysis
-
-Here is an example how to use the metaWRAP pipeline from the docker container - [installation instructions](https://github.com/bxlab/metaWRAP#docker-installation).
-
-``` bash
-# Original instructions (do NOT run)
-$ docker pull quay.io/biocontainers/metawrap:1.2--1
-```
-In this particular case it is as easy as:
-
-```
-$ singularity pull docker://quay.io/biocontainers/metawrap:1.2--1
-
-INFO:    Converting OCI blobs to SIF format
-INFO:    Starting build...
-Getting image source signatures
-...
-```
-This will bring the docker container locally and covert it to Singularity format.
-
-Then, one can start the container and use it interactively.
-
-```
-$ ./metawrap_1.2--1.sif
-WARNING: Skipping mount /usr/local/var/singularity/mnt/session/etc/resolv.conf [files]: /etc/resolv.conf doesn't exist in container
-
-Singularity> metawrap --version
-metaWRAP v=1.2
-```
-
-To run the tool from the command line (as you would use it in scripts) we need to add the call for the tool from Singularity.
-
-Original commad in the cript:  
-$ **metawrap** binning -o Lanna-straw_initial_binning_concoct -t 20 -a /proj/test/megahit_ass_Lanna-straw/final.contigs.fa --concoct --run-checkm /proj/test/Lanna-straw_reads_trimmed/*.fastq
-
-The command now calls the tool from the Singularity container:  
-$ ==singularity exec metawrap_1.2--1.sif== **metawrap** binning -o Lanna-straw_initial_binning_concoct -t 20 -a /proj/test/megahit_ass_Lanna-straw/final.contigs.fa --concoct --run-checkm /proj/test/Lanna-straw_reads_trimmed/*.fastq
-
-
-
-!!! info "Pulling Singularity container from online or local library/repository"
-    - **library://** to build from the [Container Library](https://    cloud.sylabs.io/library)  
-    ` library://sylabs-jms/testing/lolcow`
-    - **docker://** to build from [Docker Hub](https://hub.docker.com/    )  
-    ` docker://godlovedc/lolcow`
-    - **shub://** to build from [Singularity Hub](https://    singularityhub.com/)
-    - path to a existing container on your local machine
-    - path to a directory to build from a sandbox
-    - path to a Singularity definition file
-
+## [NVIDIA Deep Learning Frameworks](./PyTorch_NVIDIA.md) - additional material.

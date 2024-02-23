@@ -107,31 +107,6 @@ The contents of the `%runscript` section are written to a file within the contai
 
 ### All sections - [online documentation](https://sylabs.io/guides/latest/user-guide/definition_files.html#sections)
 
-# Other simple examples
-
-## TeX Live
-You need to use recent [TeX Live](https://www.tug.org/texlive/) but you do not want to (or you can't) upgrade your OS to the latest release... or you do not want to struggle unnecessary to make manual installation that has countless dependencies...
-
-!!! note "texlive.def"
-    ``` singularity
-    Bootstrap: docker
-    From: ubuntu:latest
-
-    %post
-      export DEBIAN_FRONTEND=noninteractive
-      apt-get update && apt-get -y dist-upgrade && apt-get install -y texlive-full && apt-get clean
-
-    %runscript
-      /bin/bash "$@"
-    ```
-
-``` bash
-$ sudo singularity build texlive.sif texlive.def
-
-$ ./texlive.sif
-```
-In this case, running the container will bring you to the bash prompt within latest Ubuntu release and the corresponding `texlive-full` package. Keep in mind that the shell is running within the container and this setup does not have any other tools like `git`, `wget`, `vim` etc.  
-If you want them available in the container, do you know where to add them?
 
 ## Installing software from a local package
 Sometimes, you cannot download a package directly or the software needs signing licenses. In this case you need to push in the locally downloaded file during the build process. You can get the latest version of the file bellow from here: https://jp-minerals.org/vesta/en/download.html (_download the the linux `VESTA-gtk3.tar.bz2` version_).

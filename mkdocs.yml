@@ -7,18 +7,18 @@ nav:
   - Building remotely: remote_builder.md
   - Building with --fakeroot: fakeroot.md
   - First steps:
-    - Building a container: build_container.md
-    - Build own container: own_container.md
+    - 1.Running containrs from online repositories: remote_repositories.md
+    - 2.Running Singularity container: running_singularity.md
+    - 3.Building a container: build_container.md
+    - 4.Something easy - exercise: exercise_00.md 
+    - 5.Build own container - exercise: own_container.md
+    - 6.Inspect containers: inspect.md
+  - Additional:
     - Building interactively (sandbox): sandbox.md
-    - Running Singularity container: running_singularity.md
-    - Running containrs from online repositories: remote_repositories.md
     - NVIDIA Deep Learning Frameworks: PyTorch_NVIDIA.md  
-  - Exercises:
-    - Something easy: exercise_00.md 
-    - Inspect containers: inspect.md
     - Upload to Sylabs container library: exercise_02.md
-    - VSCode in Singularity: exercise_04.md
   - Goods and bads: goods_bads.md
+  - Ubuntu template: ubuntu_template.md
   - Case Studies:
     - SLURM in container: CaseStudies/SLURM_in_container.md
     - Offline conda installer: CaseStudies/conda-offline.md
@@ -28,6 +28,7 @@ nav:
     - gapseq enviroment: CaseStudies/gapseq.md
     - Jamovi Server: CaseStudies/jamovi.md
     - GitHub2Docker2Singularity: CaseStudies/github2docker2singularity.md
+    - VSCode in Singularity: CaseStudies/VScode.md
     - MariaDB Server: CaseStudies/mariadb.md
     - FUSE overlayfs: CaseStudies/fuse-overlayfs.md
     - QEMU-utils: CaseStudies/qemu-utils.md

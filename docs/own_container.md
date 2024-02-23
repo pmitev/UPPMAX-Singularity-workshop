@@ -16,6 +16,9 @@ Here is a definition file to install the [Paraview](https://www.paraview.org/) p
       apt-get install -y paraview && \
       apt-get clean
 
+      # Patch for old kernels like the one on Rackham running CentOS 7 - 2024.02.23
+      # strip --remove-section=.note.ABI-tag /usr/lib/x86_64-linux-gnu/libQt5Core.so.5
+
     %runscript
       paraview "$@"
     ```
