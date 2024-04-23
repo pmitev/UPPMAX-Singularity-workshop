@@ -20,6 +20,7 @@ nav:
   - Goods and bads: goods_bads.md
   - Ubuntu template: ubuntu_template.md
   - Case Studies:
+    - Portable BioTools: CaseStudies/portable_biotools.md
     - R.ROSETTA - R, wine, 32 bit: CaseStudies/R.ROSETTA.md
     - SLURM in container: CaseStudies/SLURM_in_container.md
     - Offline conda installer: CaseStudies/conda-offline.md
