@@ -18,6 +18,7 @@ nav:
     - NVIDIA Deep Learning Frameworks: PyTorch_NVIDIA.md  
     - Upload to Sylabs container library: exercise_02.md
   - Goods and bads: goods_bads.md
+  - Reproducibility: reproducibility.md
   - Ubuntu template: ubuntu_template.md
   - Case Studies:
     - Portable BioTools: CaseStudies/portable_biotools.md
