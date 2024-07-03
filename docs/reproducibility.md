@@ -56,3 +56,31 @@ Note the `--no-home` option and the explicit `--bind`. This is also an excellent
 - Consider **performing test runs** during the build and keep the logs for future reference (part of the good practices).
 - Often, licenses restrict code distribution - for your safety, **consider keeping a copy** of the tool locally as an alternative to the on-line source.
 - As **final resort**, your containers might be used as source for new build as temporary fix.
+
+## Why not talk more about reproducibility here?
+The subject is rather complex and problems with reproducibility might extend even beyond software installation.
+
+Chemists bitten by Python scripts: How different OSes produced different results during test number-crunching - [source](https://www.theregister.com/2019/10/15/bug_python_scripts/)
+
+Excerpt:
+> When Luo ran these "Willoughby–Hoye" scripts, he got different results on different operating systems. For macOS Mavericks and Windows 10, the results were as expected (173.2); for Ubuntu 16 and macOS Mojave, the result differed (172.4 and 172.7 respectively). They may not sound a lot but in the precise world of scientific research, that's a lot.
+
+> The reason, it turns out, is not specific to Python; rather it's that the underlying system call to read files from a directory leaves the order in which files get read up to the OS's individual implementation. That's why sort order differs in different environments.
+
+Here is a bit simplified illustration of the problem from summing the values in 4 files in different order caused by the different localization in the shell.
+
+```bash
+LC_ALL=en_US.UTF-8
+a.dat 1.e-8
+A.dat 1.e+8
+b.dat 1.e-8
+B.dat 1.e+8
+200000000.00000002980232238769531250
+
+$LC_ALL=C
+A.dat 1.e+8
+B.dat 1.e+8
+a.dat 1.e-8
+b.dat 1.e-8
+200000000.00000000000000000000000000
+```
