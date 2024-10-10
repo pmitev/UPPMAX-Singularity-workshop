@@ -46,11 +46,21 @@ $ singularity shell ./lolcow.sif
 Singularity>
 ```
 
-If you try to list the files in your home folder with `ls -l ~` you will see the content of your home folder. What about the root folder? List the content with `ls -l /` and compare the output from a different terminal. 
-
-Singularity binds the user home folder, `/tmp` and some other by default. If you are running on a computer with more users accounts than your own (like on a computer cluster) compare the content of `ls -l /home` from within the container and outside. You should not be able to see the other users' folders that are on the computer otherwise.
 
 
+---
+
+Let's see what the container gives us.  
+Running the container, runs previously defined command - in this case.
+```bash
+/bin/sh -c fortune | cowsay | lolcat
+```
+This uses the container shell, to run three programs that were setup and provided in the container (instead of some heavy calculation tools).
+
+- Try to "play" with these three tools to get the idea how you ca use them while in the container shell.
+- Can you check on what OS version the container is build? Run `cat /etc/os-release` "in" the container and "outside" the container.
+- If you try to list the files in your home folder with `ls -l ~` you will see the content of your home folder. What about the root folder? List the content with `ls -l /` and compare the output from a different terminal (outside the container shell). 
+- Singularity binds the user home folder, `/tmp` and some other by default. If you are running on a computer with more users accounts than your own (like on a computer cluster) compare the content of `ls -l /home` from within the container and outside. You should not be able to see the other users' folders that are on the computer otherwise.
 
 ## Execute program in the container
 There is of course a way to start a different program than the default shell or the defined in the `%runscript` section.

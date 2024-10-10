@@ -8,7 +8,7 @@
 
     If you have already installed Singularity version, newer than 3.7, it should be sufficient for the workshop.
 
-## Installation via package manager (_if available_)
+## Installation via package manager (_if available_) : Linux
 
 Currently, for supported Ubuntu and CentOS distributions, it is also possible to install Singuarity via the system package manager [link](https://github.com/sylabs/singularity/releases)
 ``` bash
@@ -25,19 +25,20 @@ wget https://github.com/sylabs/singularity/releases/download/v4.0.0/singularity-
 sudo yum install ./singularity-ce-4.0.0-1.el9.x86_64.rpm 
 ```
 
-## Installation from source
+## Installation for Windows or Mac
 
 ---
-Detailed and well explained installation instructions at:  
-[https://sylabs.io/guides/latest/admin-guide/installation.html#installation-on-linux](https://sylabs.io/guides/latest/admin-guide/installation.html#installation-on-linux){target=_blank}
 
-Installation on Windows or Mac  
 [https://sylabs.io/guides/latest/admin-guide/installation.html#installation-on-windows-or-mac](https://sylabs.io/guides/latest/admin-guide/installation.html#installation-on-windows-or-mac){target=_blank}
 
 > (PM) I have successfully installed Singularity under [WSL2](https://docs.microsoft.com/en-us/windows/wsl/install-win10){target=_blank}, but can't guarantee that it will work in all cases.  
 > Look at this [page](./vagrant_windows.md) for tips on the typical Windows installation (MacOS is rather similar).
 
 ---
+
+## Installation from source : Linux
+Detailed and well explained installation instructions at:  
+[https://sylabs.io/guides/latest/admin-guide/installation.html#installation-on-linux](https://sylabs.io/guides/latest/admin-guide/installation.html#installation-on-linux){target=_blank}
 
 ## [TL;DR](https://www.urbandictionary.com/define.php?term=tl%3Bdr) 
 For Ubuntu (Debian based) Linux distributions.

@@ -4,8 +4,6 @@ edit_uri: edit/main/docs/
 nav:
   - Home: index.md
   - How to install: installation.md
-  - Building remotely: remote_builder.md
-  - Building with --fakeroot: fakeroot.md
   - First steps:
     - 1.Running containrs from online repositories: remote_repositories.md
     - 2.Running Singularity container: running_singularity.md
@@ -14,6 +12,8 @@ nav:
     - 5.Build own container - exercise: own_container.md
     - 6.Inspect containers: inspect.md
   - Additional:
+    - Building remotely: remote_builder.md
+    - Building with --fakeroot: fakeroot.md
     - Building interactively (sandbox): sandbox.md
     - NVIDIA Deep Learning Frameworks: PyTorch_NVIDIA.md  
     - Upload to Sylabs container library: exercise_02.md
@@ -21,6 +21,7 @@ nav:
   - Reproducibility: reproducibility.md
   - Ubuntu template: ubuntu_template.md
   - Case Studies:
+    - Other projects: CaseStudies/other_projects.md
     - Portable BioTools: CaseStudies/portable_biotools.md
     - R.ROSETTA - R, wine, 32 bit: CaseStudies/R.ROSETTA.md
     - SLURM in container: CaseStudies/SLURM_in_container.md
