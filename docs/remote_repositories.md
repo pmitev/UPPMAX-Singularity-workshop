@@ -92,6 +92,11 @@ $ singularity run docker://dctrud/wttr
 ```
 ![output](images/wttr.png)
 
+
+!!! INFO
+    ![Coderefinery](./images/coderefinery.png){ width="40", align=left } Excellent course material by the [CodeRefinery](https://coderefinery.org/) project  
+    [Containers on HPC with Apptainer](https://coderefinery.github.io/hpc-containers/)
+
 ### metaWRAP - a flexible pipeline for genome-resolved metagenomic data analysis
 
 Here is an example how to use the metaWRAP pipeline from the docker container - [installation instructions](https://github.com/bxlab/metaWRAP#docker-installation).
