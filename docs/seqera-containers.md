@@ -21,6 +21,17 @@ Select the packages you need, select "Singularity" and "linux/amd64" in the cont
 
 Command line tools [GitHub](https://github.com/seqeralabs/wave-cli)
 
+!!! Info
+    Features  
+    - Build container images on-demand for a given container file (aka Dockerfile);  
+    - Build container images on-demand based on one or more Conda packages;  
+    - Build container images for a specified target platform (currently linux/amd64 and linux/arm64);  
+    - Push and cache built containers to a user-provided container repository;  
+    - Push Singularity native container images to OCI-compliant registries;  
+    - Mirror (ie. copy) container images on-demand to a given registry;  
+    - Scan container images on-demand for security vulnerabilities;
+
+### Example 
 - Build and wait til it is done.
 ```bash
 $ wave -s --freeze --conda-package conda-forge::ase --conda-package conda-forge::xorg-libx11 --await
