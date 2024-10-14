@@ -14,6 +14,7 @@ nav:
   - Additional:
     - Building remotely: remote_builder.md
     - Building with --fakeroot: fakeroot.md
+    - Building with Seqera containers: seqera-containers.md
     - Building interactively (sandbox): sandbox.md
     - NVIDIA Deep Learning Frameworks: PyTorch_NVIDIA.md  
     - Upload to Sylabs container library: exercise_02.md
