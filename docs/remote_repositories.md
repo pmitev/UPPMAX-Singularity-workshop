@@ -35,6 +35,12 @@ INFO:    Creating SIF file...
                 ||----w |
                 ||     ||
 ```
+!!! Warning  
+    If you experience problem like this  
+    > FATAL:   Unable to handle docker://godlovedc/lolcow uri: while building SIF from layers: conveyor failed to get: while checking OCI image: image (linux/amd64) does not satisfy required platform (linux/arm64)
+    
+    use this container instead `docker://sylabsio/lolcow`.  
+    It executes `date | cowsay | lolcat` in the container instead.
 
 The container executes predefined command `fortune | cowsay | lolcat`.
 
@@ -84,6 +90,7 @@ Total space used: 187.04 MiB
     INFO:    No cached files to remove at /home/ubuntu/.singularity/    cache/oras
     INFO:    No cached files to remove at /home/ubuntu/.singularity/    cache/net
     ```
+
 
 ## More examples
 
