@@ -37,7 +37,7 @@ From: ubuntu:20.04
 ```
 
 This is an adaptation of the example from *The Carpentries*
-(https://carpentries-incubator.github.io/singularity-introduction/08-singularity-mpi/index.html).
+(https://carpentries-incubator.github.io/singularity-introduction/08-singularity-mpi.html).
 Generation of the container was done through:
 
 ``` bash
