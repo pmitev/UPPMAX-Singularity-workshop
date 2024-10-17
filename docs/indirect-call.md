@@ -1,6 +1,6 @@
 # Indirect executable calls
 
-The common approach for Singularity is to have single entry point defined by `%runscript` or by `%app`. This is not so convenient for daily use... So, here is a minimal example on how to implement a well known trick to use single executable for multiple commands (see for example the [BusBox](https://busybox.net/screenshot.html) project).
+The common approach for Singularity is to have single entry point defined by `%runscript` or by `%app`. This is not so convenient for daily use... So, here is a minimal example on how to implement a well known trick to use single executable for multiple commands (see for example the [BusyBox](https://busybox.net/screenshot.html) project).
 
 
 ``` singularity
