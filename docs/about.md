@@ -2,9 +2,6 @@
 
 This web page is a supplementary material to the [UPPMAX](https://www.uu.se/en/centre/uppmax){target=_blank} Singularity workshop.
 
-## Material related to the workshop
-- Latest [course information](./practical_information.md).
-
 ### Singularity user guildes at SNIC centers
 - [UPPMAX](https://www.uppmax.uu.se/support/user-guides/singularity-user-guide/){target=_blank}
 - [NSC](https://www.nsc.liu.se/support/singularity/){target=_blank}
@@ -30,10 +27,9 @@ This web page is a supplementary material to the [UPPMAX](https://www.uu.se/en/c
     This page is supported by
 
     - [NAISS](https://www.naiss.se/) (2024 - )
-    - [UPPMAX](https://uppmax.uu.se/) (2023 - )
-    - [UPPMAX](https://www.uu.se/en/centre/uppmax) and [SNIC](https://www.snic.se/) (2021 - 2022)
+    - [UPPMAX](https://www.uu.se/en/centre/uppmax) (2021 - )
+    - [SNIC](https://www.snic.se/) (2021 - 2022)
     
-   
 ---
 ## Contacts:
 - [Pavlin Mitev](https://katalog.uu.se/empinfo/?id=N3-1425){target=_blank} - [UPPMAX](http://www.hpc2n.umu.se/){target=_blank}
