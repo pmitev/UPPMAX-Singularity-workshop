@@ -1,4 +1,4 @@
-site_name: 'UPPMAX: Singularity workshop'
+site_name: 'Basic Singularity/Apptainer'
 repo_url: https://github.com/pmitev/UPPMAX-Singularity-workshop
 edit_uri: edit/main/docs/
 nav:

@@ -2,6 +2,22 @@
 
 Let us try to run a small and simple container from Docker Hub repository. Singularity, will pull the docker image in the cache, convert it and run it. The output should look something like this:
 
+!!! note
+    Environmental variables that will help you to redirect potentially large folders to alternative location - keep in mind that your `$HOME` folder is relatively small in size.
+
+    ```bash
+    export PROJECT=project_folder
+
+    export SINGULARITY_CACHEDIR=/proj/${PROJECT}/nobackup/SINGULARITY_CACHEDIR
+    export SINGULARITY_TMPDIR=/proj/${PROJECT}/nobackup/SINGULARITY_TMPDIR
+
+    export APPTAINER_CACHEDIR=/proj/${PROJECT}/nobackup/SINGULARITY_CACHEDIR
+    export APPTAINER_TMPDIR=/proj/${PROJECT}/nobackup/SINGULARITY_TMPDIR
+
+    mkdir -p $APPTAINER_CACHEDIR $APPTAINER_TMPDIR
+    ```
+
+
 ``` bash
 $ singularity run docker://godlovedc/lolcow
 

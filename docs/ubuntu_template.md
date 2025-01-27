@@ -3,14 +3,14 @@
 
 ```singularity
 Bootstrap: docker
-From: ubuntu:22.04
+From: ubuntu:24.04
 
 %environment
-  export LC_ALL=C
+  export LC_ALL=C.utf8
   export PYTHONNOUSERSITE=True
 
 %post
-  export LC_ALL=C
+  export LC_ALL=C.utf8
   export PYTHONNOUSERSITE=True
   export DEBIAN_FRONTEND=noninteractive
 
@@ -18,7 +18,7 @@ From: ubuntu:22.04
   mkdir -p /tmp/apt22 &&  echo "Dir::Cache "/tmp/apt22";" > /etc/apt/apt.conf.d/singularity-cache.conf
 
   apt-get update && apt-get -y dist-upgrade && \
-  apt-get install -y
+  apt-get install -y git
 
 
   # Download
