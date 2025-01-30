@@ -1,6 +1,6 @@
 # About
 
-This web page is a supplementary material to the [UPPMAX](https://www.uu.se/en/centre/uppmax){target=_blank} Singularity workshop.
+This web page is a supplementary material to the [NAISS](https://naiss.se){target=_blank} "Basic Singularity/Apptainer" workshop.
 
 ### Singularity user guildes at SNIC centers
 - [UPPMAX](https://www.uppmax.uu.se/support/user-guides/singularity-user-guide/){target=_blank}

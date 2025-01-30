@@ -24,6 +24,7 @@ nav:
   - Case Studies:
     - Other projects: CaseStudies/other_projects.md
     - Portable BioTools: CaseStudies/portable_biotools.md
+    - Rstudio server - Rocker project: CaseStudies/r-rocker-project.md
     - R.ROSETTA - R, wine, 32 bit: CaseStudies/R.ROSETTA.md
     - SLURM in container: CaseStudies/SLURM_in_container.md
     - Offline conda installer: CaseStudies/conda-offline.md
