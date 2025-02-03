@@ -1,0 +1,1782 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://pmitev.github.io/UPPMAX-Singularity-workshop/mpi_gromacs/">
+      
+      
+        <link rel="prev" href="../mpi_applications/">
+      
+      
+        <link rel="next" href="../openmpi-benchmark/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.2">
+    
+    
+      
+        <title>Gromacs in a container - Basic Singularity/Apptainer</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.d7758b05.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#example-running-conteinerized-gromacs-in-parallel" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Basic Singularity/Apptainer" class="md-header__button md-logo" aria-label="Basic Singularity/Apptainer" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Basic Singularity/Apptainer
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Gromacs in a container
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="blue"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/pmitev/UPPMAX-Singularity-workshop" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Basic Singularity/Apptainer" class="md-nav__button md-logo" aria-label="Basic Singularity/Apptainer" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Basic Singularity/Apptainer
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/pmitev/UPPMAX-Singularity-workshop" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../installation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    How to install
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    First steps
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            First steps
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../remote_repositories/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1.Running containrs from online repositories
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../running_singularity/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2.Running Singularity container
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../build_container/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3.Building a container
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../exercise_00/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4.Something easy - exercise
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../own_container/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    5.Build own container - exercise
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../inspect/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    6.Inspect containers
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Additional
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Additional
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../remote_builder/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Building remotely
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fakeroot/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Building with --fakeroot
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../seqera-containers/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Building with Seqera containers
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sandbox/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Building interactively (sandbox)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../PyTorch_NVIDIA/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    NVIDIA Deep Learning Frameworks
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../exercise_02/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Upload to Sylabs container library
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../goods_bads/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Goods and bads
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reproducibility/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Reproducibility
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ubuntu_template/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ubuntu template
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Case Studies
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Case Studies
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CaseStudies/other_projects/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Other projects
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CaseStudies/portable_biotools/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Portable BioTools
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CaseStudies/r-rocker-project/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Rstudio server - Rocker project
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CaseStudies/R.ROSETTA/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    R.ROSETTA - R, wine, 32 bit
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CaseStudies/SLURM_in_container/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SLURM in container
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CaseStudies/conda-offline/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Offline conda installer
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CaseStudies/ORFfinder/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ORFfinder on Rackham
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CaseStudies/arcasHLA/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    arcasHLA in Singularity
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CaseStudies/VESPA/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    VESPA (conda, python2)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CaseStudies/gapseq/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    gapseq enviroment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CaseStudies/jamovi/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Jamovi Server
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CaseStudies/github2docker2singularity/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GitHub2Docker2Singularity
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CaseStudies/VScode/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    VSCode in Singularity
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CaseStudies/mariadb/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    MariaDB Server
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CaseStudies/fuse-overlayfs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    FUSE overlayfs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CaseStudies/qemu-utils/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    QEMU-utils
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Advanced
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            Advanced
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mpi_applications/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Singularity and MPI
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Gromacs in a container
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Gromacs in a container
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#running-on-single-node" class="md-nav__link">
+    <span class="md-ellipsis">
+      Running on single node
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Running on single node">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#image-based-mpi-runtime" class="md-nav__link">
+    <span class="md-ellipsis">
+      Image-based MPI runtime
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#host-based-mpi-runtime" class="md-nav__link">
+    <span class="md-ellipsis">
+      Host-based MPI runtime
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compiling-gromacs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Compiling Gromacs
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mpi-multi-node-example-hpc2n" class="md-nav__link">
+    <span class="md-ellipsis">
+      MPI multi-node example: HPC2N
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../openmpi-benchmark/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Singularity MPI@Kebnekaise
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docker2singularity/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Convert Docker image to Singularity container
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../localimage/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Building from Singularity image
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../multi-stage_builds/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Multi-Stage Builds
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../indirect-call/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Indirect calls
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../uppmax_in_a_can/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    UPPMAX in a can
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../practical_information/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Practical information
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../about/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    About
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#running-on-single-node" class="md-nav__link">
+    <span class="md-ellipsis">
+      Running on single node
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Running on single node">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#image-based-mpi-runtime" class="md-nav__link">
+    <span class="md-ellipsis">
+      Image-based MPI runtime
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#host-based-mpi-runtime" class="md-nav__link">
+    <span class="md-ellipsis">
+      Host-based MPI runtime
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compiling-gromacs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Compiling Gromacs
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mpi-multi-node-example-hpc2n" class="md-nav__link">
+    <span class="md-ellipsis">
+      MPI multi-node example: HPC2N
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="example-running-conteinerized-gromacs-in-parallel">Example - running conteinerized gromacs in parallel</h1>
+<p>Here is a simple setup to build and test simple Singularity container with Gromacs with binaries for OpenMPI parallelization provided with the Ubuntu 20.04 distribution.</p>
+<div class="highlight"><pre><span></span><code><span class="k">Bootstrap</span>:<span class="w"> </span>docker
+<span class="k">From</span>:<span class="w"> </span>ubuntu:<span class="m">20.04</span>
+
+<span class="gh">%setup</span>
+
+%files
+
+<span class="gh">%environment</span>
+<span class="w">  </span><span class="nb">export</span><span class="w"> </span><span class="nv">LC_ALL</span><span class="o">=</span>C
+
+<span class="gh">%post</span>
+<span class="w">  </span><span class="nb">export</span><span class="w"> </span><span class="nv">LC_ALL</span><span class="o">=</span>C
+<span class="w">  </span><span class="nb">export</span><span class="w"> </span><span class="nv">DEBIAN_FRONTEND</span><span class="o">=</span>noninteractive
+
+<span class="w">  </span>apt-get<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>apt-get<span class="w"> </span>-y<span class="w"> </span>dist-upgrade<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>git<span class="w"> </span>wget<span class="w"> </span>gawk<span class="w"> </span>cmake<span class="w"> </span>build-essential<span class="w"> </span>libopenmpi-dev<span class="w"> </span>openssh-client<span class="w"> </span>slurm-client<span class="w"> </span>gromacs-openmpi
+
+<span class="gh">%runscript</span>
+<span class="w">  </span>/usr/bin/mdrun_mpi<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$@</span><span class="s2">&quot;</span>
+</code></pre></div>
+<p>At the time of writing this page, the recipe will install</p>
+<ul>
+<li>GROMACS - mdrun_mpi, 2020.1-Ubuntu-2020.1-1</li>
+<li>mpirun (Open MPI) 4.0.3</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Keep in mind that the binaries provided by the package manager are not optimized for the CPU and you could read such message in the output:</p>
+<blockquote>
+<p>Compiled SIMD: SSE2, but for this host/run AVX2_256 might be better (see log).
+The current CPU can measure timings more accurately than the code in
+mdrun_mpi was configured to use. This might affect your simulation
+speed as accurate timings are needed for load-balancing.
+Please consider rebuilding mdrun_mpi with the GMX_USE_RDTSCP=ON CMake option.
+Reading file benchMEM.tpr, VERSION 4.6.3-dev-20130701-6e3ae9e (single precision)
+Note: file tpx version 83, software tpx version 119</p>
+</blockquote>
+</div>
+<p>We can use <a href="https://www.mpibpc.mpg.de/grubmueller/bench">A free GROMACS benchmark set</a> to perform tests with this <a href="https://www.mpibpc.mpg.de/15101317/benchMEM.zip">set</a>.</p>
+<h3 id="running-on-single-node">Running on single node</h3>
+<h4 id="image-based-mpi-runtime">Image-based MPI runtime</h4>
+<div class="highlight"><pre><span></span><code><span class="c1"># Run shell in the container</span>
+$<span class="w"> </span>singularity<span class="w"> </span>shell<span class="w"> </span>Gromacs-openmpi20.sif
+
+<span class="c1"># 2 MPI processes, 4 OpenMP threads per MPI process</span>
+Singularity&gt;<span class="w"> </span>mpirun<span class="w"> </span>-n<span class="w"> </span><span class="m">2</span><span class="w"> </span>mdrun_mpi<span class="w"> </span>-ntomp<span class="w"> </span><span class="m">4</span><span class="w"> </span>-s<span class="w"> </span>benchMEM.tpr<span class="w"> </span>-nsteps<span class="w"> </span><span class="m">10000</span><span class="w"> </span>-resethway
+</code></pre></div>
+<h4 id="host-based-mpi-runtime">Host-based MPI runtime</h4>
+<p>On my host which runs Ubuntu 20.04 the OpenMPI version is identical. On other machines you need to make sure to run compatible version. On HPC clusters this should be module which provides OpenMPI compiled with gcc.
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>mpirun<span class="w"> </span>-n<span class="w"> </span><span class="m">2</span><span class="w"> </span>singularity<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>Gromacs-openmpi20.sif<span class="w"> </span>/usr/bin/mdrun_mpi<span class="w"> </span>-ntomp<span class="w"> </span><span class="m">4</span><span class="w"> </span>-s<span class="w"> </span>benchMEM.tpr<span class="w"> </span>-nsteps<span class="w"> </span><span class="m">10000</span><span class="w"> </span>-resethway
+
+<span class="c1"># or relying on the runscript</span>
+$<span class="w"> </span>mpirun<span class="w"> </span>-n<span class="w"> </span><span class="m">2</span><span class="w"> </span>Gromacs-openmpi20.sif<span class="w"> </span>-ntomp<span class="w"> </span><span class="m">4</span><span class="w"> </span>-s<span class="w"> </span>benchMEM.tpr<span class="w"> </span>-nsteps<span class="w"> </span><span class="m">10000</span><span class="w"> </span>-resethway
+</code></pre></div></p>
+<blockquote>
+<p>Note: At present, there is a incompatibility in the OpenMPI version that causes "Segmentation fault" when trying to run it on Rackham@UPPMAX. </p>
+</blockquote>
+<p>Bootsraping from Ubntu 18.04 will install <code>GROMACS - mdrun_mpi, 2018.1</code> and <code>mpirun (Open MPI) 2.1.1</code> which "resolves" the problem and reveals other...</p>
+<ul>
+<li>
+<p><strong>Image-based MPI runtime: Run 2 MPI processes, 20 OpenMP threads per MPI process</strong>
+<div class="highlight"><pre><span></span><code>scontrol<span class="w"> </span>show<span class="w"> </span>hostname<span class="w"> </span><span class="nv">$SLURM_NODELIST</span><span class="w"> </span>&gt;<span class="w"> </span>host
+singularity<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-B<span class="w"> </span>/etc/slurm:/etc/slurm-llnl<span class="w"> </span>-B<span class="w"> </span>/run/munge<span class="w"> </span>Gromacs-openmpi18.sif<span class="w"> </span>mpirun<span class="w"> </span>-n<span class="w"> </span><span class="m">2</span><span class="w"> </span>-d<span class="w"> </span>-mca<span class="w"> </span>plm_base_verbose<span class="w"> </span><span class="m">10</span><span class="w"> </span>--launch-agent<span class="w"> </span><span class="s1">&#39;singularity exec Gromacs-openmpi18.sif orted&#39;</span><span class="w"> </span>/usr/bin/mdrun_mpi<span class="w"> </span>-ntomp<span class="w"> </span><span class="m">20</span><span class="w"> </span>-s<span class="w"> </span>benchMEM.tpr<span class="w"> </span>-nsteps<span class="w"> </span><span class="m">10000</span><span class="w"> </span>-resethway
+</code></pre></div>
+Use <code>-d -mca plm_base_verbose 10</code> to get debugging information from <code>mpirun</code>. The slurm client that provides <code>srun</code> in Ubuntu 18.04 is too old to read the current slurm configuration on Rackham@UPPMAX.
+<div class="highlight"><pre><span></span><code><span class="cp"># Ubuntu 18.04 SLURM error</span>
+<span class="cp"># ============================</span>
+<span class="p">...</span>
+<span class="nl">srun</span><span class="p">:</span><span class="w"> </span><span class="n">error</span><span class="o">:</span><span class="w"> </span><span class="n">_parse_next_key</span><span class="o">:</span><span class="w"> </span><span class="n">Parsing</span><span class="w"> </span><span class="n">error</span><span class="w"> </span><span class="n">at</span><span class="w"> </span><span class="n">unrecognized</span><span class="w"> </span><span class="n">key</span><span class="o">:</span><span class="w"> </span><span class="n">SlurmctldHost</span>
+<span class="nl">srun</span><span class="p">:</span><span class="w"> </span><span class="n">error</span><span class="o">:</span><span class="w"> </span><span class="n">Parse</span><span class="w"> </span><span class="n">error</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">slurm</span><span class="o">-</span><span class="n">llnl</span><span class="o">/</span><span class="n">slurm</span><span class="p">.</span><span class="n">conf</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="mi">5</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;SlurmctldHost=rackham-q&quot;</span>
+<span class="nl">srun</span><span class="p">:</span><span class="w"> </span><span class="n">error</span><span class="o">:</span><span class="w"> </span><span class="n">_parse_next_key</span><span class="o">:</span><span class="w"> </span><span class="n">Parsing</span><span class="w"> </span><span class="n">error</span><span class="w"> </span><span class="n">at</span><span class="w"> </span><span class="n">unrecognized</span><span class="w"> </span><span class="n">key</span><span class="o">:</span><span class="w"> </span><span class="n">CredType</span>
+<span class="nl">srun</span><span class="p">:</span><span class="w"> </span><span class="n">error</span><span class="o">:</span><span class="w"> </span><span class="n">Parse</span><span class="w"> </span><span class="n">error</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">slurm</span><span class="o">-</span><span class="n">llnl</span><span class="o">/</span><span class="n">slurm</span><span class="p">.</span><span class="n">conf</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="mi">7</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;CredType=cred/munge&quot;</span>
+<span class="nl">srun</span><span class="p">:</span><span class="w"> </span><span class="n">fatal</span><span class="o">:</span><span class="w"> </span><span class="n">Unable</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">process</span><span class="w"> </span><span class="n">configuration</span><span class="w"> </span><span class="n">file</span>
+<span class="p">...</span>
+
+<span class="cp"># Ubuntu 20.04 SLURM passes but gromacs+mpi binaries fail on Rackham</span>
+<span class="cp"># =====================================================================</span>
+<span class="p">...</span>
+<span class="p">[</span><span class="n">r483</span><span class="p">.</span><span class="n">uppmax</span><span class="p">.</span><span class="n">uu</span><span class="p">.</span><span class="n">se</span><span class="o">:</span><span class="mi">25362</span><span class="p">]</span><span class="w"> </span><span class="p">[[</span><span class="mi">34501</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="n">plm</span><span class="o">:</span><span class="n">slurm</span><span class="o">:</span><span class="w"> </span><span class="k">final</span><span class="w"> </span><span class="n">top</span><span class="o">-</span><span class="n">level</span><span class="w"> </span><span class="n">argv</span><span class="o">:</span>
+<span class="w">        </span><span class="n">srun</span><span class="w"> </span><span class="o">--</span><span class="n">ntasks</span><span class="o">-</span><span class="n">per</span><span class="o">-</span><span class="n">node</span><span class="o">=</span><span class="mi">1</span><span class="w"> </span><span class="o">--</span><span class="n">kill</span><span class="o">-</span><span class="n">on</span><span class="o">-</span><span class="n">bad</span><span class="o">-</span><span class="n">exit</span><span class="w"> </span><span class="o">--</span><span class="n">nodes</span><span class="o">=</span><span class="mi">1</span><span class="w"> </span><span class="o">--</span><span class="n">nodelist</span><span class="o">=</span><span class="n">r484</span><span class="w"> </span><span class="o">--</span><span class="n">ntasks</span><span class="o">=</span><span class="mi">1</span><span class="w"> </span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">singularity</span><span class="w"> </span><span class="n">exec</span><span class="w"> </span><span class="n">Gromacs</span><span class="o">-</span><span class="n">apt</span><span class="p">.</span><span class="n">sif</span><span class="w"> </span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">orted</span><span class="w"> </span><span class="o">-</span><span class="n">mca</span><span class="w"> </span><span class="n">ess</span><span class="w"> </span><span class="s">&quot;slurm&quot;</span><span class="w"> </span><span class="o">-</span><span class="n">mca</span><span class="w"> </span><span class="n">ess</span>
+<span class="n">_base_jobid</span><span class="w"> </span><span class="s">&quot;2261057536&quot;</span><span class="w"> </span><span class="o">-</span><span class="n">mca</span><span class="w"> </span><span class="n">ess_base_vpid</span><span class="w"> </span><span class="s">&quot;1&quot;</span><span class="w"> </span><span class="o">-</span><span class="n">mca</span><span class="w"> </span><span class="n">ess_base_num_procs</span><span class="w"> </span><span class="s">&quot;2&quot;</span><span class="w"> </span><span class="o">-</span><span class="n">mca</span><span class="w"> </span><span class="n">orte_node_regex</span><span class="w"> </span><span class="s">&quot;r[3:483-484]@0(2)&quot;</span><span class="w"> </span><span class="o">-</span><span class="n">mca</span><span class="w"> </span><span class="n">orte_hnp_uri</span><span class="w"> </span><span class="s">&quot;2261057536.0;tcp://172.18.10.240,10.1.10.234,10.0.10.234:44203&quot;</span><span class="w"> </span><span class="o">-</span><span class="n">mca</span><span class="w"> </span><span class="n">plm_base_verbose</span><span class="w"> </span><span class="s">&quot;10&quot;</span><span class="w"> </span><span class="o">-</span><span class="n">mca</span><span class="w"> </span><span class="o">-</span><span class="n">d</span><span class="w"> </span><span class="s">&quot;-</span>
+<span class="n">display</span><span class="o">-</span><span class="n">allocation</span><span class="s">&quot;</span>
+<span class="p">[</span><span class="n">r483</span><span class="p">.</span><span class="n">uppmax</span><span class="p">.</span><span class="n">uu</span><span class="p">.</span><span class="n">se</span><span class="o">:</span><span class="mi">25362</span><span class="p">]</span><span class="w"> </span><span class="p">[[</span><span class="mi">34501</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="n">complete_setup</span><span class="w"> </span><span class="n">on</span><span class="w"> </span><span class="n">job</span><span class="w"> </span><span class="p">[</span><span class="mi">34501</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
+<span class="w"> </span><span class="n">Data</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">JOB</span><span class="w"> </span><span class="p">[</span><span class="mi">34501</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="n">offset</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="n">Total</span><span class="w"> </span><span class="n">slots</span><span class="w"> </span><span class="n">allocated</span><span class="w"> </span><span class="mi">2</span>
+<span class="mf">2261057536.0</span><span class="p">;</span><span class="n">tcp</span><span class="o">:</span><span class="c1">//172.18.10.240,10.1.10.234,10.0.10.234:44203</span>
+<span class="p">...</span>
+<span class="n">Reading</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="n">benchMEM</span><span class="p">.</span><span class="n">tpr</span><span class="p">,</span><span class="w"> </span><span class="n">VERSION</span><span class="w"> </span><span class="mf">4.6.3</span><span class="o">-</span><span class="n">dev</span><span class="mi">-20130701</span><span class="mf">-6e3</span><span class="n">ae9e</span><span class="w"> </span><span class="p">(</span><span class="n">single</span><span class="w"> </span><span class="n">precision</span><span class="p">)</span>
+<span class="nl">Note</span><span class="p">:</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="n">tpx</span><span class="w"> </span><span class="n">version</span><span class="w"> </span><span class="mi">83</span><span class="p">,</span><span class="w"> </span><span class="n">software</span><span class="w"> </span><span class="n">tpx</span><span class="w"> </span><span class="n">version</span><span class="w"> </span><span class="mi">119</span>
+<span class="p">[</span><span class="n">r484</span><span class="o">:</span><span class="mi">19455</span><span class="p">]</span><span class="w"> </span><span class="o">***</span><span class="w"> </span><span class="n">Process</span><span class="w"> </span><span class="n">received</span><span class="w"> </span><span class="n">signal</span><span class="w"> </span><span class="o">***</span>
+<span class="p">[</span><span class="n">r484</span><span class="o">:</span><span class="mi">19455</span><span class="p">]</span><span class="w"> </span><span class="n">Signal</span><span class="o">:</span><span class="w"> </span><span class="n">Segmentation</span><span class="w"> </span><span class="n">fault</span><span class="w"> </span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>
+<span class="p">...</span>
+</code></pre></div>
+Attempting to start the jobs manually requires <code>-mca plm rsh</code> to skip SLURM and use rsh/ssh to start the processes on all allocated nodes and <code>-B /etc/ssh</code> to pick up the "Host authentication" setup. Here are the problems:</p>
+<ul>
+<li>Rackham@UPPMAX uses "<a href="https://en.wikibooks.org/wiki/OpenSSH/Cookbook/Host-based_Authentication">Host based authentication</a>" which does not work in the Singularity container, because the container runs in the user space and can not get/read the private host key...</li>
+<li>One can use passwordless user key for the authentication (<em>Note: passwordless ssh keys are not allowed on Rackham</em>) after adding all nodes public host keys/signatures (<em>the signatures that you are asked to accept when connecting for the first time to a machine</em>).</li>
+</ul>
+</li>
+<li>
+<p><strong>Host-based MPI runtime: Run 2 MPI processes, 20 OpenMP threads per MPI process (explicitly specified on the mpirun command line)</strong>
+<div class="highlight"><pre><span></span><code>#!/bin/bash -l
+#SBATCH -J test
+#SBATCH -t 00:15:00
+#SBATCH -p devel -N 2 -n 2
+#SBATCH --cpus-per-task 20
+#SBATCH -A project
+
+module load gcc/7.2.0 openmpi/2.1.1
+
+mpirun -n 2 Gromacs-openmpi18.sif -ntomp 20 -s benchMEM.tpr -nsteps 10000 -resethway
+# or
+# mpirun -n 2 singularity exec Gromacs-openmpi18.sif /usr/bin/mdrun_mpi -ntomp 20 -s benchMEM.tpr -nsteps 10000 -resethway
+</code></pre></div></p>
+</li>
+</ul>
+<h4 id="compiling-gromacs">Compiling Gromacs</h4>
+<blockquote>
+<p>Note: the recipe bellow uses the OpenMPI from the distribution that triggers "Segmentation fault" problems when running the container on Rackham@UPPMAX.</p>
+</blockquote>
+<details class="note">
+<summary>recipe</summary>
+<div class="highlight"><pre><span></span><code><span class="k">Bootstrap</span>:<span class="w"> </span>docker
+<span class="k">From</span>:<span class="w"> </span>ubuntu:<span class="m">20.04</span>
+
+<span class="gh">%setup</span>
+
+%files
+
+<span class="gh">%environment</span>
+<span class="w">  </span><span class="nb">export</span><span class="w"> </span><span class="nv">LC_ALL</span><span class="o">=</span>C
+
+<span class="gh">%post</span>
+<span class="w">  </span><span class="nb">export</span><span class="w"> </span><span class="nv">LC_ALL</span><span class="o">=</span>C
+<span class="w">  </span><span class="nb">export</span><span class="w"> </span><span class="nv">DEBIAN_FRONTEND</span><span class="o">=</span>noninteractive
+<span class="w">  </span><span class="nb">export</span><span class="w"> </span><span class="nv">NCPU</span><span class="o">=</span><span class="k">$(</span>grep<span class="w"> </span>-c<span class="w"> </span>^processor<span class="w"> </span>/proc/cpuinfo<span class="k">)</span>
+
+<span class="w">  </span>apt-get<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>apt-get<span class="w"> </span>-y<span class="w"> </span>dist-upgrade<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>git<span class="w"> </span>wget<span class="w"> </span>gawk<span class="w"> </span>cmake<span class="w"> </span>build-essential<span class="w"> </span>libopenmpi-dev<span class="w"> </span>openssh-client
+
+<span class="w">  </span>mkdir<span class="w"> </span>-p<span class="w"> </span>installs
+
+<span class="w">  </span><span class="c1"># Gromacs</span>
+<span class="w">  </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/tmp/downloads<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>/tmp/downloads
+<span class="w">  </span><span class="nb">test</span><span class="w"> </span>-f<span class="w"> </span>gromacs-2021.2.tar.gz<span class="w"> </span><span class="o">||</span><span class="w"> </span>wget<span class="w"> </span>https://ftp.gromacs.org/gromacs/gromacs-2021.2.tar.gz
+<span class="w">  </span>tar<span class="w"> </span>xf<span class="w"> </span>gromacs-2021.2.tar.gz<span class="w"> </span>-C<span class="w"> </span>/installs
+
+<span class="w">  </span><span class="nb">cd</span><span class="w"> </span>/installs/gromacs-2021.2
+<span class="w">  </span>mkdir<span class="w"> </span>build-normal<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>build-normal
+<span class="w">  </span>cmake<span class="w"> </span>..<span class="w"> </span>-DCMAKE_INSTALL_PREFIX<span class="o">=</span>/opt/gromacs-2021.2<span class="w"> </span>-DGMX_GPU<span class="o">=</span>OFF<span class="w"> </span>-DGMX_MPI<span class="o">=</span>ON<span class="w"> </span>-DGMX_THREAD_MPI<span class="o">=</span>ON<span class="w"> </span>-DGMX_BUILD_OWN_FFTW<span class="o">=</span>ON<span class="w"> </span>-DGMX_DOUBLE<span class="o">=</span>OFF<span class="w"> </span>-DGM
+<span class="nv">X_PREFER_STATIC_LIBS</span><span class="o">=</span>ON<span class="w"> </span>-DBUILD_SHARED_LIBS<span class="o">=</span>ON<span class="w"> </span>-DCMAKE_BUILD_TYPE<span class="o">=</span>RELEASE
+<span class="w">  </span>make<span class="w"> </span>-j<span class="w"> </span><span class="nv">$NCPU</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>make<span class="w"> </span>install
+
+<span class="w">  </span><span class="nb">cd</span><span class="w"> </span>/installs/gromacs-2021.2
+<span class="w">  </span>mkdir<span class="w"> </span>build-mdrun-only<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>build-mdrun-only
+<span class="w">  </span>cmake<span class="w"> </span>..<span class="w"> </span>-DCMAKE_INSTALL_PREFIX<span class="o">=</span>/opt/gromacs-2021.2<span class="w"> </span>-DGMX_GPU<span class="o">=</span>OFF<span class="w"> </span>-DGMX_MPI<span class="o">=</span>ON<span class="w"> </span>-DGMX_THREAD_MPI<span class="o">=</span>ON<span class="w"> </span>-DGMX_BUILD_OWN_FFTW<span class="o">=</span>ON<span class="w"> </span>-DGMX_DOUBLE<span class="o">=</span>OFF<span class="w"> </span>-DGM
+<span class="nv">X_PREFER_STATIC_LIBS</span><span class="o">=</span>ON<span class="w"> </span>-DBUILD_SHARED_LIBS<span class="o">=</span>ON<span class="w"> </span>-DCMAKE_BUILD_TYPE<span class="o">=</span>RELEASE<span class="w"> </span>-DGMX_BUILD_MDRUN_ONLY<span class="o">=</span>ON
+<span class="w">  </span>make<span class="w"> </span>-j<span class="w"> </span><span class="nv">$NCPU</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>make<span class="w"> </span>install
+
+<span class="w">  </span><span class="nb">cd</span><span class="w"> </span>/
+<span class="w">  </span>rm<span class="w"> </span>-r<span class="w"> </span>/installs
+<span class="w">  </span>rm<span class="w"> </span>/etc/apt/apt.conf.d/singularity-cache.conf
+
+<span class="gh">%runscript</span>
+<span class="ch">#!/bin/bash</span>
+<span class="w">  </span><span class="nb">source</span><span class="w"> </span>/opt/gromacs-2021.2/bin/GMXRC
+<span class="w">  </span><span class="nb">exec</span><span class="w"> </span>gmx_mpi<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$@</span><span class="s2">&quot;</span>
+</code></pre></div>
+</details>
+<h4 id="mpi-multi-node-example-hpc2n">MPI multi-node example: HPC2N</h4>
+<p>This is an example on how to compile GROMACS (but it can be other software too) at HPC2N and how to run it on several nodes 
+<a href="https://github.com/hpc2n/intro-course/tree/master/exercises/APPTAINER">Apptainer multi-node Kebnekaise</a>.</p>
+<blockquote>
+<p>GROMACS reminds you: "Statistics: The only science that enables different experts using the same figures to draw different conclusions." (Evan Esar)</p>
+</blockquote>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      <!-- <a href="https://uppmax.uu.se/" target="_blank" rel="noopener"><img align="right" alt="Uppsala" src="https://pmitev.github.io/to-awk-or-not/images/Uppsala.png" /> </a> -->
+      <!-- <a href="https://snic.se/" target="_blank" rel="noopener"><img align="right" alt="SNIC" src="https://pmitev.github.io/to-awk-or-not/images/SNIC.png" /> </a> -->
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["search.highlight", "content.code.annotate", "content.code.copy"], "search": "../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.f13b1293.min.js"></script>
+      
+        <script src="../javascripts/config.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
