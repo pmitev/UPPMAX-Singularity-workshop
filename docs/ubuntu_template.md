@@ -8,9 +8,18 @@ From: ubuntu:24.04
 %environment
   export LC_ALL=C.utf8          
   export PYTHONNOUSERSITE=True  # Disable user's local python modules in ~/.local
-  # Fix to be able to activate conda environment in the shell
-  # export SINGULARITY_SHELL=/bin/bash
-  # set -- --init-file /opt/etc/bashrc
+  
+  ## Fix to be able to activate conda environment in the shell
+  ## https://github.com/apptainer/singularity/issues/5075#issuecomment-594391772
+  ## action="${0##*/}"
+  ## if [ "$action" = "shell" ]; then
+  ##   if [ "${SINGULARITY_SHELL:-}" = "/bin/bash" ]; then
+  ##     set -- --noprofile --init-file /.singularity_bash
+  ##   elif test -z "${SINGULARITY_SHELL:-}"; then
+  ##     export SINGULARITY_SHELL=/bin/bash
+  ##     set -- --noprofile --init-file /.singularity_bash
+  ##   fi
+  ## fi
 
 %post
   export LC_ALL=C.utf8
@@ -30,13 +39,12 @@ From: ubuntu:24.04
   # gunzip -c $TMPD/human_g1k_v37.fasta.gz > human_g1k_v37.fasta || true
 
 
-  # Miniforge3
-  # export TMPD=/tmp/downloads &&   mkdir -p $TMPD
-  # wget -P $TMPD -c https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh && \
-  # sh $TMPD/Miniforge3-Linux-x86_64.sh -b -p /opt/miniforge3
-  # mkdir -p /opt/etc
-  # echo "source /opt/miniforge3/etc/profile.d/conda.sh" >> /opt/etc/bashrc
-  # echo "source /opt/miniforge3/etc/profile.d/mamba.sh" >> /opt/etc/bashrc
+  ## Miniforge3
+  ## export TMPD=/tmp/downloads &&   mkdir -p $TMPD
+  ## wget -P $TMPD -c https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh && \
+  ## sh $TMPD/Miniforge3-Linux-x86_64.sh -b -p /opt/miniforge3
+  ## echo "source /opt/miniforge3/etc/profile.d/conda.sh" >> /.singularity_bash
+  ## echo "source /opt/miniforge3/etc/profile.d/mamba.sh" >> /.singularity_bash
 
 
   # pip cache in /tmp
@@ -72,3 +80,5 @@ From: ubuntu:24.04
     echo "# ERROR !!! Command $SINGULARITY_NAME not found in the container"
   fi
 ```
+
+
